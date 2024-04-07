@@ -1,0 +1,148 @@
+#include "libs.h"
+
+#include "Update.h"
+#include "Draw.h"
+#include "Inputs.h"
+#include "Shaders.h"
+
+
+Vertex vertieces[] =
+{   
+    //position								        //Color								        	//Texcoords
+    glm::vec3(0.0f,0.5f,0.f),		        glm::vec3(1.f,0.f,0.f),	    	    glm::vec2(0.f,1.f),
+    glm::vec3(-0.5f,-0.5f,0.f),	        glm::vec3(0.f,1.f,0.f),	          	glm::vec2(0.f,0.f),
+    glm::vec3(0.5f,-0.5f,0.f),		        glm::vec3(0.f,0.f,1.f),	        	glm::vec2(1.f,0.f)
+};
+unsigned nrOfVertices = sizeof(vertieces) / sizeof(Vertex);
+
+GLuint indices[] =
+{
+    0, 1, 2
+};
+unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
+
+
+
+int main()
+{
+    //GLFW
+    glfwInit();
+
+    //SETTING OPENGL VERSION TO 4.4
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+    //GLFWwindow
+    const int WINDOW_WIDTH = 1024;
+    const int WINDOW_HEIGHT = 720;
+    int frameBufferWidth = 0;
+    int frameBufferHeight = 0;
+
+    GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "DUNGEON", NULL , NULL);
+
+    glfwGetFramebufferSize(window, &frameBufferWidth, &frameBufferHeight);
+
+	glViewport(0,0,frameBufferWidth,frameBufferHeight);
+
+    glfwMakeContextCurrent(window);
+
+
+    //GLEW
+    glewExperimental = GL_TRUE;
+    if(glewInit()!=GLEW_OK)
+    {
+        std::cout << "ERROR::MAIN.CPP::GLEWINIT FAILED\n";
+		glfwTerminate();
+    }
+
+    //OPENGL OPTIONS
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    //SHADER_INIT
+    GLuint core_program;
+    if (!loadShaders(core_program))
+        glfwTerminate();
+    else
+	    std::cout << "EO\n";
+ 
+    
+    
+
+    //Vertex Area Object
+    GLuint VAO;
+    glCreateVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+
+
+    //Vertec Buffer Object
+
+    GLuint VBO;
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertieces), vertieces, GL_STATIC_DRAW);
+
+
+    //Element Buffer Object
+
+    GLuint EBO;
+    glGenBuffers(1, &EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+
+    //ENABLE AND SET VERTEX ATRIBUTES POINTERS (Input Assembly)
+
+	//Position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
+    glEnableVertexAttribArray(0);
+    //Color
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
+    glEnableVertexAttribArray(1);
+    //Texcoord
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texcoord));
+    glEnableVertexAttribArray(2);
+
+    glBindVertexArray(0);
+
+    
+
+    //MAIN LOOP
+    while(!glfwWindowShouldClose(window))
+    {
+        //UPDATE INPUTS
+        glfwPollEvents();
+
+        //UPDATE
+        UpdateInput(window);
+        
+
+        //DRAWING
+        Clear();
+        UseProgram(core_program);
+        glBindVertexArray(VAO);
+        //std::cout << nrOfIndices << "\n";
+        //glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
+        glDrawArrays(GL_TRIANGLES, 0, nrOfVertices);
+
+        EndOfDrawing(window);
+
+		
+    }
+
+    //EOP
+    glfwDestroyWindow(window);
+    glDeleteProgram(core_program);
+    glfwTerminate();
+
+    return 0;
+}
