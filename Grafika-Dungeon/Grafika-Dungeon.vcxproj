@@ -71,19 +71,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
