@@ -57,47 +57,8 @@ int main()
     if (!loadShaders(core_program))
         glfwTerminate();
 
- 
-    
-    
-
-    //Vertex Area Object
-    GLuint VAO;
-    glCreateVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-
-
-    //Vertec Buffer Object
-
-    GLuint VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, nrOfVertices * sizeof(Vertex), vertices, GL_STATIC_DRAW);
-
-
-    //Element Buffer Object
-
-    GLuint EBO;
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, nrOfIndices * sizeof(Vertex), indices, GL_STATIC_DRAW);
-
-
-    //ENABLE AND SET VERTEX ATRIBUTES POINTERS (Input Assembly)
-
-	//Position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Position));
-    glEnableVertexAttribArray(0);
-    //Color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Color));
-    glEnableVertexAttribArray(1);
-    //Texcoord
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, TexCoords));
-    glEnableVertexAttribArray(2);
-
-    glBindVertexArray(0);
-
-    
+    enableBuffers();
+    enableAndSetVertexAtributesPointers();
 
     //MAIN LOOP
     while(!glfwWindowShouldClose(window))

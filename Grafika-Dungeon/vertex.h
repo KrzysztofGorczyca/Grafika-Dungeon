@@ -14,5 +14,7 @@ extern unsigned nrOfVertices;
 
 GLuint indices[];
 extern unsigned nrOfIndices;
+extern GLuint VAO;
 
 void enableBuffers();
+void enableAndSetVertexAtributesPointers();
