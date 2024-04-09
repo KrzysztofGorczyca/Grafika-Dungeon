@@ -161,9 +161,11 @@
     <ClCompile Include="Inputs.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="Update.cpp" />
+    <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Inputs.h" />
     <ClInclude Include="libs.h" />
@@ -173,6 +175,9 @@
   <ItemGroup>
     <None Include="fragment_core.glsl" />
     <None Include="vertex_core.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Grafika-Dungeon.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

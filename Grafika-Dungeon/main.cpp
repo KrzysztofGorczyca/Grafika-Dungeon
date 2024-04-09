@@ -72,7 +72,7 @@ int main()
     GLuint VBO;
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, nrOfVertices * sizeof(Vertex), vertices, GL_STATIC_DRAW);
 
 
     //Element Buffer Object
@@ -80,7 +80,7 @@ int main()
     GLuint EBO;
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, nrOfIndices * sizeof(Vertex), indices, GL_STATIC_DRAW);
 
 
     //ENABLE AND SET VERTEX ATRIBUTES POINTERS (Input Assembly)
