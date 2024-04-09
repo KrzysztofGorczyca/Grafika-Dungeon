@@ -1,4 +1,4 @@
-// INCLUDES
+// -------------------------------INCLUDES-------------------------------------
 #include "libs.h"
 #include "Update.h"
 #include "Draw.h"
@@ -9,7 +9,7 @@
 #include "Textures.h"
 #include "Camera.h"
 
-// MAIN FUNCTION
+// ----------------------------MAIN FUNCTION-----------------------------------
 int main()
 {
     // WINDOW INITIALIZATION 
@@ -32,14 +32,14 @@ int main()
     // TEXTURES
     initializeTextures();
 
+    // CAMERA AND MATRIX INITIALIZATION
     initCamera();
-
     uniformCameraMatrixes();
     initViewMatrix();
     initUniformsMatrixes(core_program);
 
 
-    // MAIN LOOP
+    // ----------------------------MAIN LOOP-----------------------------------
     while(!glfwWindowShouldClose(window))
     {
         // UPDATE EVENT POLL
@@ -50,26 +50,22 @@ int main()
         
         // DRAWING START
         Clear();
-        glUseProgram(core_program);
+        UseProgram(core_program);
 
         // UPDATE UNIFORMS
         updateUniformsOuter(core_program);
 
-
-        // MATRIX UPDATE
-
-
+        // CAMERA AND MATRIX UPDATE
         uniformCameraMatrixes();
         updateUniformsMatrixes(core_program);
         getFrameBuffer(window, frameBufferWidth, frameBufferHeight);
         resetProjectionMatrix();
 
-
         // ACTIVATE TEXTURES
         activateTextures();
 
         // DRAW OBJECT
-        glBindVertexArray(VAO);
+        DrawBindVAO(VAO);
         glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
         EndOfDrawing(window);	
 
@@ -80,6 +76,7 @@ int main()
     // EOP
     glfwDestroyWindow(window);
     glfwTerminate();
+    glUseProgram(0);
     glDeleteProgram(core_program);
 
     return 0;

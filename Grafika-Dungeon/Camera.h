@@ -1,6 +1,7 @@
 #pragma once
 #include "libs.h"
 
+// --------------------------CAMERA GLOBAL VARIABLES--------------------------
 // MODEL MATRIX VARIABLES
 extern glm::vec3 position;
 extern glm::vec3 rotation;
@@ -19,7 +20,7 @@ extern float nearPlane;
 extern float farPlane;
 extern glm::mat4 ProjectionMatrix;
 
-// CAMERA FUNCTIONS
+// ------------------------------CAMERA FUNCTIONS------------------------------
 void initCamera();
 void uniformCameraMatrixes();
 void initViewMatrix();

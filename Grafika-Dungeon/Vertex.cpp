@@ -1,5 +1,6 @@
 #include "Vertex.h"
 
+// --------------------------VERTEX GLOBAL VARIABLES--------------------------
 Vertex vertices[] =
 {
     //Position								//Color								//TexCoords
@@ -7,7 +8,7 @@ Vertex vertices[] =
     glm::vec3(-0.5f,-0.5f,0.f),	            glm::vec3(0.f,1.f,0.f),	          	glm::vec2(0.f,0.f),
     glm::vec3(0.5f,-0.5f,0.f),		        glm::vec3(0.f,0.f,1.f),	        	glm::vec2(1.f,0.f),
 
-    //Traingle 2 bez duplikatow
+    //Traingle 2 without duplicates
     glm::vec3(0.5f,0.5f,0.f),	            glm::vec3(1.f,1.f,0.f),	          	glm::vec2(1.f,1.f)
 };
 unsigned nrOfVertices = sizeof(vertices) / sizeof(Vertex);
@@ -21,6 +22,8 @@ unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
 
 GLuint VAO; // Zmienna globalna
 
+// ------------------------------VERTEX FUNCTIONS------------------------------
+//FUNCTION FOR ENABLING BUFFERS IN INITIALIZATION
 void enableBuffers()
 {
     //Vertex Area Object
@@ -29,7 +32,6 @@ void enableBuffers()
 
 
     //Vertec Buffer Object
-
     GLuint VBO;
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -45,6 +47,7 @@ void enableBuffers()
 
 }	
 
+//FUNCTION FOR ENABLING AND SETTING VERTEX ATRIBUTES POINTERS IN INITIALIZATION
 void enableAndSetVertexAtributesPointers()
 {
 	//Position

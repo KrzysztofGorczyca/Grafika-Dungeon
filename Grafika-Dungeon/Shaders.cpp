@@ -1,6 +1,8 @@
 #include "Shaders.h"
 #include <fstream>
 
+// ---------------------------FUNCTIONS---------------------------
+// FUNCTION TO LOAD SHADERS IN INITIALIZATION
 bool loadShaders(GLuint &shaderProgram)
 {
 	bool loadSuccess = true;
@@ -12,7 +14,7 @@ bool loadShaders(GLuint &shaderProgram)
 
 	std::ifstream in_file;
 
-	//vertex
+	//VERTEX
 	in_file.open("vertex_core.glsl");
 
 	if (in_file.is_open())
@@ -29,6 +31,7 @@ bool loadShaders(GLuint &shaderProgram)
 	}
 	in_file.close();
 
+	// CREATE AND COMPILE VERTEX SHADER
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	const GLchar* vertSrc = src.c_str();
 	glShaderSource(vertexShader, 1, &vertSrc, NULL);
@@ -48,7 +51,7 @@ bool loadShaders(GLuint &shaderProgram)
 
 	
 
-	//Fragment
+	//FRAGMENT
 
 	in_file.open("fragment_core.glsl");
 
@@ -66,6 +69,7 @@ bool loadShaders(GLuint &shaderProgram)
 	}
 	in_file.close();
 
+	// CREATE AND COMPILE FRAGMENT SHADER
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	const GLchar* fragSrc = src.c_str();
 	glShaderSource(fragmentShader, 1, &fragSrc, NULL);
@@ -80,7 +84,7 @@ bool loadShaders(GLuint &shaderProgram)
 		loadSuccess = false;
 	}
 
-	//Program
+	// PROGRAM
 	shaderProgram = glCreateProgram();
 
 	glAttachShader(shaderProgram, vertexShader);
@@ -98,7 +102,7 @@ bool loadShaders(GLuint &shaderProgram)
 		loadSuccess = false;
 	}
 
-	//End
+	// END
 	glUseProgram(shaderProgram);
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);

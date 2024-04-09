@@ -1,11 +1,11 @@
 #pragma once
 #include "libs.h"
 
-// TEXTURES
+// ---------------------------TEXTURES---------------------------
 extern GLuint texture0;
 extern GLuint texture1;
 
-// FUNCTIONS
+// ---------------------------FUNCTIONS---------------------------
 GLuint loadTexture(const char* path);
 void configureTexture();
 void unbindTexture();

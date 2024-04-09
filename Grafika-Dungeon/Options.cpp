@@ -1,8 +1,11 @@
 #include "Options.h"
 
+// -------------------------- GLOBAL VARIABLES--------------------------
 int frameBufferWidth = 0;
 int frameBufferHeight = 0;
 
+// ------------------------------ FUNCTIONS------------------------------
+// SETTING UP OPENGL IN INITIALIZATION
 void setupOpenGL(GLFWwindow*& window, int width, int height, const char* title) {
     // GLFW
     glfwInit();
@@ -22,6 +25,7 @@ void setupOpenGL(GLFWwindow*& window, int width, int height, const char* title) 
     glfwMakeContextCurrent(window);
 }
 
+// SETTING UP GLEW IN INITIALIZATION
 void setupGLEW() {
     // GLEW
     glewExperimental = GL_TRUE;
@@ -31,6 +35,7 @@ void setupGLEW() {
     }
 }
 
+// SETTING UP OPENGL OPTIONS IN INITIALIZATION
 void setupOpenGLOptions() {
     // OpenGL Options
     glEnable(GL_DEPTH_TEST);

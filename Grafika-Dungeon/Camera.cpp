@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+//----------------------------GLOBAL VARIABLES----------------------------
+
 // MODEL MATRIX VARIABLES
 glm::vec3 position;
 glm::vec3 rotation;
@@ -18,6 +20,9 @@ float nearPlane;
 float farPlane;
 glm::mat4 ProjectionMatrix;
 
+//---------------------------------FUNCTIONS---------------------------------
+
+// USED TO INITIALIZE CAMERA VARIABLES
 void initCamera() {
 	position = glm::vec3(0.0f);
 	rotation = glm::vec3(0.0f);
@@ -31,10 +36,12 @@ void initCamera() {
 	ViewMatrix = glm::mat4(1.f);
 }
 
+// USED TO INITIALIZE VIEW MATRIX WITHOUT UPDATING IT
 void initViewMatrix() {
 	ViewMatrix = glm::lookAt(camPosition, camPosition + camFront, worldUp);
 }
 
+// USED TO INITIALIZE AND UPDATE UNIFORM MATRIX
 void uniformCameraMatrixes() {
 	ModelMatrix = glm::mat4(1.f);
 	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(position));
@@ -47,24 +54,26 @@ void uniformCameraMatrixes() {
 	ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(1024) / 720, nearPlane, farPlane);	
 }
 
+// USED TO INITIALIZE UNIFORM MATRIXES
 void initUniformsMatrixes(GLuint core_program) {
-	glUseProgram(core_program);
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ViewMatrix"), 1, GL_FALSE, glm::value_ptr(ViewMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
 }
 
+// USED TO UPDATE UNIFORM MATRIXES
 void updateUniformsMatrixes(GLuint core_program) {
-	glUseProgram(core_program);
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
 }	
 
+// USED TO RESET PROJECTION MATRIX IN UPDATE
 void resetProjectionMatrix() {
 	ProjectionMatrix = glm::mat4(1.f);
 	ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(1024) / 720, nearPlane, farPlane);
 }
 
+// USED TO GET FRAME BUFFER SIZE IN UPDATE
 void getFrameBuffer(GLFWwindow* window, int& frameBufferWidth, int& frameBufferHeight) {
 	glfwGetFramebufferSize(window, &frameBufferWidth, &frameBufferHeight);
 }

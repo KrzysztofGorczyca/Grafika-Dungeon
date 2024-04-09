@@ -1,10 +1,10 @@
 #include "Textures.h"
 
-// GLOBAL VARIABLES
+// --------------------------------------GLOBAL VARIABLES--------------------------------------
 GLuint texture0;
 GLuint texture1;
 
-// REPETITIVE FUNCTIONS
+// ---------------------REPETITIVE FUNCTIONS---------------------
 
 // ADD NEW TEXTURES HERE
 void initializeTextures() {
@@ -22,8 +22,8 @@ void activateTextures() {
 	activateTexture(texture1, 1);
 }
 
-// STATIC FUNCTIONS
-
+// ----------------------STATIC FUNCTIONS----------------------
+// LOADING TEXTURE FROM initializeTextures()
 GLuint loadTexture(const char* path) {
     GLuint textureID;
     glGenTextures(1, &textureID);
@@ -49,6 +49,7 @@ GLuint loadTexture(const char* path) {
     return textureID;
 }
 
+// CONFIGURING TEXTURE WITH SET PARAMETERS IN loadTexture()
 void configureTexture() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -56,16 +57,19 @@ void configureTexture() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 }
 
+// UNBINDING TEXTURE IN UPDATE 
 void unbindTexture() {
     glBindVertexArray(0);
     glActiveTexture(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+// UPDATING UNIFORMS IN UPDATE FROM updateUniformsOuter()
 void updateUniformsInner(GLuint core_program, char const* uniformName, int index) {
     glUniform1i(glGetUniformLocation(core_program, uniformName), index);
 }
 
+// ACTIVATING TEXTURE IN UPDATE
 void activateTexture(GLuint texture, int unitIndex) {
 	glActiveTexture(GL_TEXTURE0 + unitIndex);
 	glBindTexture(GL_TEXTURE_2D, texture);
