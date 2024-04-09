@@ -159,12 +159,14 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Inputs.cpp" />
+    <ClCompile Include="Options.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="Update.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="Options.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Inputs.h" />
