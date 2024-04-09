@@ -31,6 +31,24 @@ int main()
     // TEXTURES
     initializeTextures();
 
+
+    // MATRIX
+    glm::mat4 ModelMatrix(1.f);
+    ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0.f, 0.f, 0.f));
+                                                                    //  X    Y    Z
+    ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f));
+    ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f));
+    ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));
+
+    ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1.f));
+
+    glUseProgram(core_program);
+
+    glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
+
+    //glUseProgram(0);
+
+
     // MAIN LOOP
     while(!glfwWindowShouldClose(window))
     {
@@ -46,6 +64,21 @@ int main()
 
         // UPDATE UNIFORMS
         updateUniformsOuter(core_program);
+
+
+
+        glUseProgram(core_program);
+
+        ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0.f, 0.f, 0.f));
+        ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f));
+        ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f));
+        ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.05f), glm::vec3(0.f, 0.f, 1.f));
+        ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1.f));
+
+
+        glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
+        //glUseProgram(0);
+
 
         // ACTIVATE TEXTURES
         activateTextures();

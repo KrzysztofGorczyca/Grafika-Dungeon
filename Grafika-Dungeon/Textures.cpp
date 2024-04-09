@@ -1,8 +1,10 @@
 #include "Textures.h"
 
-// REPETITIVE FUNCTIONS
+// GLOBAL VARIABLES
 GLuint texture0;
 GLuint texture1;
+
+// REPETITIVE FUNCTIONS
 
 // ADD NEW TEXTURES HERE
 void initializeTextures() {
