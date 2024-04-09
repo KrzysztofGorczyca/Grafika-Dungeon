@@ -1,5 +1,8 @@
 #include "Options.h"
 
+int frameBufferWidth = 0;
+int frameBufferHeight = 0;
+
 void setupOpenGL(GLFWwindow*& window, int width, int height, const char* title) {
     // GLFW
     glfwInit();
@@ -12,8 +15,6 @@ void setupOpenGL(GLFWwindow*& window, int width, int height, const char* title) 
 
     window = glfwCreateWindow(width, height, title, NULL, NULL);
 
-    int frameBufferWidth = 0;
-    int frameBufferHeight = 0;
     glfwGetFramebufferSize(window, &frameBufferWidth, &frameBufferHeight);
 
     glViewport(0, 0, frameBufferWidth, frameBufferHeight);
