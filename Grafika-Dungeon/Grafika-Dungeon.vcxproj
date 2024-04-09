@@ -161,6 +161,7 @@
     <ClCompile Include="Inputs.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Shaders.cpp" />
+    <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Update.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Inputs.h" />
     <ClInclude Include="libs.h" />
+    <ClInclude Include="Textures.h" />
     <ClInclude Include="Update.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
