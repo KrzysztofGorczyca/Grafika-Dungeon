@@ -38,3 +38,7 @@ void unbindTexture() {
     glActiveTexture(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+void updateUniforms(GLuint core_program, char const* uniformName) {
+    glUniform1i(glGetUniformLocation(core_program, uniformName), 0);
+}

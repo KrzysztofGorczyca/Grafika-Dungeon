@@ -1,5 +1,5 @@
+// INCLUDES
 #include "libs.h"
-
 #include "Update.h"
 #include "Draw.h"
 #include "Inputs.h"
@@ -8,61 +8,60 @@
 #include "Options.h"
 #include "Textures.h"
 
-
+// MAIN FUNCTION
 int main()
 {
-    //WINDOW INITIALIZATION 
+    // WINDOW INITIALIZATION 
     GLFWwindow* window;
 
-    //SETUP OPTIONS
+    // SETUP OPTIONS
     setupOpenGL(window, 1024, 720, "Dungeon");
     setupGLEW();
     setupOpenGLOptions();
 
-    //SHADER_INIT
+    // SHADER_INIT
     GLuint core_program;
     if (!loadShaders(core_program))
         glfwTerminate();
 
-    //VERTEX DATA
+    // VERTEX DATA
     enableBuffers();
     enableAndSetVertexAtributesPointers();
 
-    //TEXTURE
+    // TEXTURE
     GLuint texture0 = loadTexture("Textures/horse.png");
 
 
-    //MAIN LOOP
+    // MAIN LOOP
     while(!glfwWindowShouldClose(window))
     {
-        //UPDATE EVENT POLL
+        // UPDATE EVENT POLL
         glfwPollEvents();
 
-        //UPDATE INPUT
+        // UPDATE INPUT
         UpdateInput(window);
         
-        //DRAWING START
+        // DRAWING START
         Clear();
         glUseProgram(core_program);
 
-        //UPDATE UNIFORMS
-        glUniform1i(glGetUniformLocation(core_program, "texture0"), 0);
+        // UPDATE UNIFORMS
+        updateUniforms(core_program, "texture0");
 
-        //TEXTURE
+        // TEXTURE
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture0);
 
-        //DRAW OBJECT
+        // DRAW OBJECT
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
-        //glDrawArrays(GL_TRIANGLES, 0, nrOfVertices); 
         EndOfDrawing(window);	
 
-        //UNBIND TEXTURE
+        // UNBIND TEXTURE
         unbindTexture();
     }
 
-    //EOP
+    // EOP
     glfwDestroyWindow(window);
     glfwTerminate();
     glDeleteProgram(core_program);
