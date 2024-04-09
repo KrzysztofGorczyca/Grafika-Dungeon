@@ -1,7 +1,7 @@
 #include "Shaders.h"
 #include <fstream>
 
-bool loadShaders(GLuint &program)
+bool loadShaders(GLuint &shaderProgram)
 {
 	bool loadSuccess = true;
 	char infoLog[512];
@@ -23,8 +23,10 @@ bool loadShaders(GLuint &program)
 		}
 	}
 	else
+	{ 
 		std::cout << "ERROR::SHADERS.CPP::LOADSHADERS::COULD_NOT_OPEN_VERTEX_FILE\n";
-
+		loadSuccess = false;
+	}
 	in_file.close();
 
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -79,28 +81,28 @@ bool loadShaders(GLuint &program)
 	}
 
 	//Program
-	program = glCreateProgram();
+	shaderProgram = glCreateProgram();
 
-	glAttachShader(program, vertexShader);
-	glAttachShader(program, fragmentShader);
+	glAttachShader(shaderProgram, vertexShader);
+	glAttachShader(shaderProgram, fragmentShader);
 
-	glLinkProgram(program);
+	glLinkProgram(shaderProgram);
 
-	glGetProgramiv(program,GL_LINK_STATUS,&success);
+	glGetProgramiv(shaderProgram,GL_LINK_STATUS,&success);
 
 	if(!success)
 	{
-		glGetProgramInfoLog(program, 512, NULL, infoLog);
+		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
 		std::cout << "ERROR::SHADERS.CPP::LOADSHADERS::COULD_NOT_LINK_PROGRAM\n";
 		std::cout << infoLog << "\n";
 		loadSuccess = false;
 	}
 
 	//End
-	glUseProgram(0);
+	glUseProgram(shaderProgram);
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-	glDeleteProgram(program);
+	glDeleteProgram(shaderProgram);
 
 	return loadSuccess;
 }

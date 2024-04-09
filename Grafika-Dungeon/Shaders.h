@@ -1,6 +1,6 @@
 #pragma once
 #include "libs.h"
 
-bool loadShaders(GLuint& program);
+bool loadShaders(GLuint &program);
 
 

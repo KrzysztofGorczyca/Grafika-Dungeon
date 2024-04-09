@@ -6,14 +6,14 @@
 #include "Shaders.h"
 
 
-Vertex vertieces[] =
+Vertex vertices[] =
 {   
-    //position								        //Color								        	//Texcoords
+    //Position								//Color								//TexCoords
     glm::vec3(0.0f,0.5f,0.f),		        glm::vec3(1.f,0.f,0.f),	    	    glm::vec2(0.f,1.f),
-    glm::vec3(-0.5f,-0.5f,0.f),	        glm::vec3(0.f,1.f,0.f),	          	glm::vec2(0.f,0.f),
+    glm::vec3(-0.5f,-0.5f,0.f),	            glm::vec3(0.f,1.f,0.f),	          	glm::vec2(0.f,0.f),
     glm::vec3(0.5f,-0.5f,0.f),		        glm::vec3(0.f,0.f,1.f),	        	glm::vec2(1.f,0.f)
 };
-unsigned nrOfVertices = sizeof(vertieces) / sizeof(Vertex);
+unsigned nrOfVertices = sizeof(vertices) / sizeof(Vertex);
 
 GLuint indices[] =
 {
@@ -72,8 +72,7 @@ int main()
     GLuint core_program;
     if (!loadShaders(core_program))
         glfwTerminate();
-    else
-	    std::cout << "EO\n";
+
  
     
     
@@ -89,7 +88,7 @@ int main()
     GLuint VBO;
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertieces), vertieces, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 
     //Element Buffer Object
@@ -103,13 +102,13 @@ int main()
     //ENABLE AND SET VERTEX ATRIBUTES POINTERS (Input Assembly)
 
 	//Position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Position));
     glEnableVertexAttribArray(0);
     //Color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Color));
     glEnableVertexAttribArray(1);
     //Texcoord
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texcoord));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, TexCoords));
     glEnableVertexAttribArray(2);
 
     glBindVertexArray(0);
@@ -128,21 +127,22 @@ int main()
 
         //DRAWING
         Clear();
-        UseProgram(core_program);
+        glUseProgram(core_program);
         glBindVertexArray(VAO);
-        //std::cout << nrOfIndices << "\n";
+        //std::cout << nrOfVertices << "\n";
         //glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
         glDrawArrays(GL_TRIANGLES, 0, nrOfVertices);
 
         EndOfDrawing(window);
+
 
 		
     }
 
     //EOP
     glfwDestroyWindow(window);
-    glDeleteProgram(core_program);
     glfwTerminate();
+    glDeleteProgram(core_program);
 
     return 0;
 }
