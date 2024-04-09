@@ -50,9 +50,6 @@
     <ClInclude Include="Shaders.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="vertex.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_core.glsl">

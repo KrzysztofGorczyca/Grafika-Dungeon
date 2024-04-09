@@ -168,7 +168,6 @@
     <ClInclude Include="Inputs.h" />
     <ClInclude Include="libs.h" />
     <ClInclude Include="Update.h" />
-    <ClInclude Include="vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_core.glsl" />
