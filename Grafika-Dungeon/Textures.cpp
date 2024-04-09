@@ -39,6 +39,12 @@ void unbindTexture() {
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void updateUniforms(GLuint core_program, char const* uniformName) {
-    glUniform1i(glGetUniformLocation(core_program, uniformName), 0);
+void updateUniforms(GLuint core_program, char const* uniformName, int index) {
+    glUniform1i(glGetUniformLocation(core_program, uniformName), index);
 }
+
+void activateTexture(GLuint texture, int unitIndex) {
+	glActiveTexture(GL_TEXTURE0 + unitIndex);
+	glBindTexture(GL_TEXTURE_2D, texture);
+}
+
