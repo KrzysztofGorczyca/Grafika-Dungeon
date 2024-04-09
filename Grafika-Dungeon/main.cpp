@@ -29,10 +29,7 @@ int main()
     enableAndSetVertexAtributesPointers();
 
     // TEXTURES
-    // Texture 1
-    GLuint texture0 = loadTexture("Textures/horse.png");
-    //Texture 2
-    GLuint texture1 = loadTexture("Textures/texture_example.png");
+    initializeTextures();
 
     // MAIN LOOP
     while(!glfwWindowShouldClose(window))
@@ -48,12 +45,10 @@ int main()
         glUseProgram(core_program);
 
         // UPDATE UNIFORMS
-        updateUniforms(core_program, "texture0", 0);
-        updateUniforms(core_program, "texture1", 1);
+        updateUniformsOuter(core_program);
 
         // ACTIVATE TEXTURES
-        activateTexture(texture0, 0);
-        activateTexture(texture1, 1);
+        activateTextures();
 
         // DRAW OBJECT
         glBindVertexArray(VAO);
