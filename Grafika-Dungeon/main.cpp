@@ -30,7 +30,8 @@ int main()
     enableAndSetVertexAtributesPointers();
 
     // TEXTURES
-    initializeTextures();
+    Texture texture0("Textures/horse.png", GL_TEXTURE_2D, 0);
+    texture0.bind();
 
     // CAMERA AND MATRIX INITIALIZATION
     initCamera();
@@ -53,7 +54,7 @@ int main()
         UseProgram(core_program);
 
         // UPDATE UNIFORMS
-        updateUniformsOuter(core_program);
+        //updateUniformsOuter(core_program);
 
         // CAMERA AND MATRIX UPDATE
         uniformCameraMatrixes();
@@ -62,7 +63,6 @@ int main()
         resetProjectionMatrix();
 
         // ACTIVATE TEXTURES
-        activateTextures();
 
         // DRAW OBJECT
         DrawBindVAO(VAO);
@@ -70,7 +70,8 @@ int main()
         EndOfDrawing(window);	
 
         // UNBIND TEXTURE
-        unbindTexture();
+        //texture0.unbind(GL_TEXTURE_2D);
+        //unbindTexture();
     }
 
     // EOP
