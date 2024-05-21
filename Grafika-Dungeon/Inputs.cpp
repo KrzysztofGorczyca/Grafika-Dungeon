@@ -31,4 +31,14 @@ void UpdateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& rotation, g
 	{
 		position.x += 0.001f;
 	}
+	// ROTATE LEFT
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+	{
+				rotation.y += 0.01f;
+	}
+	// ROTATE RIGHT
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+	{
+						rotation.y -= 0.01f;
+	}
 }

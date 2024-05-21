@@ -22,3 +22,9 @@
 
 //SOIL
 #include <SOIL2.h>
+
+//ASSIMP
+
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>

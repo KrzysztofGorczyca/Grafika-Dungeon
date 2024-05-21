@@ -54,11 +54,16 @@ void uniformCameraMatrixes() {
 	ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(1024) / 720, nearPlane, farPlane);	
 }
 
+//LIGHTS
+glm::vec3 lightPos0(0.f, 0.f, 2.f);
+
 // USED TO INITIALIZE UNIFORM MATRIXES
 void initUniformsMatrixes(GLuint core_program) {
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ViewMatrix"), 1, GL_FALSE, glm::value_ptr(ViewMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
+
+	glUniform3fv(glGetUniformLocation(core_program, "lightPos0"), 1, glm::value_ptr(lightPos0));
 }
 
 // USED TO UPDATE UNIFORM MATRIXES
