@@ -11,15 +11,15 @@ void UpdateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& rotation, g
 	}
 
 	// ---------MOVEMENT---------
-	// UP
+	// FOWARD
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		position.z -= 0.001f;
+		position.z += 0.001f;
 	}
-	// DOWN
+	// BACKWARD
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		position.z += 0.001f;
+		position.z -= 0.001f;
 	}
 	// LEFT
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
@@ -31,14 +31,24 @@ void UpdateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& rotation, g
 	{
 		position.x += 0.001f;
 	}
+	// UP
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		position.y += 0.001f;
+	}
+	//DOWN
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+	{
+		position.y -= 0.001f;
+	}
 	// ROTATE LEFT
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
 	{
-				rotation.y += 0.01f;
+		rotation.y += 0.01f;
 	}
 	// ROTATE RIGHT
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
 	{
-						rotation.y -= 0.01f;
+		rotation.y -= 0.01f;
 	}
 }
