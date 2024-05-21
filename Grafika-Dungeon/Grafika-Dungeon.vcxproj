@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Models.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="resource.h" />

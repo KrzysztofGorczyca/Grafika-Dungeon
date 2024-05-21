@@ -1,5 +1,15 @@
 #version 440
 
+// ----------------------------STRUCTS----------------------------
+struct Material
+{
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	sampler2D diffuseTex;
+    sampler2D specularTex;
+};
+
 // ----------------------------VERTEX VARIABLES----------------------------
 in vec3 vs_position;
 in vec3 vs_color;
@@ -10,6 +20,7 @@ out vec4 fs_color;
 
 // ----------------------------UNIFORM VARIABLES---------------------------
 // ADD NEW SAMPLER2D WHEN ADDING TEXTURE
+uniform Material material;
 uniform sampler2D texture0;
 uniform sampler2D texture1;
 uniform vec3 lightPos0;

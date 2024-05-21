@@ -8,7 +8,7 @@
 #include "Options.h"
 #include "Textures.h"
 #include "Camera.h"
-
+#include "Material.h"
 // ----------------------------MAIN FUNCTION-----------------------------------
 int main()
 {
@@ -32,6 +32,11 @@ int main()
     // TEXTURES
     Texture texture0("Textures/horse.png", GL_TEXTURE_2D, 0);
     texture0.bind();
+    Texture texture1("Textures/texture_example.png", GL_TEXTURE_2D, 1);
+    texture0.bind();
+
+    // MATERIALS
+    Material material0(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), texture0.getTextureUnit(), texture1.getTextureUnit());
 
     // CAMERA AND MATRIX INITIALIZATION
     initCamera();
@@ -54,7 +59,8 @@ int main()
         UseProgram(core_program);
 
         // UPDATE UNIFORMS
-        //updateUniformsOuter(core_program);
+        updateUniformsOuter(core_program);
+        material0.sendToShader(core_program);
 
         // CAMERA AND MATRIX UPDATE
         uniformCameraMatrixes();

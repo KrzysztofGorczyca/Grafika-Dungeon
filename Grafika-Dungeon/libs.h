@@ -23,6 +23,10 @@
 //SOIL
 #include <SOIL2.h>
 
+#include "Shaders.h"
+#include "Textures.h"
+#include "Material.h"
+
 //ASSIMP
 
 #include <assimp/Importer.hpp>
