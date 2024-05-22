@@ -1,3 +1,4 @@
+// -------------------------------INCLUDES-------------------------------------
 #include "libs.h"
 #include "Update.h"
 #include "Draw.h"
@@ -7,9 +8,10 @@
 #include "Options.h"
 #include "Textures.h"
 #include "Camera.h"
-#include "Material.h"
 
-int main() {
+// ----------------------------MAIN FUNCTION-----------------------------------
+int main()
+{
     // WINDOW INITIALIZATION 
     GLFWwindow* window;
 
@@ -20,6 +22,7 @@ int main() {
 
     // SHADER_INIT
     Shader core_program("vertex_core.glsl", "fragment_core.glsl");
+    core_program.use();
 
     // VERTEX DATA
     enableBuffers();
@@ -28,11 +31,6 @@ int main() {
     // TEXTURES
     Texture texture0("Textures/horse.png", GL_TEXTURE_2D, 0);
     texture0.bind();
-    Texture texture1("Textures/texture_example.png", GL_TEXTURE_2D, 1);
-    texture0.bind();
-
-    // MATERIALS
-    Material material0(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), texture0.getTextureUnit(), texture1.getTextureUnit());
 
     // CAMERA AND MATRIX INITIALIZATION
     initCamera();
@@ -40,10 +38,10 @@ int main() {
     initViewMatrix();
     initUniformsMatrixes(core_program.getID());
 
-   
 
-    // MAIN LOOP
-    while (!glfwWindowShouldClose(window)) {
+    // ----------------------------MAIN LOOP-----------------------------------
+    while (!glfwWindowShouldClose(window))
+    {
         // UPDATE EVENT POLL
         glfwPollEvents();
 
@@ -56,8 +54,7 @@ int main() {
         core_program.use();
 
         // UPDATE UNIFORMS
-        updateUniformsOuter(core_program.getID());
-        material0.sendToShader(core_program);
+        //updateUniformsOuter(core_program);
 
         // CAMERA AND MATRIX UPDATE
         uniformCameraMatrixes();
@@ -71,11 +68,16 @@ int main() {
         DrawBindVAO(VAO);
         glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
         EndOfDrawing(window);
+
+        // UNBIND TEXTURE
+        //texture0.unbind(GL_TEXTURE_2D);
+        //unbindTexture();
     }
 
     // EOP
     glfwDestroyWindow(window);
     glfwTerminate();
+    glUseProgram(0);
     core_program.unuse();
 
     return 0;
