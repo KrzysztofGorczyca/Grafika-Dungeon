@@ -8,7 +8,7 @@
 #include "Options.h"
 #include "Textures.h"
 #include "Camera.h"
-
+#include "Material.h"
 // ----------------------------MAIN FUNCTION-----------------------------------
 int main()
 {
@@ -30,7 +30,10 @@ int main()
 
     // TEXTURES
     Texture texture0("Textures/horse.png", GL_TEXTURE_2D, 0);
-    texture0.bind();
+    Texture texture1("Textures/texture_example.png", GL_TEXTURE_2D, 1);
+
+    //MATERIALS 
+    Material material0(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), texture0.getTextureUnit(), texture1.getTextureUnit());
 
     // CAMERA AND MATRIX INITIALIZATION
     initCamera();
@@ -50,8 +53,17 @@ int main()
 
         // DRAWING START
         Clear();
+
+        core_program.set1i(texture0.getTextureUnit(), "texture0");
+        core_program.set1i(texture1.getTextureUnit(), "texture1");
+        material0.sendToShader(core_program);
+
         // USE PROGRAM
         core_program.use();
+
+        // BINDING TEXTURES
+        texture0.bind();
+        texture1.bind();
 
         // UPDATE UNIFORMS
         //updateUniformsOuter(core_program);

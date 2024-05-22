@@ -162,7 +162,6 @@
     <ClCompile Include="Inputs.cpp" />
     <ClCompile Include="Models.cpp" />
     <ClCompile Include="Options.cpp" />
-    <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Update.cpp" />
     <ClCompile Include="Vertex.cpp" />
