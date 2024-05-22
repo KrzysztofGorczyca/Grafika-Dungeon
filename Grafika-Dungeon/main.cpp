@@ -21,9 +21,8 @@ int main()
     setupOpenGLOptions();
 
     // SHADER_INIT
-    GLuint core_program;
-    if (!loadShaders(core_program))
-        glfwTerminate();
+    Shader core_program("vertex_core.glsl", "fragment_core.glsl");
+    core_program.use();
 
     // VERTEX DATA
     enableBuffers();
@@ -37,7 +36,7 @@ int main()
     initCamera();
     uniformCameraMatrixes();
     initViewMatrix();
-    initUniformsMatrixes(core_program);
+    initUniformsMatrixes(core_program.getID());
 
 
     // ----------------------------MAIN LOOP-----------------------------------
@@ -51,14 +50,15 @@ int main()
         
         // DRAWING START
         Clear();
-        UseProgram(core_program);
+        // USE PROGRAM
+        core_program.use();
 
         // UPDATE UNIFORMS
         //updateUniformsOuter(core_program);
 
         // CAMERA AND MATRIX UPDATE
         uniformCameraMatrixes();
-        updateUniformsMatrixes(core_program);
+        updateUniformsMatrixes(core_program.getID());
         getFrameBuffer(window, frameBufferWidth, frameBufferHeight);
         resetProjectionMatrix();
 
@@ -78,7 +78,7 @@ int main()
     glfwDestroyWindow(window);
     glfwTerminate();
     glUseProgram(0);
-    glDeleteProgram(core_program);
+    core_program.unuse();
 
     return 0;
 }
