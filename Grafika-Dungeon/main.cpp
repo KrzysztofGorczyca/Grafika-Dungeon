@@ -21,9 +21,9 @@ int main()
     setupOpenGLOptions();
 
     // SHADER_INIT
+
+    Shader test("vertex_core.glsl", "fragment_core.glsl")
     GLuint core_program;
-    if (!loadShaders(core_program))
-        glfwTerminate();
 
     // VERTEX DATA
     enableBuffers();
