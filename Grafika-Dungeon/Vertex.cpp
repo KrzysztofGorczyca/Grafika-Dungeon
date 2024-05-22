@@ -3,13 +3,13 @@
 // --------------------------VERTEX GLOBAL VARIABLES--------------------------
 Vertex vertices[] =
 {
-    //Position								        //Color								            //TexCoords                       //Normal
-    glm::vec3(-0.5f,0.5f,0.f),		        glm::vec3(1.f,0.f,0.f),	    	    glm::vec2(0.f,1.f),         glm::vec3(0.f,0.f,-1.f),
-    glm::vec3(-0.5f,-0.5f,0.f),	        glm::vec3(0.f,1.f,0.f),	          	glm::vec2(0.f,0.f),         glm::vec3(0.f,1.f,-1.f),
-    glm::vec3(0.5f,-0.5f,0.f),		        glm::vec3(0.f,0.f,1.f),	        	glm::vec2(1.f,0.f),         glm::vec3(0.f,0.f,-1.f),
+    //Position						    //Color				                //TexCoords                 //Normal
+    glm::vec3(-0.5f,0.5f,0.f),		    glm::vec3(1.f,0.f,0.f),	    	    glm::vec2(0.f,1.f),         glm::vec3(0.f,0.f,1.f),
+    glm::vec3(-0.5f,-0.5f,0.f),	        glm::vec3(0.f,1.f,0.f),	          	glm::vec2(0.f,0.f),         glm::vec3(0.f,1.f,1.f),
+    glm::vec3(0.5f,-0.5f,0.f),		    glm::vec3(0.f,0.f,1.f),	        	glm::vec2(1.f,0.f),         glm::vec3(0.f,0.f,1.f),
 
     //Traingle 2 without duplicates
-    glm::vec3(0.5f,0.5f,0.f),	            glm::vec3(1.f,1.f,0.f),	          	glm::vec2(1.f,1.f),         glm::vec3(0.f,0.f,-1.f)
+    glm::vec3(0.5f,0.5f,0.f),	            glm::vec3(1.f,1.f,0.f),	          	glm::vec2(1.f,1.f),         glm::vec3(0.f,0.f,1.f)
 };
 unsigned nrOfVertices = sizeof(vertices) / sizeof(Vertex);
 
