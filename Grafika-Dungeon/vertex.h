@@ -20,3 +20,4 @@ extern GLuint VAO;
 // ------------------------------VERTEX FUNCTIONS------------------------------
 void enableBuffers();
 void enableAndSetVertexAtributesPointers();
+

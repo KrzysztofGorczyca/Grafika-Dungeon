@@ -1,3 +1,4 @@
+/*
 #pragma once
 #include "libs.h"
 
@@ -85,3 +86,4 @@ public:
 		SOIL_free_image_data(image);
 	}
 };
+*/

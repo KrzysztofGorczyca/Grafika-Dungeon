@@ -168,8 +168,10 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="Filesystem.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Models.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shaders.h" />
@@ -180,7 +182,15 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\Downloads\9.ssao.glsl" />
+    <None Include="..\..\..\..\Downloads\ssao.glsl" />
+    <None Include="..\..\..\..\Downloads\9.ssao_blur.glsl" />
+    <None Include="..\..\..\..\Downloads\9.ssao_geometry.glsl" />
+    <None Include="..\..\..\..\Downloads\ssao_geometry.glsl" />
+    <None Include="..\..\..\..\Downloads\9.ssao_lighting.glsl" />
     <None Include="fragment_core.glsl" />
+    <None Include="model_loading.fs" />
+    <None Include="model_loading.vs" />
     <None Include="vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
