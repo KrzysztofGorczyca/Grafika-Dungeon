@@ -22,7 +22,7 @@ int main()
 
     // SHADER_INIT
 
-    Shader test("vertex_core.glsl", "fragment_core.glsl")
+    Shader core_program("vertex_core.glsl", "fragment_core.glsl");
     GLuint core_program;
 
     // VERTEX DATA
@@ -44,6 +44,8 @@ int main()
     initViewMatrix();
     initUniformsMatrixes(core_program);
 
+    //INIT UNIFORMS
+    core_program.use();
 
     // ----------------------------MAIN LOOP-----------------------------------
     while(!glfwWindowShouldClose(window))

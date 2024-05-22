@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Shaders.h"
 
 //----------------------------GLOBAL VARIABLES----------------------------
 
@@ -59,12 +60,12 @@ glm::vec3 lightPos0(0.f, 0.f, 2.f);
 
 // USED TO INITIALIZE UNIFORM MATRIXES
 void initUniformsMatrixes(GLuint core_program) {
-	glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
-	glUniformMatrix4fv(glGetUniformLocation(core_program, "ViewMatrix"), 1, GL_FALSE, glm::value_ptr(ViewMatrix));
-	glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
+	core_program.setMat4fv("ModelMatrix", ModelMatrix);
+	core_program.setMat4fv("ViewMatrix", ViewMatrix);
+	core_program.setMat4fv("ProjectionMatrix", ProjectionMatrix);
 
-	glUniform3fv(glGetUniformLocation(core_program, "lightPos0"), 1, glm::value_ptr(lightPos0));
-	glUniform3fv(glGetUniformLocation(core_program, "cameraPos"), 1, glm::value_ptr(camPosition));
+	core_program.setMat3fv("lightPos0", lightPos0);
+	core_program.setMat3fv("cameraPos", camPosition);
 }
 
 // USED TO UPDATE UNIFORM MATRIXES

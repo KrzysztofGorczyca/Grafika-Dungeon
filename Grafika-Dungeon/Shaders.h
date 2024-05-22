@@ -118,4 +118,58 @@ public:
     {
         return this->id;
     }
+
+    void unuse()
+	{
+		glUseProgram(0);
+	}
+
+    void set1i(GLint value, const GLchar* name)
+	{
+		this->use();
+		glUniform1i(glGetUniformLocation(this->id, name), value);
+		this->unuse();
+	}
+
+    void setVec1f(GLfloat value, const GLchar* name)
+    {
+        this->use();
+        glUniform1f(glGetUniformLocation(this->id, name), value);
+        this->unuse();
+    }
+
+    void setVec2f(glm::fvec2 value, const GLchar* name)
+    {
+        this->use();
+        glUniform2fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(value));
+        this->unuse();
+    }
+
+    void setVec3f(glm::fvec3 value, const GLchar* name)
+    {
+    	this->use();
+		glUniform3fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(value));
+		this->unuse();
+    }
+
+    void setVec4f(glm::fvec4 value, const GLchar* name)
+    {
+        this->use();
+        glUniform4fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(value));
+        this->unuse();
+    }
+
+    void setMat3fv(glm::mat3 value, const GLchar* name, GLboolean transpose = GL_FALSE)
+    {
+        this->use();
+        glUniformMatrix3fv(glGetUniformLocation(this->id, name), 1, GL_FALSE, glm::value_ptr(value));
+            this->unuse();
+    }
+
+    void setMat4fv(glm::mat4 value, const GLchar* name, GLboolean transpose = GL_FALSE)
+    {
+        this->use();
+        glUniformMatrix4fv(glGetUniformLocation(this->id, name), 1, GL_FALSE, glm::value_ptr(value));
+        this->unuse();
+    }
 };

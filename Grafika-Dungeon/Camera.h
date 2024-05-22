@@ -1,5 +1,6 @@
 #pragma once
 #include "libs.h"
+#include "Shaders.h"
 
 // --------------------------CAMERA GLOBAL VARIABLES--------------------------
 // MODEL MATRIX VARIABLES
