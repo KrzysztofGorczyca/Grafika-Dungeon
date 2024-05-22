@@ -1,4 +1,3 @@
-// -------------------------------INCLUDES-------------------------------------
 #include "libs.h"
 #include "Update.h"
 #include "Draw.h"
@@ -9,9 +8,8 @@
 #include "Textures.h"
 #include "Camera.h"
 #include "Material.h"
-// ----------------------------MAIN FUNCTION-----------------------------------
-int main()
-{
+
+int main() {
     // WINDOW INITIALIZATION 
     GLFWwindow* window;
 
@@ -21,9 +19,7 @@ int main()
     setupOpenGLOptions();
 
     // SHADER_INIT
-
     Shader core_program("vertex_core.glsl", "fragment_core.glsl");
-    GLuint core_program;
 
     // VERTEX DATA
     enableBuffers();
@@ -42,31 +38,30 @@ int main()
     initCamera();
     uniformCameraMatrixes();
     initViewMatrix();
-    initUniformsMatrixes(core_program);
+    initUniformsMatrixes(core_program.getID());
 
-    //INIT UNIFORMS
-    core_program.use();
+   
 
-    // ----------------------------MAIN LOOP-----------------------------------
-    while(!glfwWindowShouldClose(window))
-    {
+    // MAIN LOOP
+    while (!glfwWindowShouldClose(window)) {
         // UPDATE EVENT POLL
         glfwPollEvents();
 
         // UPDATE INPUT
         UpdateInput(window, position, rotation, scale);
-        
+
         // DRAWING START
         Clear();
-        UseProgram(core_program);
+        // USE PROGRAM
+        core_program.use();
 
         // UPDATE UNIFORMS
-        updateUniformsOuter(core_program);
+        updateUniformsOuter(core_program.getID());
         material0.sendToShader(core_program);
 
         // CAMERA AND MATRIX UPDATE
         uniformCameraMatrixes();
-        updateUniformsMatrixes(core_program);
+        updateUniformsMatrixes(core_program.getID());
         getFrameBuffer(window, frameBufferWidth, frameBufferHeight);
         resetProjectionMatrix();
 
@@ -75,18 +70,13 @@ int main()
         // DRAW OBJECT
         DrawBindVAO(VAO);
         glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
-        EndOfDrawing(window);	
-
-        // UNBIND TEXTURE
-        //texture0.unbind(GL_TEXTURE_2D);
-        //unbindTexture();
+        EndOfDrawing(window);
     }
 
     // EOP
     glfwDestroyWindow(window);
     glfwTerminate();
-    glUseProgram(0);
-    glDeleteProgram(core_program);
+    core_program.unuse();
 
     return 0;
 }

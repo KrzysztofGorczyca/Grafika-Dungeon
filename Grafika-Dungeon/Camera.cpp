@@ -1,8 +1,6 @@
 #include "Camera.h"
 #include "Shaders.h"
 
-//----------------------------GLOBAL VARIABLES----------------------------
-
 // MODEL MATRIX VARIABLES
 glm::vec3 position;
 glm::vec3 rotation;
@@ -21,66 +19,58 @@ float nearPlane;
 float farPlane;
 glm::mat4 ProjectionMatrix;
 
-//---------------------------------FUNCTIONS---------------------------------
+// FUNCTIONS
 
-// USED TO INITIALIZE CAMERA VARIABLES
 void initCamera() {
-	position = glm::vec3(0.0f);
-	rotation = glm::vec3(0.0f);
-	scale = glm::vec3(1.0f);
-	worldUp = glm::vec3(0.f, 1.f, 0.f);
-	camFront = glm::vec3(0.f, 0.f, -1.f);
-	camPosition = glm::vec3(0.f, 0.f, 1.f);
-	fov = 90.0f;
-	nearPlane = 0.1f;
-	farPlane = 100.0f;
-	ViewMatrix = glm::mat4(1.f);
+    position = glm::vec3(0.0f);
+    rotation = glm::vec3(0.0f);
+    scale = glm::vec3(1.0f);
+    worldUp = glm::vec3(0.f, 1.f, 0.f);
+    camFront = glm::vec3(0.f, 0.f, -1.f);
+    camPosition = glm::vec3(0.f, 0.f, 1.f);
+    fov = 90.0f;
+    nearPlane = 0.1f;
+    farPlane = 100.0f;
+    ViewMatrix = glm::mat4(1.f);
 }
 
-// USED TO INITIALIZE VIEW MATRIX WITHOUT UPDATING IT
 void initViewMatrix() {
-	ViewMatrix = glm::lookAt(camPosition, camPosition + camFront, worldUp);
+    ViewMatrix = glm::lookAt(camPosition, camPosition + camFront, worldUp);
 }
 
-// USED TO INITIALIZE AND UPDATE UNIFORM MATRIX
 void uniformCameraMatrixes() {
-	ModelMatrix = glm::mat4(1.f);
-	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(position));
-	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));
-	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));
-	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));
-	ModelMatrix = glm::scale(ModelMatrix, scale);
+    ModelMatrix = glm::mat4(1.f);
+    ModelMatrix = glm::translate(ModelMatrix, glm::vec3(position));
+    ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));
+    ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));
+    ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));
+    ModelMatrix = glm::scale(ModelMatrix, scale);
 
-	glm::mat4 ProjectionMatrix(1.f);
-	ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(1024) / 720, nearPlane, farPlane);	
+    ProjectionMatrix = glm::mat4(1.f);
+    ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(1024) / 720, nearPlane, farPlane);
 }
 
-//LIGHTS
 glm::vec3 lightPos0(0.f, 0.f, 2.f);
 
-// USED TO INITIALIZE UNIFORM MATRIXES
 void initUniformsMatrixes(GLuint core_program) {
-	core_program.setMat4fv("ModelMatrix", ModelMatrix);
-	core_program.setMat4fv("ViewMatrix", ViewMatrix);
-	core_program.setMat4fv("ProjectionMatrix", ProjectionMatrix);
+    glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
+    glUniformMatrix4fv(glGetUniformLocation(core_program, "ViewMatrix"), 1, GL_FALSE, glm::value_ptr(ViewMatrix));
+    glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
 
-	core_program.setMat3fv("lightPos0", lightPos0);
-	core_program.setMat3fv("cameraPos", camPosition);
+    glUniform3fv(glGetUniformLocation(core_program, "lightPos0"), 1, glm::value_ptr(lightPos0));
+    glUniform3fv(glGetUniformLocation(core_program, "cameraPos"), 1, glm::value_ptr(camPosition));
 }
 
-// USED TO UPDATE UNIFORM MATRIXES
 void updateUniformsMatrixes(GLuint core_program) {
-	glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
-	glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
-}	
-
-// USED TO RESET PROJECTION MATRIX IN UPDATE
-void resetProjectionMatrix() {
-	ProjectionMatrix = glm::mat4(1.f);
-	ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(1024) / 720, nearPlane, farPlane);
+    glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
+    glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
 }
 
-// USED TO GET FRAME BUFFER SIZE IN UPDATE
+void resetProjectionMatrix() {
+    ProjectionMatrix = glm::mat4(1.f);
+    ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(1024) / 720, nearPlane, farPlane);
+}
+
 void getFrameBuffer(GLFWwindow* window, int& frameBufferWidth, int& frameBufferHeight) {
-	glfwGetFramebufferSize(window, &frameBufferWidth, &frameBufferHeight);
+    glfwGetFramebufferSize(window, &frameBufferWidth, &frameBufferHeight);
 }
