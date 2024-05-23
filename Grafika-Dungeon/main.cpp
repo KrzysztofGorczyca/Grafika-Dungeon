@@ -74,7 +74,7 @@ int main()
     Shader Shader("vertex.glsl", "fragment.glsl");
     // load models
     // -----------
-    Model ourModel("Assets/Room6.obj");
+    Model ourModel("Assets/Map/Map.obj");
 
 
     // draw in wireframe
