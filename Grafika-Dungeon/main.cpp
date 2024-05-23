@@ -74,7 +74,7 @@ int main()
     Shader Shader("vertex.glsl", "fragment.glsl");
     // load models
     // -----------
-    Model ourModel("Assets/backpack/backpack.obj");
+    Model ourModel("Assets/Room6.obj");
 
 
     // draw in wireframe
@@ -106,15 +106,26 @@ int main()
         Shader.setInt("material.diffuse", 0);  // Assuming 0 is the correct texture unit
         Shader.setFloat("material.shininess", 32.0f);
 
-        // ustawienia œwiat³a
+        // ---------Directional light settings-----------------
         Shader.setVec3("light.position", lightPos);
         Shader.setVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
         Shader.setVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f)); // zmniejszone, poniewa¿ to nie jest œwiat³o punktowe
         Shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
         Shader.setVec3("viewPos", camera.Position);
+        // ---------------------------------------------------
+
+        //-----------Point light settings----------------
         Shader.setFloat("light.constant", 1.0f);
         Shader.setFloat("light.linear", 0.09f);
         Shader.setFloat("light.quadratic", 0.032f);
+        // ---------------------------------------------
+        
+        // ---------Spot light settings-----------------
+        Shader.setVec3("light.position", camera.Position);
+        Shader.setVec3("light.direction", camera.Front);
+        Shader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+        Shader.setFloat("light.outerCutOff", glm::cos(glm::radians(17.5f)));
+        // --------------------------------------------
 
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
