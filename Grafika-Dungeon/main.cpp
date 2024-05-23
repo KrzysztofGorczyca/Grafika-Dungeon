@@ -12,6 +12,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -70,11 +71,10 @@ int main()
 
     // build and compile shaders
     // -------------------------
-    Shader ourShader("vertex.glsl", "fragment.glsl");
-
+    Shader Shader("vertex.glsl", "fragment.glsl");
     // load models
     // -----------
-    Model ourModel("Assets/Room6.obj");
+    Model ourModel("Assets/backpack/backpack.obj");
 
 
     // draw in wireframe
@@ -100,21 +100,34 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // don't forget to enable shader before setting uniforms
-        ourShader.use();
+        Shader.use();
+
+        // ustawienia materia³u
+        Shader.setInt("material.diffuse", 0);  // Assuming 0 is the correct texture unit
+        Shader.setFloat("material.shininess", 32.0f);
+
+        // ustawienia œwiat³a
+        Shader.setVec3("light.position", lightPos);
+        Shader.setVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
+        Shader.setVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f)); // zmniejszone, poniewa¿ to nie jest œwiat³o punktowe
+        Shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+        Shader.setVec3("viewPos", camera.Position);
+        Shader.setFloat("light.constant", 1.0f);
+        Shader.setFloat("light.linear", 0.09f);
+        Shader.setFloat("light.quadratic", 0.032f);
 
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-        ourShader.setMat4("projection", projection);
-        ourShader.setMat4("view", view);
+        Shader.setMat4("projection", projection);
+        Shader.setMat4("view", view);
 
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
-        ourShader.setMat4("model", model);
-        ourModel.Draw(ourShader);
-
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f)); // it's a bit too big for our scene, so scale it down
+        Shader.setMat4("model", model);
+        ourModel.Draw(Shader);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
