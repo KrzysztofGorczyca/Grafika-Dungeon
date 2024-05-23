@@ -1,3 +1,6 @@
+#ifndef CAMERA_H
+#define CAMERA_H
+
 #include "libs.h"
 
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
@@ -120,3 +123,5 @@ private:
         Up = glm::normalize(glm::cross(Right, Front));
     }
 };
+
+#endif // CAMERA_H

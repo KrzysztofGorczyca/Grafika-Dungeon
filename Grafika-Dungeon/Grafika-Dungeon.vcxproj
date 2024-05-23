@@ -155,39 +155,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Draw.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Inputs.cpp" />
-    <ClCompile Include="Models.cpp" />
-    <ClCompile Include="Options.cpp" />
-    <ClCompile Include="Update.cpp" />
-    <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Draw.h" />
-    <ClInclude Include="Filesystem.h" />
-    <ClInclude Include="Material.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
-    <ClInclude Include="Options.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shaders.h" />
-    <ClInclude Include="Inputs.h" />
     <ClInclude Include="libs.h" />
-    <ClInclude Include="Textures.h" />
-    <ClInclude Include="Update.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Downloads\9.ssao.glsl" />
-    <None Include="..\..\..\..\Downloads\ssao.glsl" />
-    <None Include="..\..\..\..\Downloads\9.ssao_blur.glsl" />
-    <None Include="..\..\..\..\Downloads\9.ssao_geometry.glsl" />
-    <None Include="..\..\..\..\Downloads\ssao_geometry.glsl" />
-    <None Include="..\..\..\..\Downloads\9.ssao_lighting.glsl" />
     <None Include="fragment_core.glsl" />
     <None Include="model_loading.fs" />
     <None Include="model_loading.vs" />
