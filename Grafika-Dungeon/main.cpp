@@ -75,7 +75,7 @@ int main()
 
     // load models
     // -----------
-    Model ourModel("Assets/Room1.obj");
+    Model ourModel("Assets/Room6.obj");
 
 
     // draw in wireframe
