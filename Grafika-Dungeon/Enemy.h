@@ -25,11 +25,11 @@ public:
            // player.TakeDamage(10); // For example, decrease player health
         }
     }
-
+    */
     // Getters and setters
     glm::vec3 GetPosition() const { return Position; }
     float GetHealth() const { return Health; }
-    */
+    
 private:
     glm::vec3 Position;
     float Speed;
