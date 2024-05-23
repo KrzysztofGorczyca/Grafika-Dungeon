@@ -171,8 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_core.glsl" />
-    <None Include="model_loading.fs" />
-    <None Include="model_loading.vs" />
+    <None Include="fragment.glsl" />
+    <None Include="vertex.glsl" />
     <None Include="vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Model.h"
 #include "Input.h"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -69,7 +70,7 @@ int main()
 
     // build and compile shaders
     // -------------------------
-    Shader ourShader("model_loading.vs", "model_loading.fs");
+    Shader ourShader("vertex.glsl", "fragment.glsl");
 
     // load models
     // -----------

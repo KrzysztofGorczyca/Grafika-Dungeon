@@ -58,10 +58,10 @@
     <None Include="vertex_core.glsl">
       <Filter>Pliki zasobów</Filter>
     </None>
-    <None Include="model_loading.fs">
+    <None Include="fragment.glsl">
       <Filter>Pliki zasobów</Filter>
     </None>
-    <None Include="model_loading.vs">
+    <None Include="vertex.glsl">
       <Filter>Pliki zasobów</Filter>
     </None>
   </ItemGroup>

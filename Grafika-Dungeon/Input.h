@@ -2,11 +2,6 @@
 #include "libs.h"
 #include "Camera.h"
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-class Input {
-public:
-private:
-};
-
 void processInput(GLFWwindow* window, Camera& camera, float deltaTime);
+void mouse_callback(GLFWwindow* window, Camera& camera, double xposIn, double yposIn, bool firstMouse, float lastX, float lastY);
+void scroll_callback(GLFWwindow* window, Camera& camera, double xoffset, double yoffset);
