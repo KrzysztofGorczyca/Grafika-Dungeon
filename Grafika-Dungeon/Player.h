@@ -26,7 +26,8 @@ public:
     }
 
     void printPlayerPosition() {
-        printf("Health: %d\n", Health);
+       //printf("Health: %d\n", Health);
+       //printf("Position: (%f, %f)\n", Position.x, Position.z);
     }
 
     // Metody do modyfikacji zdrowia
@@ -60,6 +61,8 @@ public:
             lastHealthUpdateTime = now; // reset the timer
         }
     }
+
+
 
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> lastHealthUpdateTime;

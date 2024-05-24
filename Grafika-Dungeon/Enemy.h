@@ -28,6 +28,7 @@ public:
         glm::vec3 direction = glm::normalize(camera.getCameraPosition() - Position);
         if (glm::distance(Position, camera.getCameraPosition()) > 1.0f)
             Position += direction * Speed * deltaTime;
+        //printf("Enemy Position: %f %f\n", Position.x, Position.z);
     }
 
     // Getters and setters
