@@ -1,5 +1,5 @@
 #include "libs.h"
-
+#include <chrono>
 #include "Shaders.h"
 #include "Camera.h"
 #include "Model.h"
@@ -23,6 +23,9 @@ bool firstMouse = true;
 
 // Player
 Player player(glm::vec3(-0.000978f, 0.9f, 15.233716f));
+
+// Testing
+glm::vec3 targetPoint(-0.016375f, 0.0f, 10.050759f);
 
 // timing
 float deltaTime = 0.0f;
@@ -86,15 +89,20 @@ int main()
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+    // Inicjalizacja zmiennych do mierzenia czasu
+    auto lastTime = std::chrono::high_resolution_clock::now();
+    float deltaTime = 0.0f;
+
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
         // --------------------
-        float currentFrame = static_cast<float>(glfwGetTime());
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<float> elapsedTime = currentTime - lastTime;
+        deltaTime = elapsedTime.count();
+        lastTime = currentTime;
 
         // input
         // -----
@@ -103,6 +111,7 @@ int main()
         // Player position
         player.SetPosition(camera.Position.x, camera.Position.y, camera.Position.z);
         player.printPlayerPosition();
+        player.CheckDistanceAndModifyHealth(targetPoint, 2.0f, 20);
         // render
         // ------
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
