@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Model.h"
 #include "Input.h"
+#include "Player.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -19,6 +20,9 @@ Camera camera(glm::vec3(-0.000978f, 0.75f, 15.233716f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
+
+// Player
+Player player(glm::vec3(-0.000978f, 0.7f, 15.233716f));
 
 // timing
 float deltaTime = 0.0f;
@@ -94,6 +98,9 @@ int main()
         // -----
         processInput(window, camera, deltaTime);
 
+        // Player position
+        player.SetPosition(camera.Position.x, camera.Position.y, camera.Position.z);
+        player.printPlayerPosition();
         // render
         // ------
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
@@ -108,7 +115,7 @@ int main()
 
         // ---------Directional light settings-----------------
         Shader.setVec3("light.position", lightPos);
-        Shader.setVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
+        Shader.setVec3("light.ambient", glm::vec3(0.1f, 0.1f, 0.1f));
         Shader.setVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f)); // zmniejszone, poniewa¿ to nie jest œwiat³o punktowe
         Shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
         Shader.setVec3("viewPos", camera.Position);
