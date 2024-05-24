@@ -14,6 +14,10 @@ void processInput(GLFWwindow* window, Camera& camera, float deltaTime)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+        // Tutaj mo¿esz dodaæ logikê ataku gracza, np. wywo³uj¹c metodê ataku w klasie Player
+        // player.Attack();
+    }
 }
 
 void mouse_callback(GLFWwindow* window, Camera& camera, double xposIn, double yposIn, bool firstMouse, float lastX, float lastY)
