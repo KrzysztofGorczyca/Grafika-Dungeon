@@ -2,6 +2,7 @@
 
 #include "Shaders.h"
 #include "Camera.h"
+#include "Enemy.h"
 #include "Model.h"
 #include "Input.h"
 #include "Player.h"
@@ -73,9 +74,14 @@ int main()
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 
+
+
     // build and compile shaders
     // -------------------------
     Shader Shader("vertex.glsl", "fragment.glsl");
+
+    //Enemy
+    Enemy enemyEO(glm::vec3(-0.016375f, 0.0f, 10.050759f));
     // load models
     // -----------
     Model ourModel("Assets/Map/Map.obj");
@@ -158,10 +164,14 @@ int main()
 
         // render the enemy model
         glm::mat4 enemy = glm::mat4(1.0f);
-        enemy = glm::translate(enemy, glm::vec3(-0.016375f, 0.0f, 10.050759f)); // translate it down so it's at the center of the scene
+        enemy = glm::translate(enemy, enemyEO.GetPosition()); // translate it down so it's at the center of the scene
         enemy = glm::scale(enemy, glm::vec3(1.0f, 1.0f, 1.0f)); // it's a bit too big for our scene, so scale it down
         Shader.setMat4("enemy", enemy);
         enemyModel.Draw(Shader);
+
+        enemyEO.Update(deltaTime, camera);
+
+        std::cout<< glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------

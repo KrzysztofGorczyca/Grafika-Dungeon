@@ -13,8 +13,8 @@ public:
     float Speed;
     float Health;
     // Constructor
-    Enemy(glm::vec3 position, float speed, float health)
-        :Position(position), Speed(speed), Health(health)
+    Enemy(glm::vec3 position)
+        :Position(position)
     {
 
     }
@@ -26,13 +26,13 @@ public:
     void Update(float deltaTime, const Camera& camera) {
         // Example: Move towards the player
         glm::vec3 direction = glm::normalize(camera.getCameraPosition() - Position);
-        if (glm::distance(Position, camera.getCameraPosition()) > 7.0f)
+        if (glm::distance(Position, camera.getCameraPosition()) > 1.0f)
             Position += direction * Speed * deltaTime;
     }
 
     // Getters and setters
-    glm::vec3 GetPosition() const { return Position; }
-    float GetHealth() const { return Health; }
+    inline glm::vec3 GetPosition() const { return Position; }
+    inline float GetHealth() const { return Health; }
 
 private:
     
