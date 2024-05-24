@@ -79,6 +79,7 @@ int main()
     // load models
     // -----------
     Model ourModel("Assets/Map/Map.obj");
+    Model chestModel("Assets/Chest/Chest.obj");
 
 
     // draw in wireframe
@@ -146,6 +147,14 @@ int main()
         model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f)); // it's a bit too big for our scene, so scale it down
         Shader.setMat4("model", model);
         ourModel.Draw(Shader);
+
+        // render the loaded model
+        glm::mat4 chest = glm::mat4(1.0f);
+        chest = glm::translate(chest, glm::vec3(1.074662f, 0.5f, 6.693111f)); // translate it down so it's at the center of the scene
+        chest = glm::scale(chest, glm::vec3(1.0f, 1.0f, 1.0f)); // it's a bit too big for our scene, so scale it down
+        Shader.setMat4("chest", chest);
+
+        chestModel.Draw(Shader);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
