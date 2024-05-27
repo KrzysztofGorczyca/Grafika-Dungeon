@@ -18,14 +18,12 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 // camera
 Camera camera(glm::vec3(-0.000978f, 0.9f, 15.233716f));
-//Camera camera(glm::vec3(0.1f, 0.1f, 0.1f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
 // Player
 Player player(glm::vec3(-0.000978f, 0.9f, 15.233716f));
-//Player player(glm::vec3(0.1f, 0.1f, 0.1f));
 
 // Testing
 glm::vec3 targetPoint(-0.016375f, 0.0f, 10.050759f);
@@ -36,8 +34,7 @@ float lastFrame = 0.0f;
 
 int main()
 {
-    // glfw: initialize and configure
-    // ------------------------------
+     // glfw: initialize and configure
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -48,7 +45,6 @@ int main()
 #endif
 
     // glfw window creation
-    // --------------------
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Dungeon", NULL, NULL);
     if (window == NULL)
     {
@@ -61,18 +57,15 @@ int main()
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
-    // tell GLFW to capture our mouse
+    // Mouse capture
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
 
-    // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
     stbi_set_flip_vertically_on_load(true);
 
     // configure global opengl state
@@ -92,7 +85,7 @@ int main()
     Model ourModel("Assets/Map/Map.obj");
     Model chestModel("Assets/Chest/Chest.obj");
     Model enemyModel("Assets/Skeleton/skeleton.obj");
-    //Model swordModel("Assets/backpack/backpack.obj");
+
 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -125,17 +118,16 @@ int main()
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // don't forget to enable shader before setting uniforms
         Shader.use();
 
         // ustawienia materia³u
-        Shader.setInt("material.diffuse", 0);  // Assuming 0 is the correct texture unit
+        Shader.setInt("material.diffuse", 0); 
         Shader.setFloat("material.shininess", 32.0f);
 
         // ---------Directional light settings-----------------
         Shader.setVec3("light.position", lightPos);
         Shader.setVec3("light.ambient", glm::vec3(0.1f, 0.1f, 0.1f));
-        Shader.setVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f)); // zmniejszone, poniewa¿ to nie jest œwiat³o punktowe
+        Shader.setVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
         Shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
         Shader.setVec3("viewPos", camera.Position);
         // ---------------------------------------------------
@@ -158,68 +150,46 @@ int main()
         glm::mat4 view = camera.GetViewMatrix();
         Shader.setMat4("projection", projection);
         Shader.setMat4("view", view);
-        printf("Camera position: %f %f\n", camera.Position.x, camera.Position.z);
+
         // render the map model
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f)); // it's a bit too big for our scene, so scale it down
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f)); 
         Shader.setMat4("model", model);
         ourModel.Draw(Shader);
 
+        // render the chest model
+        glm::mat4 chest = glm::mat4(1.0f);
+        chest = glm::translate(chest, glm::vec3(1.074662f, 0.5f, 6.693111f)); 
+        chest = glm::scale(chest, glm::vec3(1.0f, 1.0f, 1.0f)); 
+        Shader.setMat4("chest", chest);
+        chestModel.Draw(Shader);
 
         // render the enemy model
         glm::mat4 enemy = glm::mat4(1.0f);
-        enemy = glm::translate(enemy, glm::vec3(-0.051745f, 0.0f, 7.191688f)); // translate it down so it's at the center of the scene
-        enemy = glm::scale(enemy, glm::vec3(1.0f, 1.0f, 1.0f)); // it's a bit too big for our scene, so scale it down
+        enemy = glm::translate(enemy, enemyEO.GetPosition());
+        enemy = glm::scale(enemy, glm::vec3(1.0f, 1.0f, 1.0f)); 
         Shader.setMat4("enemy", enemy);
         enemyModel.Draw(Shader);
-        
-        // render the chest model
-        glm::mat4 chest = glm::mat4(1.0f);
-        chest = glm::translate(chest, glm::vec3(1.121070f, 0.0f, 7.237563f)); // translate it down so it's at the center of the scene
-        chest = glm::scale(chest, glm::vec3(1.0f, 1.0f, 1.0f)); // it's a bit too big for our scene, so scale it down
-        Shader.setMat4("chest", chest);
-        chestModel.Draw(Shader);
-        
-        /*
-        // render the chest model
-        glm::vec3 playerPosition = player.GetPosition();
-        glm::vec3 offset(0.1f, 0.1f, 0.1f);
-        glm::vec3 chestPosition = playerPosition + offset;
-        glm::mat4 chest = glm::mat4(1.0f);
-        chest = glm::translate(chest, chestPosition); // translate it down so it's at the center of the scene
-        chest = glm::scale(chest, glm::vec3(1.0f, 1.0f, 1.0f)); // it's a bit too big for our scene, so scale it down
-        Shader.setMat4("model", chest);
-        chestModel.Draw(Shader);
-        */
-        //std::cout<< glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
+        enemyEO.Update(deltaTime, camera);
+
+        std::cout<< glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    // glfw: terminate, clearing all previously allocated GLFW resources.
-    // ------------------------------------------------------------------
     glfwTerminate();
     return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
     glViewport(0, 0, width, height);
 }
 
-// glfw: whenever the mouse moves, this callback is called
-// -------------------------------------------------------
+
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
     float xpos = static_cast<float>(xposIn);
@@ -233,7 +203,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     }
 
     float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+    float yoffset = lastY - ypos;
 
     lastX = xpos;
     lastY = ypos;
@@ -241,8 +211,6 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
-// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-// ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));

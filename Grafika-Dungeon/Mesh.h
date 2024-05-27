@@ -30,8 +30,7 @@ public:
         unsigned int specularNr = 1;
         for (unsigned int i = 0; i < textures.size(); i++)
         {
-            glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
-            // retrieve texture number (the N in diffuse_textureN)
+            glActiveTexture(GL_TEXTURE0 + i); 
             string number;
             string name = textures[i].type;
             if (name == "texture_diffuse")

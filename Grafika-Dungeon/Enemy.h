@@ -1,8 +1,8 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "libs.h" // Include necessary libraries
-#include "Camera.h" // Include the Camera class
+#include "libs.h"
+#include "Camera.h"
 
 
 #define ModelPath "Assets/Enemy/Enemy.obj"
@@ -24,11 +24,9 @@ public:
 
     // Update function to handle movement and other logic
     void Update(float deltaTime, const Camera& camera) {
-        // Example: Move towards the player
         glm::vec3 direction = glm::normalize(camera.getCameraPosition() - Position);
         if (glm::distance(Position, camera.getCameraPosition()) > 1.0f)
             Position += direction * Speed * deltaTime;
-        //printf("Enemy Position: %f %f\n", Position.x, Position.z);
     }
 
     // Getters and setters
