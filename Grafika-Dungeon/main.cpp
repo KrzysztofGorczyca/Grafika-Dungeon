@@ -88,7 +88,7 @@ int main()
     Model mapModel("Assets/Map/Map.obj");
     Model chestModel("Assets/Chest/Chest.obj");
     Model enemyModel("Assets/Skeleton/skeleton.obj");
-    //Model enemyModel("Assets/Skeleton/skeleton.obj");
+    Model swordModel("Assets/Blade/Blade.obj");
 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -215,11 +215,44 @@ int main()
             Shader.setMat4("model", model);
             enemyModel.Draw(Shader);
         }
+
+        {
+            // render the sword model
+            glm::vec3 swordOffset(0.3f, -0.3f, 0.8f);  // Dostosowany offset
+            glm::vec3 swordPosition = camera.Position
+                + camera.Right * swordOffset.x
+                + camera.Up * swordOffset.y
+                + camera.Front * swordOffset.z;
+
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, swordPosition);
+
+            // Uzyskaj rotacjê kamery jako macierz 4x4
+            glm::vec3 cameraFront = camera.Front;
+            glm::vec3 cameraRight = camera.Right;
+            glm::vec3 cameraUp = camera.Up;
+
+            glm::mat4 cameraRotation = glm::mat4(1.0f);
+            cameraRotation[0] = glm::vec4(cameraRight, 0.0f);
+            cameraRotation[1] = glm::vec4(cameraUp, 0.0f);
+            cameraRotation[2] = glm::vec4(-cameraFront, 0.0f); // Negacja, bo kamera patrzy w przeciwn¹ stronê
+            cameraRotation[3] = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+            // Zastosuj rotacjê kamery do modelu miecza
+            model *= cameraRotation;
+
+            // Lokalna rotacja miecza, jeœli jest potrzebna
+            model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+            Shader.setMat4("model", model);
+            swordModel.Draw(Shader);
+        }
         
         enemy1.Update(deltaTime, camera);
-        printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
-        printf("Player position: (%f, %f, %f)\n", player.GetPosition().x, player.GetPosition().y, player.GetPosition().z);
-        printf("Enemy position: (%f, %f, %f)\n", enemy1.GetPosition().x, enemy1.GetPosition().y, enemy1.GetPosition().z);
+        //printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
+        //printf("Player position: (%f, %f, %f)\n", player.GetPosition().x, player.GetPosition().y, player.GetPosition().z);
+        //printf("Enemy position: (%f, %f, %f)\n", enemy1.GetPosition().x, enemy1.GetPosition().y, enemy1.GetPosition().z);
         //printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
         //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
