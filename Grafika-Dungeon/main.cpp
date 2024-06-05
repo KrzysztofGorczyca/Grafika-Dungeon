@@ -82,7 +82,7 @@ int main()
     Shader Shader("vertex.glsl", "fragment.glsl");
 
     //Enemy
-    Enemy enemyEO(glm::vec3(-0.016375f, 0.0f, 10.050759f));
+    Enemy enemy1(glm::vec3(-0.016375f, 0.0f, 10.050759f));
     // load models
     // -----------
     Model mapModel("Assets/Map/Map.obj");
@@ -209,16 +209,18 @@ int main()
         {
             // render the enemy model
             glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(-0.016375f, 0.0f, 10.050759f));
+            model = glm::translate(model, enemy1.GetPosition());
+            model *= glm::mat4_cast(enemy1.Rotation);
             model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
             Shader.setMat4("model", model);
             enemyModel.Draw(Shader);
         }
-        //enemyEO.Update(deltaTime, camera);
-        printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemyEO.GetPosition())-0.9));
+        
+        enemy1.Update(deltaTime, camera);
+        printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
         printf("Player position: (%f, %f, %f)\n", player.GetPosition().x, player.GetPosition().y, player.GetPosition().z);
-        printf("Enemy position: (%f, %f, %f)\n", enemyEO.GetPosition().x, enemyEO.GetPosition().y, enemyEO.GetPosition().z);
-        printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
+        printf("Enemy position: (%f, %f, %f)\n", enemy1.GetPosition().x, enemy1.GetPosition().y, enemy1.GetPosition().z);
+        //printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
         //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
         glfwSwapBuffers(window);
