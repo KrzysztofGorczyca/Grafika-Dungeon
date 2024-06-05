@@ -24,6 +24,33 @@
     <ClCompile Include="Input.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_demo.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_draw.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_glfw.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_opengl2.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_opengl3.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_tables.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_widgets.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs.h">
@@ -49,6 +76,42 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imconfig.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_glfw.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl2.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl3.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl3_loader.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_internal.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imstb_rectpack.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imstb_textedit.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imstb_truetype.h">
+      <Filter>Pliki zasobów</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

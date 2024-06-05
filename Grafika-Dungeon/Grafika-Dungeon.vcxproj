@@ -79,8 +79,9 @@
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI\backends;$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI\backends;$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
@@ -126,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,12 +159,30 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Libraries\include\IMGUI\imgui.cpp" />
+    <ClCompile Include="Libraries\include\IMGUI\imgui_demo.cpp" />
+    <ClCompile Include="Libraries\include\IMGUI\imgui_draw.cpp" />
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Libraries\include\IMGUI\imgui_tables.cpp" />
+    <ClCompile Include="Libraries\include\IMGUI\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imconfig.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imgui.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_glfw.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl2.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl3.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imgui_internal.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imstb_rectpack.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imstb_textedit.h" />
+    <ClInclude Include="Libraries\include\IMGUI\imstb_truetype.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player.h" />

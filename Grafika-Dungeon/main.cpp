@@ -32,9 +32,14 @@ glm::vec3 targetPoint(-0.016375f, 0.0f, 10.050759f);
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
+// Grid settings
+int gridWidth = 10;
+int gridHeight = 10;
+
+
 int main()
 {
-     // glfw: initialize and configure
+    // glfw: initialize and configure
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -72,8 +77,6 @@ int main()
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 
-
-
     // build and compile shaders
     // -------------------------
     Shader Shader("vertex.glsl", "fragment.glsl");
@@ -82,10 +85,10 @@ int main()
     Enemy enemyEO(glm::vec3(-0.016375f, 0.0f, 10.050759f));
     // load models
     // -----------
-    Model ourModel("Assets/Map/Map.obj");
+    Model mapModel("Assets/Map/Map.obj");
     Model chestModel("Assets/Chest/Chest.obj");
     Model enemyModel("Assets/Skeleton/skeleton.obj");
-
+    //Model enemyModel("Assets/Skeleton/skeleton.obj");
 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -93,6 +96,18 @@ int main()
     // Inicjalizacja zmiennych do mierzenia czasu
     auto lastTime = std::chrono::high_resolution_clock::now();
     float deltaTime = 0.0f;
+
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.Fonts->AddFontDefault();
+    io.Fonts->Build();
+    ImGui::StyleColorsDark(); // Choose a default theme
+
+    // Setup Platform/Renderer bindings
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
 
     // render loop
     // -----------
@@ -108,11 +123,34 @@ int main()
         // input
         // -----
         processInput(window, camera, deltaTime);
+        /*
+        if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
+            // Start the ImGui frame
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
 
+            // ImGui Window
+
+            ImGui::Begin("Settings");
+            if (ImGui::Button("Set Grid 100x100"))
+            {
+                gridWidth = 100;
+                gridHeight = 100;
+            }
+            ImGui::Text("Current Grid Size: %d x %d", gridWidth, gridHeight);
+            ImGui::End();
+            
+            // Rendering
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        }
+        */
         // Player position
         player.SetPosition(camera.Position.x, camera.Position.y, camera.Position.z);
         player.printPlayerPosition();
         player.CheckDistanceAndModifyHealth(targetPoint, 2.0f, 20);
+
         // render
         // ------
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
@@ -121,7 +159,7 @@ int main()
         Shader.use();
 
         // ustawienia materia³u
-        Shader.setInt("material.diffuse", 0); 
+        Shader.setInt("material.diffuse", 0);
         Shader.setFloat("material.shininess", 32.0f);
 
         // ---------Directional light settings-----------------
@@ -137,7 +175,7 @@ int main()
         Shader.setFloat("light.linear", 0.09f);
         Shader.setFloat("light.quadratic", 0.032f);
         // ---------------------------------------------
-        
+
         // ---------Spot light settings-----------------
         Shader.setVec3("light.position", camera.Position);
         Shader.setVec3("light.direction", camera.Front);
@@ -150,36 +188,47 @@ int main()
         glm::mat4 view = camera.GetViewMatrix();
         Shader.setMat4("projection", projection);
         Shader.setMat4("view", view);
+        {
+            // render the map model
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+            Shader.setMat4("model", model);
+            mapModel.Draw(Shader);
+        }
 
-        // render the map model
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f)); 
-        Shader.setMat4("model", model);
-        ourModel.Draw(Shader);
+        {
+            // render the chest model
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(1.333f, 0.3f, 7.0f));
+            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+            Shader.setMat4("model", model);
+            chestModel.Draw(Shader);
+        }
 
-        // render the chest model
-        glm::mat4 chest = glm::mat4(1.0f);
-        chest = glm::translate(chest, glm::vec3(1.074662f, 0.5f, 6.693111f)); 
-        chest = glm::scale(chest, glm::vec3(1.0f, 1.0f, 1.0f)); 
-        Shader.setMat4("chest", chest);
-        chestModel.Draw(Shader);
-
-        // render the enemy model
-        glm::mat4 enemy = glm::mat4(1.0f);
-        enemy = glm::translate(enemy, enemyEO.GetPosition());
-        enemy = glm::scale(enemy, glm::vec3(1.0f, 1.0f, 1.0f)); 
-        Shader.setMat4("enemy", enemy);
-        enemyModel.Draw(Shader);
-
-        enemyEO.Update(deltaTime, camera);
-
-        std::cout<< glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
+        {
+            // render the enemy model
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(-0.016375f, 0.0f, 10.050759f));
+            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+            Shader.setMat4("model", model);
+            enemyModel.Draw(Shader);
+        }
+        //enemyEO.Update(deltaTime, camera);
+        printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemyEO.GetPosition())-0.9));
+        printf("Player position: (%f, %f, %f)\n", player.GetPosition().x, player.GetPosition().y, player.GetPosition().z);
+        printf("Enemy position: (%f, %f, %f)\n", enemyEO.GetPosition().x, enemyEO.GetPosition().y, enemyEO.GetPosition().z);
+        printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
+        //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
+    /*
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+    */
     glfwTerminate();
     return 0;
 }
@@ -188,7 +237,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
-
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
