@@ -7,13 +7,15 @@
 #include "Input.h"
 #include "Player.h"
 
+bool menu = true;
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1920;
+const unsigned int SCR_HEIGHT = 1080;
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 // camera
@@ -50,7 +52,7 @@ int main()
 #endif
 
     // glfw window creation
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Dungeon", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Dungeon", NULL(), NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -89,6 +91,7 @@ int main()
     Model chestModel("Assets/Chest/Chest.obj");
     Model enemyModel("Assets/Skeleton/skeleton.obj");
     Model swordModel("Assets/Blade/Blade.obj");
+    Model menuHoveredModel("Assets/Menu/menuHovered.obj");
 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -113,162 +116,239 @@ int main()
     // -----------
     while (!glfwWindowShouldClose(window))
     {
-        // per-frame time logic
-        // --------------------
-        auto currentTime = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<float> elapsedTime = currentTime - lastTime;
-        deltaTime = elapsedTime.count();
-        lastTime = currentTime;
+	    // per-frame time logic
+    	// --------------------
+    	auto currentTime = std::chrono::high_resolution_clock::now();
+    	std::chrono::duration<float> elapsedTime = currentTime - lastTime;
+    	deltaTime = elapsedTime.count();
+    	lastTime = currentTime;
 
-        // input
-        // -----
-        processInput(window, camera, deltaTime, player);
-        player.UpdateSwordAnimation(deltaTime);
-        /*
-        if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
-            // Start the ImGui frame
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
+    	// input
+    	// -----
+    	processInput(window, camera, deltaTime, player);
+    	player.UpdateSwordAnimation(deltaTime);
+    	/*
+		if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
+			// Start the ImGui frame
+			ImGui_ImplOpenGL3_NewFrame();
+			ImGui_ImplGlfw_NewFrame();
+			ImGui::NewFrame();
 
-            // ImGui Window
+			// ImGui Window
 
-            ImGui::Begin("Settings");
-            if (ImGui::Button("Set Grid 100x100"))
-            {
-                gridWidth = 100;
-                gridHeight = 100;
-            }
-            ImGui::Text("Current Grid Size: %d x %d", gridWidth, gridHeight);
-            ImGui::End();
-            
-            // Rendering
-            ImGui::Render();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        }
-        */
-        // Player position
-        player.SetPosition(camera.Position.x, camera.Position.y, camera.Position.z);
-        player.printPlayerPosition();
-        player.CheckDistanceAndModifyHealth(targetPoint, 2.0f, 20);
+			ImGui::Begin("Settings");
+			if (ImGui::Button("Set Grid 100x100"))
+			{
+				gridWidth = 100;
+				gridHeight = 100;
+			}
+			ImGui::Text("Current Grid Size: %d x %d", gridWidth, gridHeight);
+			ImGui::End();
 
-        // render
-        // ------
-        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			// Rendering
+			ImGui::Render();
+			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		}
+		*/
+    	// Player position
+    	player.SetPosition(camera.Position.x, camera.Position.y, camera.Position.z);
+    	player.printPlayerPosition();
+    	player.CheckDistanceAndModifyHealth(targetPoint, 2.0f, 20);
 
-        Shader.use();
+    	// render
+    	// ------
+    	glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    	Shader.use();
+    	// view/projection transformations
+    	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    	glm::mat4 view = camera.GetViewMatrix();
+    	Shader.setMat4("projection", projection);
+    	Shader.setMat4("view", view);
 
         // ustawienia materia³u
-        Shader.setInt("material.diffuse", 0);
-        Shader.setFloat("material.shininess", 32.0f);
-
-        // ---------Directional light settings-----------------
-        Shader.setVec3("light.position", lightPos);
-        Shader.setVec3("light.ambient", glm::vec3(0.1f, 0.1f, 0.1f));
-        Shader.setVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
-        Shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-        Shader.setVec3("viewPos", camera.Position);
-        // ---------------------------------------------------
-
-        //-----------Point light settings----------------
-        Shader.setFloat("light.constant", 1.0f);
-        Shader.setFloat("light.linear", 0.09f);
-        Shader.setFloat("light.quadratic", 0.032f);
-        // ---------------------------------------------
-
-        // ---------Spot light settings-----------------
-        Shader.setVec3("light.position", camera.Position);
-        Shader.setVec3("light.direction", camera.Front);
-        Shader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
-        Shader.setFloat("light.outerCutOff", glm::cos(glm::radians(17.5f)));
-        // --------------------------------------------
-
-        // view/projection transformations
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        glm::mat4 view = camera.GetViewMatrix();
-        Shader.setMat4("projection", projection);
-        Shader.setMat4("view", view);
         {
-            // render the map model
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-            Shader.setMat4("model", model);
-            mapModel.Draw(Shader);
+            Shader.setInt("material.diffuse", 0);
+            Shader.setFloat("material.shininess", 32.0f);
         }
-
-        {
-            // render the chest model
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(1.333f, 0.3f, 7.0f));
-            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-            Shader.setMat4("model", model);
-            chestModel.Draw(Shader);
-        }
-
-        {
-            // render the enemy model
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, enemy1.GetPosition());
-            model *= glm::mat4_cast(enemy1.Rotation);
-            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-            Shader.setMat4("model", model);
-            enemyModel.Draw(Shader);
-        }
-
-        {
-            // render the sword model
-            glm::vec3 swordPosition = camera.Position
-                + camera.Right * player.swordOffset.x
-                + camera.Up * player.swordOffset.y
-                + camera.Front * player.swordOffset.z;
-
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, swordPosition);
-
-            // Uzyskaj rotacjê kamery jako macierz 4x4
-            glm::vec3 cameraFront = camera.Front;
-            glm::vec3 cameraRight = camera.Right;
-            glm::vec3 cameraUp = camera.Up;
-
-            glm::mat4 cameraRotation = glm::mat4(1.0f);
-            cameraRotation[0] = glm::vec4(cameraRight, 0.0f);
-            cameraRotation[1] = glm::vec4(cameraUp, 0.0f);
-            cameraRotation[2] = glm::vec4(-cameraFront, 0.0f); // Negacja, bo kamera patrzy w przeciwn¹ stronê
-            cameraRotation[3] = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-
-            // Zastosuj rotacjê kamery do modelu miecza
-            model *= cameraRotation;
-
-
-            model *= glm::mat4_cast(player.swordRotation);
-            // Lokalna rotacja miecza, jeœli jest potrzebna
-            model = glm::rotate(model, glm::radians(70.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-            model = glm::rotate(model, glm::radians(-30.0f), glm::vec3(0.0f, 1.0f, 1.0f));
-            model = glm::rotate(model, glm::radians(-30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-
-            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-            Shader.setMat4("model", model);
-            swordModel.Draw(Shader);
-        }
-
         
-        enemy1.Update(deltaTime, camera);
-        //printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
-        //printf("Player position: (%f, %f, %f)\n", player.GetPosition().x, player.GetPosition().y, player.GetPosition().z);
-        //printf("Enemy position: (%f, %f, %f)\n", enemy1.GetPosition().x, enemy1.GetPosition().y, enemy1.GetPosition().z);
-        //printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
-        //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
+    	if (menu) {
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+    		camera.Position = glm::vec3(0.0f, 0.0f, 2.0f);
+
+    		// ---------Directional light settings-----------------
+    		{
+                Shader.setVec3("light.position", lightPos);
+                Shader.setVec3("light.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
+                Shader.setVec3("light.diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
+                Shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+                Shader.setVec3("viewPos", camera.Position);
+    		}
+    		// ---------------------------------------------------
+
+    		//-----------Point light settings----------------
+    		{
+    			Shader.setFloat("light.constant", 1.0f);
+    			Shader.setFloat("light.linear", 0.09f);
+    			Shader.setFloat("light.quadratic", 0.032f);
+    		}
+    		// ---------------------------------------------
+
+    		// ---------Spot light settings-----------------
+    		{
+    			Shader.setVec3("light.position", camera.Position);
+    			Shader.setVec3("light.direction", camera.Front);
+    			Shader.setFloat("light.cutOff", glm::cos(glm::radians(35.0f)));
+    			Shader.setFloat("light.outerCutOff", glm::cos(glm::radians(25.0f)));
+    		}
+    		// --------------------------------------------
+
+    		// render the menu model
+    		{
+    			glm::mat4 model = glm::mat4(1.0f);
+    			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+    			model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+    			Shader.setMat4("model", model);
+    			menuHoveredModel.Draw(Shader);
+    		}
+
+            if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS)
+            {
+                camera.Position = glm::vec3(-0.000978f, 0.9f, 15.233716f);
+            	menu = false;
+			}
+
+    		glfwSwapBuffers(window);
+    		glfwPollEvents();
+    	}
+    	else
+    	{ 
+    		{
+    			// ustawienia materia³u
+    			{
+    				Shader.setInt("material.diffuse", 0);
+    				Shader.setFloat("material.shininess", 32.0f);
+    			}
+
+    			// ---------Directional light settings-----------------
+    			{
+    				Shader.setVec3("light.position", lightPos);
+    				Shader.setVec3("light.ambient", glm::vec3(0.1f, 0.1f, 0.1f));
+    				Shader.setVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
+    				Shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+    				Shader.setVec3("viewPos", camera.Position);
+    			}
+    			// ---------------------------------------------------
+
+    			//-----------Point light settings----------------
+    			{
+    				Shader.setFloat("light.constant", 1.0f);
+    				Shader.setFloat("light.linear", 0.09f);
+    				Shader.setFloat("light.quadratic", 0.032f);
+    			}
+    			// ---------------------------------------------
+
+    			// ---------Spot light settings-----------------
+    			{
+    				Shader.setVec3("light.position", camera.Position);
+    				Shader.setVec3("light.direction", camera.Front);
+    				Shader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+    				Shader.setFloat("light.outerCutOff", glm::cos(glm::radians(17.5f)));
+    			}
+    			// --------------------------------------------
+
+    			// render the map model
+    			{
+    				glm::mat4 model = glm::mat4(1.0f);
+    				model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+    				model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+    				Shader.setMat4("model", model);
+    				mapModel.Draw(Shader);
+    			}
+
+    			// render the chest model
+    			{
+    				glm::mat4 model = glm::mat4(1.0f);
+    				model = glm::translate(model, glm::vec3(1.333f, 0.3f, 7.0f));
+    				model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+    				Shader.setMat4("model", model);
+    				chestModel.Draw(Shader);
+    			}
+
+    			// render the enemy model
+    			{
+    				glm::mat4 model = glm::mat4(1.0f);
+    				model = glm::translate(model, enemy1.GetPosition());
+    				model *= glm::mat4_cast(enemy1.Rotation);
+    				model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+    				Shader.setMat4("model", model);
+    				enemyModel.Draw(Shader);
+    			}
+    			// render the sword model
+    			{
+    				glm::vec3 swordPosition = camera.Position
+						+ camera.Right * player.swordOffset.x
+						+ camera.Up * player.swordOffset.y
+						+ camera.Front * player.swordOffset.z;
+
+    				glm::mat4 model = glm::mat4(1.0f);
+    				model = glm::translate(model, swordPosition);
+
+    				// Uzyskaj rotacjê kamery jako macierz 4x4
+    				glm::vec3 cameraFront = camera.Front;
+    				glm::vec3 cameraRight = camera.Right;
+    				glm::vec3 cameraUp = camera.Up;
+
+    				glm::mat4 cameraRotation = glm::mat4(1.0f);
+    				cameraRotation[0] = glm::vec4(cameraRight, 0.0f);
+    				cameraRotation[1] = glm::vec4(cameraUp, 0.0f);
+    				cameraRotation[2] = glm::vec4(-cameraFront, 0.0f); // Negacja, bo kamera patrzy w przeciwn¹ stronê
+    				cameraRotation[3] = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+    				// Zastosuj rotacjê kamery do modelu miecza
+    				model *= cameraRotation;
+
+
+    				model *= glm::mat4_cast(player.swordRotation);
+    				// Lokalna rotacja miecza, jeœli jest potrzebna
+    				model = glm::rotate(model, glm::radians(70.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    				model = glm::rotate(model, glm::radians(-30.0f), glm::vec3(0.0f, 1.0f, 1.0f));
+    				model = glm::rotate(model, glm::radians(-30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+    				model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+    				Shader.setMat4("model", model);
+    				swordModel.Draw(Shader);
+    			}
+
+                
+                std::string enemytemp = "enemy";
+                for (int i = 1; i < 3; i++)
+                {
+                    enemytemp += std::to_string(i);
+                    std::cout<< enemytemp <<std::endl;
+                    enemytemp = "enemy";
+				}
+                
+
+    			enemy1.Update(deltaTime, camera);
+    			//printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
+    			//printf("Player position: (%f, %f, %f)\n", player.GetPosition().x, player.GetPosition().y, player.GetPosition().z);
+    			//printf("Enemy position: (%f, %f, %f)\n", enemy1.GetPosition().x, enemy1.GetPosition().y, enemy1.GetPosition().z);
+    			//printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
+    			//std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
+
+    			glfwSwapBuffers(window);
+    			glfwPollEvents();
+    		}
+    	}
     }
-    /*
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-    */
+        /*
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+        */
+    
     glfwTerminate();
     return 0;
 }
@@ -280,23 +360,25 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
-    float xpos = static_cast<float>(xposIn);
-    float ypos = static_cast<float>(yposIn);
+	if(!menu){
+		float xpos = static_cast<float>(xposIn);
+		float ypos = static_cast<float>(yposIn);
 
-    if (firstMouse)
-    {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-    }
+		if (firstMouse)
+		{
+			lastX = xpos;
+			lastY = ypos;
+			firstMouse = false;
+		}
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos;
+		float xoffset = xpos - lastX;
+		float yoffset = lastY - ypos;
 
-    lastX = xpos;
-    lastY = ypos;
+		lastX = xpos;
+		lastY = ypos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+		camera.ProcessMouseMovement(xoffset, yoffset);
+	}
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
