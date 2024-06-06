@@ -6,6 +6,8 @@
 #include "Model.h"
 #include "Input.h"
 #include "Player.h"
+#include "Chest.h"
+#include <random>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -41,7 +43,11 @@ int gridWidth = 10;
 int gridHeight = 10;
 
 vector<Enemy> enemies; // Wektor przechowuj¹cy przeciwników
+vector<Chest> chests; // Wektor przechowuj¹cy skrzynie
 
+std::random_device rd;
+std::mt19937 gen(rd());
+std::uniform_real_distribution<> dis(0.0, 1.0);
 int main()
 {
     // glfw: initialize and configure
@@ -175,6 +181,204 @@ int main()
         Enemy enemy29(glm::vec3(-14.0527f, 0.0f, 9.95003f));
         enemies.push_back(enemy29);
 	}
+
+    //Chest
+    {
+        if (dis(gen) < 0.2) {
+            Chest chest1(glm::vec3(-3.33969f, 0.3f, -5.33003f), 90.0f);
+            chests.push_back(chest1);
+        }
+
+        if (dis(gen) < 1.0) {
+            Chest chest2(glm::vec3(2.9929f, 0.3f, -5.2583f), 90.0f);
+            chests.push_back(chest2);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest3(glm::vec3(9.01465f, 0.3f, 5.79264f), 90.0f);
+            chests.push_back(chest3);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest4(glm::vec3(10.1609f, 0.3f, 6.9917f), 0.0f);
+            chests.push_back(chest4);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest5(glm::vec3(8.97347f, 0.3f, 8.18384f), -90.0f);
+            chests.push_back(chest5);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest6(glm::vec3(7.17944f, 0.3f, 21.43f), 0.0f);
+            chests.push_back(chest6);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest7(glm::vec3(5.97503f, 0.3f, 22.2366f), -90.0f);
+            chests.push_back(chest7);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest8(glm::vec3(-5.09801f, 0.3f, 19.8613f), 90.0f);
+            chests.push_back(chest8);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest9(glm::vec3(-17.0788f, 0.3f, 19.8751f), 90.0f);
+            chests.push_back(chest9);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest10(glm::vec3(-9.87756f, 0.3f, 7.02046f), 0.0f);
+            chests.push_back(chest10);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest11(glm::vec3(-11.0927f, 0.3f, 5.82239f), 90.0f);
+            chests.push_back(chest11);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest12(glm::vec3(-14.1043f, 0.3f, 11.1898f), -90.0f);
+            chests.push_back(chest12);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest13(glm::vec3(-15.2466f, 0.3f, 9.99498f), 180.0f);
+            chests.push_back(chest13);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest14(glm::vec3(-14.0877f, 0.3f, -5.30439f), 90.0f);
+            chests.push_back(chest14);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest15(glm::vec3(-11.0805f, 0.3f, -7.98703f), -90.0f);
+            chests.push_back(chest15);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest16(glm::vec3(-9.89421f, 0.3f, -9.17691f), 0.0f);
+            chests.push_back(chest16);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest17(glm::vec3(-15.2498f, 0.3f, -12.1821f), 180.0f);
+            chests.push_back(chest17);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest18(glm::vec3(-14.0587f, 0.3f, -13.3533f), 90.0f);
+            chests.push_back(chest18);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest19(glm::vec3(-3.0095f, 0.3f, -10.9699f), -90.0f);
+            chests.push_back(chest19);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest20(glm::vec3(4.81888f, 0.3f, -12.1666f), 180.0f);
+            chests.push_back(chest20);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest21(glm::vec3(14.055f, 0.3f, -13.3138f), 90.0f);
+            chests.push_back(chest21);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest22(glm::vec3(18.2704f, 0.3f, -12.1454f), 0.0f);
+            chests.push_back(chest22);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest23(glm::vec3(18.2621f, 0.3f, -4.07328f), 0.0f);
+            chests.push_back(chest23);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest24(glm::vec3(2.98643f, 0.3f, -24.4461f), 90.0f);
+            chests.push_back(chest24);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest25(glm::vec3(7.19058f, 0.3f, -23.2428f), 0.0f);
+            chests.push_back(chest25);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest26(glm::vec3(-8.078f, 0.3f, -24.4193f), 90.0f);
+            chests.push_back(chest26);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest27(glm::vec3(-9.88308f, 0.3f, -20.2373f), 0.0f);
+            chests.push_back(chest27);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest28(glm::vec3(-11.067f, 0.3f, -19.0355f), -90.0f);
+            chests.push_back(chest28);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest29(glm::vec3(-12.2597f, 0.3f, -20.234f), 180.0f);
+            chests.push_back(chest29);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest30(glm::vec3(-14.4506f, 0.3f, -24.4312f), 90.0f);
+            chests.push_back(chest30);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest33(glm::vec3(-25.1724f, 0.3f, 19.8899f), 90.0f);
+            chests.push_back(chest33);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest34(glm::vec3(-29.3303f, 0.3f, 9.98386f), 180.0f);
+            chests.push_back(chest34);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest35(glm::vec3(-26.9758f, 0.3f, -6.17842f), 0.0f);
+            chests.push_back(chest35);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest36(glm::vec3(-34.118f, 0.3f, -7.95768f), -90.0f);
+            chests.push_back(chest36);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest37(glm::vec3(-35.3373f, 0.3f, -9.14862f), 180.0f);
+            chests.push_back(chest37);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest38(glm::vec3(-34.1369f, 0.3f, -10.3523f), 90.0f);
+            chests.push_back(chest38);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest39(glm::vec3(-29.3188f, 0.3f, -20.2508f), 180.0f);
+            chests.push_back(chest39);
+        }
+
+        if (dis(gen) < 0.2) {
+            Chest chest40(glm::vec3(-29.3179f, 0.3f, -26.2363f), 180.0f);
+            chests.push_back(chest40);
+        }
+
+        if (dis(gen) < 1.0) {
+            Chest chest41(glm::vec3(1.1842f, 0.3f, 7.01446f), 0.0f);
+            chests.push_back(chest41);
+        }
+    }
 
     // load models
     // -----------
@@ -367,11 +571,13 @@ int main()
                     mapModel.Draw(Shader);
                 }
 
-                // render the chest model
+                for (const Chest& chest : chests)
                 {
                     glm::mat4 model = glm::mat4(1.0f);
-                    model = glm::translate(model, glm::vec3(1.333f, 0.3f, 7.0f));
+                    model = glm::translate(model, chest.GetPosition());
+                    model *= glm::mat4_cast(chest.Rotation);
                     model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+                    model = glm::rotate(model, glm::radians(chest.getRadians()), glm::vec3(0.0f, 1.0f, 0.0f));
                     Shader.setMat4("model", model);
                     chestModel.Draw(Shader);
                 }
