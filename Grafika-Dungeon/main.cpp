@@ -165,6 +165,14 @@ int main()
         Enemy enemy26(glm::vec3(-1.59904f, 0.0f, -12.1365f));
         enemies.push_back(enemy26);
 
+        Enemy enemy27(glm::vec3(0.136875f, 0.0f, -12.4627f));
+        enemies.push_back(enemy27);
+
+        Enemy enemy28(glm::vec3(-14.0106f, 0.0f, -2.22209f));
+        enemies.push_back(enemy28);
+
+        Enemy enemy29(glm::vec3(-14.0527f, 0.0f, 9.95003f));
+        enemies.push_back(enemy29);
 	}
     // load models
     // -----------
