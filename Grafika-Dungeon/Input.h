@@ -3,6 +3,6 @@
 #include "Camera.h"
 #include "Player.h"
 
-void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& player);
+void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& player, bool menu, bool died);
 void mouse_callback(GLFWwindow* window, Camera& camera, double xposIn, double yposIn, bool firstMouse, float lastX, float lastY);
 void scroll_callback(GLFWwindow* window, Camera& camera, double xoffset, double yoffset);

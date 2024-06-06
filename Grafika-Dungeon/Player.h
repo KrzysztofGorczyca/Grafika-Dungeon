@@ -11,7 +11,7 @@ class Player
 {
 public:
     glm::vec3 Position;     // Pozycja gracza na mapie
-    int Health = 100;       // Zdrowie gracza
+    float Health = 100.0;       // Zdrowie gracza
     int Damage = 25;        // Obra¿enia zadawane przez gracza
     glm::vec3 swordOffset;
     glm::quat swordRotation; // Domyœlna rotacja miecza
@@ -27,6 +27,26 @@ public:
         : Position(position), lastHealthUpdateTime(std::chrono::high_resolution_clock::now()),
     	swordOffset(glm::vec3(0.23f, -0.33f, 0.5f)),
         swordRotation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f)) {}
+
+
+    void takeDamage(Enemy enemy, float deltaTime)
+    {
+        float atackSpeed = 1.0f;
+        std::cout << Health << std::endl;
+        float time = 0.0f;
+        time += deltaTime;
+        if (time >= atackSpeed) {
+            glm::vec2 playerPosition(Position.x, Position.z);
+            glm::vec2 enemyPos2D(enemy.Position.x, enemy.Position.z);
+            float distance = glm::distance(playerPosition, enemyPos2D);
+            if (distance < 1.0f) {
+                Health -= enemy.Damage;
+                if (Health < 0) Health = 0;
+                if (isDead())
+                    std::cout << Health << std::endl;
+            }
+        }
+    }
 
     // Metody do ustawiania i pobierania pozycji
     void SetPosition(float x, float y, float z) {
@@ -148,6 +168,16 @@ public:
         }
     }
 
+
+
+    bool isDead()
+    {
+    	if(Health <= 0)
+    	{
+    		return true;
+		}
+		return false;
+	}
 
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> lastHealthUpdateTime;

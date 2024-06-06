@@ -113,6 +113,11 @@ public:
 	    return Position;
     }
 
+    void ResetCameraAngles() {
+        Yaw = YAW;
+        Pitch = PITCH;
+        updateCameraVectors();
+    }
 
 private:
     // calculates the front vector from the Camera's (updated) Euler Angles

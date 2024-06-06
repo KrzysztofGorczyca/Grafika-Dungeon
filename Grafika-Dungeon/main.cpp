@@ -12,6 +12,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 bool menu = true;
+bool game = false;
+bool died = false;
 
 // settings
 const unsigned int SCR_WIDTH = 1920;
@@ -83,7 +85,6 @@ int main()
     // build and compile shaders
     // -------------------------
     Shader Shader("vertex.glsl", "fragment.glsl");
-
     //Enemy
 
 	{
@@ -174,13 +175,15 @@ int main()
         Enemy enemy29(glm::vec3(-14.0527f, 0.0f, 9.95003f));
         enemies.push_back(enemy29);
 	}
+
     // load models
     // -----------
     Model mapModel("Assets/Map/Map.obj");
     Model chestModel("Assets/Chest/Chest.obj");
     Model enemyModel("Assets/Skeleton/skeleton.obj");
     Model swordModel("Assets/Blade/Blade.obj");
-    Model menuHoveredModel("Assets/Menu/menuHovered.obj");
+    Model mainMenuModel("Assets/Menu/mainMenu.obj");
+    Model deathMenuModel("Assets/Menu/deathMenu.obj");
 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -212,9 +215,14 @@ int main()
         deltaTime = elapsedTime.count();
         lastTime = currentTime;
 
+        // start the ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
         // input
         // -----
-        processInput(window, camera, deltaTime, player);
+        processInput(window, camera, deltaTime, player, menu, died);
         player.UpdateSwordAnimation(deltaTime, enemies);
         /*
         if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
@@ -296,21 +304,27 @@ int main()
                 model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
                 model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
                 Shader.setMat4("model", model);
-                menuHoveredModel.Draw(Shader);
+                mainMenuModel.Draw(Shader);
             }
 
             if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS)
             {
                 camera.Position = glm::vec3(-0.000978f, 0.9f, 15.233716f);
                 menu = false;
+                game = true;
             }
+
+
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
-        else
+        else if (game)
         {
             {
+                
                 // ustawienia materiu
                 {
                     Shader.setInt("material.diffuse", 0);
@@ -422,25 +436,85 @@ int main()
                     swordModel.Draw(Shader);
                 }
 
-                /*
-                std::string enemytemp = "enemy";
-                for (int i = 1; i < 3; i++)
-                {
-                    enemytemp += std::to_string(i);
-                    std::cout << enemytemp << std::endl;
-                    enemytemp = "enemy";
-                }
-				*/
-
                 //printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
-                std::cout<<"(" << player.Position.x << "f," << "0.0f," << player.Position.z << "f" <<")" << std::endl;
+                //std::cout<<"(" << player.Position.x << "f," << "0.0f," << player.Position.z << "f" <<")" << std::endl;
                 //printf("Enemy position: (%f, %f, %f)\n", enemy1.GetPosition().x, enemy1.GetPosition().y, enemy1.GetPosition().z);
                 //printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
                 //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
+                if(player.GetHealth() <= 0.0f)
+                {
+					game = false;
+					died = true;
+				}
+
+                ImGui::Begin("Health");
+                ImGui::Text("Player Health: %.1f", player.Health);
+                ImGui::End();
+                ImGui::Begin("Damage");
+                ImGui::Text("Player Damage: %.1f", player.Damage);
+                ImGui::End();
+
+
+                ImGui::Render();
+                ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
                 glfwSwapBuffers(window);
                 glfwPollEvents();
             }
+        } else if(died)
+        {
+            camera.Position = glm::vec3(5000.0f, 0.0f, -4998.0f);
+
+			// ---------Directional light settings-----------------
+	        {
+	        	Shader.setVec3("light.position", lightPos);
+				Shader.setVec3("light.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
+				Shader.setVec3("light.diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
+				Shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+				Shader.setVec3("viewPos", camera.Position);
+			}
+			// ---------------------------------------------------
+
+			//-----------Point light settings----------------
+	        {
+	        	Shader.setFloat("light.constant", 1.0f);
+				Shader.setFloat("light.linear", 0.09f);
+				Shader.setFloat("light.quadratic", 0.032f);
+			}
+			// ---------------------------------------------
+
+			// ---------Spot light settings-----------------
+        	{
+	        	Shader.setVec3("light.position", camera.Position);
+				Shader.setVec3("light.direction", camera.Front);
+				Shader.setFloat("light.cutOff", glm::cos(glm::radians(35.0f)));
+				Shader.setFloat("light.outerCutOff", glm::cos(glm::radians(25.0f)));
+			}
+			// --------------------------------------------
+
+			// render the died menu model
+        	{
+	        	glm::mat4 model = glm::mat4(1.0f);
+				model = glm::translate(model, glm::vec3(5000.0f, 0.0f, -5000.0f));
+				model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+				Shader.setMat4("model", model);
+                deathMenuModel.Draw(Shader);
+			}
+
+            camera.ResetCameraAngles();
+
+			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			{
+                glfwTerminate();
+                return 0;
+			}
+
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+			glfwSwapBuffers(window);
+			glfwPollEvents();
         }
     }
     /*
@@ -460,25 +534,28 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
     if(!menu)
-    {
-	    float xpos = static_cast<float>(xposIn);
-    	float ypos = static_cast<float>(yposIn);
+        if(!died)
+        {
+	        {
+	        	float xpos = static_cast<float>(xposIn);
+	        	float ypos = static_cast<float>(yposIn);
 
-    	if (firstMouse)
-    	{
-    		lastX = xpos;
-    		lastY = ypos;
-    		firstMouse = false;
-    	}
+	        	if (firstMouse)
+	        	{
+	        		lastX = xpos;
+	        		lastY = ypos;
+	        		firstMouse = false;
+	        	}
 
-    	float xoffset = xpos - lastX;
-    	float yoffset = lastY - ypos;
+	        	float xoffset = xpos - lastX;
+	        	float yoffset = lastY - ypos;
 
-    	lastX = xpos;
-    	lastY = ypos;
+	        	lastX = xpos;
+	        	lastY = ypos;
 
-    	camera.ProcessMouseMovement(xoffset, yoffset);
-    }
+	        	camera.ProcessMouseMovement(xoffset, yoffset);
+	        }
+        }
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)

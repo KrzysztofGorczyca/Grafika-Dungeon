@@ -1,8 +1,9 @@
 #include "Input.h"
 #include "Player.h"
 
-void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& player)
+void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& player, bool menu, bool died)
 {
+    if (menu || died) return;
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 

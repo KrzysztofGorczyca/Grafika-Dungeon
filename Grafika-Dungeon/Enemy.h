@@ -15,12 +15,14 @@ public:
     glm::quat Rotation;
     float Speed;
     float Health;
+    float Damage;
     // Constructor
     Enemy(glm::vec3 position)
         :Position(position)
         , Rotation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f))
         , Health(100.0f)
         , Speed(1.0f)
+		, Damage(25.0f)
     {
 
     }
@@ -79,6 +81,7 @@ public:
     {
     	Position = position;
 	}
+
 
 private:
     void rotateEnemy(glm::vec3 direction) {
