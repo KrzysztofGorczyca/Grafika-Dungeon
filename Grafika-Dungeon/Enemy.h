@@ -35,6 +35,7 @@ public:
         direction.y = 0.0f;  // Ignoruj ró¿nicê w osi Y
         direction = glm::normalize(direction);  // Normalizuj wektor kierunku
 
+
         // SprawdŸ odleg³oœæ i zaktualizuj pozycjê tylko w p³aszczyŸnie XZ
         float distance = glm::distance(glm::vec2(Position.x, Position.z), glm::vec2(camera.getCameraPosition().x, camera.getCameraPosition().z));
         if (distance < 5.0f && distance > 1.0f) {
@@ -48,8 +49,22 @@ public:
         Position.y = 0.0f;
     }
 
+    void getHit() {
+        printf("Enemy hit!\n");
+        Health -= 100.0f;
+        isDead();
+    }
 
-
+    bool isDead() {
+        if (Health <= 00.0f)
+        {
+            printf("Enemy is dead!\n");
+            Position = glm::vec3(0.0f, 0.0f, -100.0f);
+            return true;
+        }
+	    
+        return false;
+	}
 
 
     // Getters and setters

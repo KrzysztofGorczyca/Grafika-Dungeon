@@ -36,6 +36,7 @@ float lastFrame = 0.0f;
 int gridWidth = 10;
 int gridHeight = 10;
 
+vector<Enemy> enemies; // Wektor przechowuj¹cy przeciwników
 
 int main()
 {
@@ -83,6 +84,7 @@ int main()
 
     //Enemy
     Enemy enemy1(glm::vec3(-0.016375f, 0.0f, 10.050759f));
+    enemies.push_back(enemy1);
     // load models
     // -----------
     Model mapModel("Assets/Map/Map.obj");
@@ -123,7 +125,6 @@ int main()
         // input
         // -----
         processInput(window, camera, deltaTime, player);
-        player.UpdateSwordAnimation(deltaTime);
         /*
         if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
             // Start the ImGui frame
@@ -141,7 +142,7 @@ int main()
             }
             ImGui::Text("Current Grid Size: %d x %d", gridWidth, gridHeight);
             ImGui::End();
-            
+
             // Rendering
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -216,6 +217,9 @@ int main()
             Shader.setMat4("model", model);
             enemyModel.Draw(Shader);
         }
+
+        enemies[0].Position = enemy1.GetPosition();
+        player.UpdateSwordAnimation(deltaTime, enemies);
 
         {
             // render the sword model
