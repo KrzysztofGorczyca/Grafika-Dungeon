@@ -70,6 +70,7 @@ private:
         // Ustaw obrót przeciwnika
         Rotation = rotationQuat;
     }
+
 };
 
 #endif // ENEMY_H

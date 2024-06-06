@@ -3,6 +3,7 @@
 // Used by Grafika-Dungeon.rc
 
 // Nastêpne wartoœci domyœlne dla nowych obiektów
+
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS

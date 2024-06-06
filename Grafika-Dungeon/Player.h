@@ -69,4 +69,5 @@ private:
     std::chrono::time_point<std::chrono::high_resolution_clock> lastHealthUpdateTime;
 };
 
+
 #endif // PLAYER_H
