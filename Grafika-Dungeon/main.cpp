@@ -248,6 +248,7 @@ int main()
             Shader.setMat4("model", model);
             swordModel.Draw(Shader);
         }
+
         
         enemy1.Update(deltaTime, camera);
         //printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
