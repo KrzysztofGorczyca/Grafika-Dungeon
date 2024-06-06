@@ -125,6 +125,46 @@ int main()
 
     	Enemy enemy13(glm::vec3(-28.199f, 0.0f, -17.4238f));
     	enemies.push_back(enemy13);
+
+        Enemy enemy14(glm::vec3(5.99937f, 0.0f, 2.57415f));
+        enemies.push_back(enemy14);
+
+        Enemy enemy15(glm::vec3(5.41255f, 0.0f, 8.69031f));
+        enemies.push_back(enemy15);
+
+        Enemy enemy16(glm::vec3(6.00506f, 0.0f, 21.0736f));
+        enemies.push_back(enemy16);
+
+        Enemy enemy17(glm::vec3(-6.37469f, 0.0f, 21.0618f));
+        enemies.push_back(enemy17);
+
+        Enemy enemy18(glm::vec3(-12.6804f, 0.0f, 21.4268f));
+        enemies.push_back(enemy18);
+
+        Enemy enemy19(glm::vec3(-28.1926f, 0.0f, 20.8219f));
+        enemies.push_back(enemy19);
+
+        Enemy enemy20(glm::vec3(-28.1475f, 0.0f, 11.6525f));
+        enemies.push_back(enemy20);
+
+        Enemy enemy21(glm::vec3(-28.0663f, 0.0f, 5.56968f));
+        enemies.push_back(enemy21);
+
+        Enemy enemy22(glm::vec3(-28.1336f, 0.0f, -7.38187f));
+        enemies.push_back(enemy22);
+
+        Enemy enemy23(glm::vec3(-32.0134f, 0.0f, -9.16037f));
+        enemies.push_back(enemy23);
+
+        Enemy enemy24(glm::vec3(-23.7428f, 0.0f, -9.16687f));
+        enemies.push_back(enemy24);
+
+        Enemy enemy25(glm::vec3(-12.4485f, 0.0f, -9.25784f));
+        enemies.push_back(enemy25);
+
+        Enemy enemy26(glm::vec3(-1.59904f, 0.0f, -12.1365f));
+        enemies.push_back(enemy26);
+
 	}
     // load models
     // -----------
