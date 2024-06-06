@@ -113,6 +113,9 @@
     <ClInclude Include="Libraries\include\IMGUI\imstb_truetype.h">
       <Filter>Pliki zasobów</Filter>
     </ClInclude>
+    <ClInclude Include="Chest.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_core.glsl">
