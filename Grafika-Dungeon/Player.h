@@ -12,7 +12,7 @@ class Player
 public:
     glm::vec3 Position;     // Pozycja gracza na mapie
     int Health = 100;       // Zdrowie gracza
-    int Damage = 20;        // Obra¿enia zadawane przez gracza
+    int Damage = 25;        // Obra¿enia zadawane przez gracza
     glm::vec3 swordOffset;
     glm::quat swordRotation; // Domyœlna rotacja miecza
     // Dodaj zmienne do œledzenia stanu animacji w klasie Player lub Sword
@@ -104,13 +104,14 @@ public:
                     for (Enemy& enemy : enemies) {
                         glm::vec3 enemyPosition = enemy.GetPosition();
                         glm::vec2 playerPosition(Position.x, Position.z);
-                        printf("Player position -0.000978f, 15.233716f : (%f, %f)\n", Position.x, Position.z);
+                        //printf("Player position -0.000978f, 15.233716f : (%f, %f)\n", Position.x, Position.z);
                         glm::vec2 enemyPos2D(enemyPosition.x, enemyPosition.z);
-                        printf("Enemy position -0.016375f, 10.050759f : (%f, %f)\n", enemyPosition.x, enemyPosition.z);
+                        //printf("Enemy position -0.016375f, 10.050759f : (%f, %f)\n", enemyPosition.x, enemyPosition.z);
                         float distance = glm::distance(playerPosition, enemyPos2D);
-                        printf("Distance: %f\n", distance);
+                        //printf("Distance: %f\n", distance);
                         if (distance < 1.5f) {
-                            enemy.getHit();
+                            enemy.modifyHealth(-Damage);
+                            std::cout<<"Enemy health: "<<enemy.GetHealth()<<std::endl<<enemy.Position.z<<std::endl;
                         }
                     }
 

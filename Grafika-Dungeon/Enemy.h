@@ -30,46 +30,55 @@ public:
 
     // Update function to handle movement and other logic
     void Update(float deltaTime, const Camera& camera) {
-        // Oblicz kierunek ruchu ignoruj¹c ró¿nicê w osi Y
-        glm::vec3 direction = camera.getCameraPosition() - Position;
-        direction.y = 0.0f;  // Ignoruj ró¿nicê w osi Y
-        direction = glm::normalize(direction);  // Normalizuj wektor kierunku
+        if(!isDead())
+	    {
+		    // Oblicz kierunek ruchu ignoruj¹c ró¿nicê w osi Y
+	    	glm::vec3 direction = camera.getCameraPosition() - Position;
+	    	direction.y = 0.0f;  // Ignoruj ró¿nicê w osi Y
+	    	direction = glm::normalize(direction);  // Normalizuj wektor kierunku
+	    	if(isDead())
+	    	{
+	    		std::cout << "Enemy is dead" << std::endl;
+	    	}
 
+	    	// SprawdŸ odleg³oœæ i zaktualizuj pozycjê tylko w p³aszczyŸnie XZ
+	    	float distance = glm::distance(glm::vec2(Position.x, Position.z), glm::vec2(camera.getCameraPosition().x, camera.getCameraPosition().z));
+	    	if (distance < 5.0f && distance > 1.0f) {
+	    		Position += direction * Speed * deltaTime;
+	    		rotateEnemy(direction);
+	    	}else if(distance < 1.0f){
+	    		rotateEnemy(direction);
+	    	}
 
-        // SprawdŸ odleg³oœæ i zaktualizuj pozycjê tylko w p³aszczyŸnie XZ
-        float distance = glm::distance(glm::vec2(Position.x, Position.z), glm::vec2(camera.getCameraPosition().x, camera.getCameraPosition().z));
-        if (distance < 5.0f && distance > 1.0f) {
-            Position += direction * Speed * deltaTime;
-            rotateEnemy(direction);
-        }else if(distance < 1.0f){
-            rotateEnemy(direction);
-        }
-
-        // Ustaw wspó³rzêdn¹ Y na sta³¹ wartoœæ (np. 0)
-        Position.y = 0.0f;
+	    	// Ustaw wspó³rzêdn¹ Y na sta³¹ wartoœæ (np. 0)
+	    	Position.y = 0.0f;
+	    }
     }
 
-    void getHit() {
-        printf("Enemy hit!\n");
-        Health -= 100.0f;
-        isDead();
-    }
-
-    bool isDead() {
-        if (Health <= 00.0f)
-        {
-            printf("Enemy is dead!\n");
-            Position = glm::vec3(0.0f, 0.0f, -100.0f);
-            return true;
-        }
-	    
-        return false;
+    void modifyHealth(float amount)
+    {
+    	Health += amount;
+		if (Health < 0.0f) Health = 0.0f;
+		if (Health > 100.0f) Health = 100.0f;
 	}
 
+    bool isDead()
+    {
+	    		if(Health <= 0.0f)
+	    		{
+                    Position = glm::vec3(0.0f, 0.0f, 100.0f);
+	    			return true;
+	    		}
+                return false;
+	}
 
     // Getters and setters
-    inline glm::vec3 GetPosition() const { return Position; }
+    inline glm::vec3 GetPosition() const{ return Position; }
     inline float GetHealth() const { return Health; }
+    void UpdatePosition(glm::vec3 position)
+    {
+    	Position = position;
+	}
 
 private:
     void rotateEnemy(glm::vec3 direction) {

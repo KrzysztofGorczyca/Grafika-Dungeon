@@ -85,8 +85,47 @@ int main()
     Shader Shader("vertex.glsl", "fragment.glsl");
 
     //Enemy
-    Enemy enemy1(glm::vec3(-0.016375f, 0.0f, 10.050759f));
-    enemies.push_back(enemy1);
+
+	{
+		Enemy enemy0(glm::vec3(-0.016375f, 0.0f, 10.050759f));
+    	enemies.push_back(enemy0);
+
+    	Enemy enemy1(glm::vec3(0.036355f, 0.000000f, -2.577032f));
+    	enemies.push_back(enemy1);
+
+    	Enemy enemy3(glm::vec3(-5.59401f, 0.0f, -4.34549f));
+    	enemies.push_back(enemy3);
+
+    	Enemy enemy4(glm::vec3(4.30192f, 0.0f, -4.18849f));
+    	enemies.push_back(enemy4);
+
+    	Enemy enemy5(glm::vec3(16.9623f, 0.0f, -3.83829f));
+    	enemies.push_back(enemy5);
+
+    	Enemy enemy6(glm::vec3(17.0234f, 0.0f, -12.5754f));
+    	enemies.push_back(enemy6);
+
+    	Enemy enemy7(glm::vec3(5.97025f, 0.0f, -23.3051f));
+    	enemies.push_back(enemy7);
+
+    	Enemy enemy8(glm::vec3(-11.093f, 0.0f, -23.3374f));
+    	enemies.push_back(enemy8);
+
+    	Enemy enemy9(glm::vec3(-11.1941f, 0.0f, -19.7457f));
+    	enemies.push_back(enemy9);
+
+    	Enemy enemy10(glm::vec3(-15.5271f, 0.0f, -23.477f));
+    	enemies.push_back(enemy10);
+
+    	Enemy enemy11(glm::vec3(-28.4578f, 0.0f, -23.371f));
+    	enemies.push_back(enemy11);
+
+    	Enemy enemy12(glm::vec3(-28.1101f, 0.0f, -29.3522f));
+    	enemies.push_back(enemy12);
+
+    	Enemy enemy13(glm::vec3(-28.199f, 0.0f, -17.4238f));
+    	enemies.push_back(enemy13);
+	}
     // load models
     // -----------
     Model mapModel("Assets/Map/Map.obj");
@@ -114,7 +153,7 @@ int main()
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
 
-    // render loop asd
+    // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
     {
@@ -275,15 +314,30 @@ int main()
                     chestModel.Draw(Shader);
                 }
 
+                
+                player.UpdateSwordAnimation(deltaTime, enemies);
+
+                for (Enemy& enemy : enemies)
+                {
+                    enemy.Update(deltaTime, camera);
+                    enemy.Position = enemy.GetPosition();
+                }
+
+                enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& enemy) {
+                    return enemy.GetHealth() <= 0.0f;
+                    }), enemies.end());
+
                 // render the enemy model
+                for (const Enemy& enemy : enemies)
                 {
                     glm::mat4 model = glm::mat4(1.0f);
-                    model = glm::translate(model, enemy1.GetPosition());
-                    model *= glm::mat4_cast(enemy1.Rotation);
+                    model = glm::translate(model, enemy.GetPosition());
+                    model *= glm::mat4_cast(enemy.Rotation);
                     model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
                     Shader.setMat4("model", model);
                     enemyModel.Draw(Shader);
                 }
+
                 // render the sword model
                 {
                     glm::vec3 swordPosition = camera.Position
@@ -330,12 +384,8 @@ int main()
                 }
 				*/
 
-                enemies[0].Position = enemy1.GetPosition();
-                player.UpdateSwordAnimation(deltaTime, enemies);
-
-                enemy1.Update(deltaTime, camera);
                 //printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
-                //printf("Player position: (%f, %f, %f)\n", player.GetPosition().x, player.GetPosition().y, player.GetPosition().z);
+                std::cout<<"(" << player.Position.x << "f," << "0.0f," << player.Position.z << "f" <<")" << std::endl;
                 //printf("Enemy position: (%f, %f, %f)\n", enemy1.GetPosition().x, enemy1.GetPosition().y, enemy1.GetPosition().z);
                 //printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
                 //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
