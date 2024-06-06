@@ -1,7 +1,7 @@
 #include "Input.h"
 #include "Player.h"
 
-void processInput(GLFWwindow* window, Camera& camera, float deltaTime)
+void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& player)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -14,8 +14,9 @@ void processInput(GLFWwindow* window, Camera& camera, float deltaTime)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
-    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-        
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS && !player.isAnimating) {
+        player.isAnimating = true;
+        player.animationTime = 0.0f;
     }
 }
 

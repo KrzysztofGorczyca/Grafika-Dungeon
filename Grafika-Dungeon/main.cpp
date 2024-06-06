@@ -122,7 +122,8 @@ int main()
 
         // input
         // -----
-        processInput(window, camera, deltaTime);
+        processInput(window, camera, deltaTime, player);
+        player.UpdateSwordAnimation(deltaTime);
         /*
         if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
             // Start the ImGui frame
@@ -218,11 +219,10 @@ int main()
 
         {
             // render the sword model
-            glm::vec3 swordOffset(0.3f, -0.3f, 0.8f);  // Dostosowany offset
             glm::vec3 swordPosition = camera.Position
-                + camera.Right * swordOffset.x
-                + camera.Up * swordOffset.y
-                + camera.Front * swordOffset.z;
+                + camera.Right * player.swordOffset.x
+                + camera.Up * player.swordOffset.y
+                + camera.Front * player.swordOffset.z;
 
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, swordPosition);
@@ -241,8 +241,12 @@ int main()
             // Zastosuj rotacjê kamery do modelu miecza
             model *= cameraRotation;
 
+
+            model *= glm::mat4_cast(player.swordRotation);
             // Lokalna rotacja miecza, jeœli jest potrzebna
-            model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(70.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(-30.0f), glm::vec3(0.0f, 1.0f, 1.0f));
+            model = glm::rotate(model, glm::radians(-30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
             model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
             Shader.setMat4("model", model);
