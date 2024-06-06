@@ -4,6 +4,8 @@
 #include <glm/glm.hpp>
 #include <cmath>
 #include <chrono>
+#include "libs.h"
+#include "Enemy.h"
 
 class Player
 {
@@ -72,7 +74,7 @@ public:
         }
     }
 
-    void UpdateSwordAnimation(float deltaTime) {
+    void UpdateSwordAnimation(float deltaTime, std::vector<Enemy>& enemies) {
         if (isAnimating) {
             animationTime += deltaTime;
             float t;
@@ -94,10 +96,27 @@ public:
                 swordOffset.x = currentX;
                 swordOffset.z = currentZ;
 
+
                 // Sprawdü, czy miecz osiπgnπ≥ koÒcowπ pozycjÍ
                 if (animationTime >= attackDuration) {
+
+                    // Sprawdü kolizje z przeciwnikami
+                    for (Enemy& enemy : enemies) {
+                        glm::vec3 enemyPosition = enemy.GetPosition();
+                        glm::vec2 playerPosition(Position.x, Position.z);
+                        printf("Player position -0.000978f, 15.233716f : (%f, %f)\n", Position.x, Position.z);
+                        glm::vec2 enemyPos2D(enemyPosition.x, enemyPosition.z);
+                        printf("Enemy position -0.016375f, 10.050759f : (%f, %f)\n", enemyPosition.x, enemyPosition.z);
+                        float distance = glm::distance(playerPosition, enemyPos2D);
+                        printf("Distance: %f\n", distance);
+                        if (distance < 1.5f) {
+                            enemy.getHit();
+                        }
+                    }
+
                     animationTime = 0.0f;  // Resetuj czas animacji
                     isReturning = true;    // Rozpocznij fazÍ powrotu
+
                 }
             }
             else {
