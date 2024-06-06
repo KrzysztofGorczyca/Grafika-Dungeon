@@ -9,6 +9,7 @@ struct Texture {
     string path;
 };
 
+
 class Mesh {
 public:
     // mesh data

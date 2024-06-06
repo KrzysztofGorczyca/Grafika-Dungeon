@@ -51,6 +51,7 @@ public:
 
 
 
+
     // Getters and setters
     inline glm::vec3 GetPosition() const { return Position; }
     inline float GetHealth() const { return Health; }

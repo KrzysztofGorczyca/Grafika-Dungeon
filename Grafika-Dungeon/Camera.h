@@ -113,6 +113,7 @@ public:
 	    return Position;
     }
 
+
 private:
     // calculates the front vector from the Camera's (updated) Euler Angles
     void updateCameraVectors()
