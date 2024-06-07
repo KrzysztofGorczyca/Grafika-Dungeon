@@ -1,0 +1,247 @@
+\doxysection{Player.\+h}
+\hypertarget{_player_8h_source}{}\label{_player_8h_source}\mbox{\hyperlink{_player_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLAYER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAYER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glm/glm.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{libs_8h}{libs.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_enemy_8h}{Enemy.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ glm::vec3\ \mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}};\ \ \ \ \ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}}\ =\ 100.00f;\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a7e07709060a3b6d44f47bd920e600094}{MaxHealth}}\ =\ 100.00f;\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_ab361860ffe2e0a3f1c2f38a897c6bd8b}{Damage}}\ =\ 25.0f;\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a4c819c9ad1d6b8c561f511d6bd3ded38}{Range}}\ =\ 1.50f;\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_aad3c89184fb64aa916cabecaa49e00cd}{Regeneration}}\ =\ 5.0f;\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_player_a42307950465241a438152efc68950298}{regenTime}}\ =\ 0;\ }
+\DoxyCodeLine{00024\ \ \ \ \ glm::vec3\ \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{swordOffset}};\ }
+\DoxyCodeLine{00025\ \ \ \ \ glm::quat\ \mbox{\hyperlink{class_player_ab3ad28052a2bd25609339016c7eeee78}{swordRotation}};\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_a277e978139db82aed94d1898af5741f7}{isAnimating}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_afe40a4e05d36c8a4159f0e826a8648f7}{wasAttacked}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_aa2acca0d0cd5696138ccfc1a588e784c}{animationTime}}\ =\ 0.0f;\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a7d5cddaf3935aec90bddc5957d6870c7}{attackDuration}}\ =\ 0.4f;\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a0fbc90e2733f79f4e44d9981f808896e}{returnDuration}}\ =\ 0.8f;\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_ae867a701e810087ec579989d117ea697}{isReturning}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_a1bac66c3184fcf2a2f54085c5048aa3a}{holdingE}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_a60dc0d814d4d1f121b49d1b6277d716b}{playAttack}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_ab47a2fd315da9d38992e5db3a0c3b1cc}{playReturn}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_a5a5bdc93315abaaddce1dae5df767030}{playDamageSound}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{class_player_a55db2c837b2794d790102dda17f0d2bd}{Player}}(glm::vec3\ position\ =\ glm::vec3(0.0f,\ 0.0f,\ 0.0f))}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}}(position),\ lastHealthUpdateTime(std::chrono::high\_resolution\_clock::now()),}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{swordOffset}}(glm::vec3(0.23f,\ -\/0.33f,\ 0.5f)),}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_ab3ad28052a2bd25609339016c7eeee78}{swordRotation}}(glm::quat(1.0f,\ 0.0f,\ 0.0f,\ 0.0f))\ \{\}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a3a36e731f0bcff0f76ce4be364ba0db7}{SetPosition}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}}\ =\ glm::vec3(x,\ y,\ z);}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ glm::vec3\ \mbox{\hyperlink{class_player_a346c4199f3f11e11849bb34b18c237fd}{GetPosition}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}};}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a0f4b39d88315a8fa6ac6e7f3c3db33a1}{GetDamage}}()\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_player_ab361860ffe2e0a3f1c2f38a897c6bd8b}{Damage}};}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_aadc0d69ac54a6ee2402635c63dd5a4a9}{addDamage}}(\textcolor{keywordtype}{float}\ amount)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_ab361860ffe2e0a3f1c2f38a897c6bd8b}{Damage}}\ +=\ amount;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a9bd9822c2da4e2c8ac7f92712325c0eb}{addAttackSpeed}}(\textcolor{keywordtype}{float}\ amount)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a7d5cddaf3935aec90bddc5957d6870c7}{attackDuration}}\ -\/=\ amount;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a0fbc90e2733f79f4e44d9981f808896e}{returnDuration}}\ -\/=\ amount\ /\ 2;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_a7d5cddaf3935aec90bddc5957d6870c7}{attackDuration}}\ <\ 0.1f)\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a7d5cddaf3935aec90bddc5957d6870c7}{attackDuration}}\ =\ 0.1f;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_a0fbc90e2733f79f4e44d9981f808896e}{returnDuration}}\ <\ 0.1f)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a0fbc90e2733f79f4e44d9981f808896e}{returnDuration}}\ =\ 0.2f;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a2a37658a435d9a71d3a434f6b1ab47aa}{GetAttackSpeed}}()\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_player_a7d5cddaf3935aec90bddc5957d6870c7}{attackDuration}};}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_aacf2ec715d5a2f746d2edf214ae17538}{setCurrentHealth}}(\textcolor{keywordtype}{int}\ health)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}}\ =\ health;}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a416f2ccebb25dabc1359dc49debd1aad}{GetHealth}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}};}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_afc68a8ff91830b716619bfd54321d1f1}{modifyCurrentHealth}}(\textcolor{keywordtype}{int}\ amount)\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a5a5bdc93315abaaddce1dae5df767030}{playDamageSound}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}}\ +=\ amount;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}}\ <\ 0)\ \mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}}\ =\ 0;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}}\ >\ \mbox{\hyperlink{class_player_a7e07709060a3b6d44f47bd920e600094}{MaxHealth}})\ \mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}}\ =\ \mbox{\hyperlink{class_player_a7e07709060a3b6d44f47bd920e600094}{MaxHealth}};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_aacf2ec715d5a2f746d2edf214ae17538}{setCurrentHealth}}(\mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}});}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_afe40a4e05d36c8a4159f0e826a8648f7}{wasAttacked}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (amount\ <\ 0\ \&\&\ !\mbox{\hyperlink{class_player_a5a5bdc93315abaaddce1dae5df767030}{playDamageSound}})\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_sounds_8cpp_a7ca3ca4f639513572cb4e706247f3467}{playPlayerTakeDamageSound}}();}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a5a5bdc93315abaaddce1dae5df767030}{playDamageSound}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_aa0d61e0cc29601311553d628c7c62441}{addMaxHealth}}(\textcolor{keywordtype}{float}\ amount)\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a7e07709060a3b6d44f47bd920e600094}{MaxHealth}}\ +=\ amount;}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a39085f1175a86924b7825cfe1b3b090d}{GetMaxHealth}}()\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_player_a7e07709060a3b6d44f47bd920e600094}{MaxHealth}};}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a5d5e677d0a2bb9635e46b1a8e5789171}{GetAttackRange}}()\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_player_a4c819c9ad1d6b8c561f511d6bd3ded38}{Range}};}
+\DoxyCodeLine{00159\ \ \ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a1bbb828707d80e0599d9f49a30cc3637}{addAttackRange}}(\textcolor{keywordtype}{float}\ amount)\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a4c819c9ad1d6b8c561f511d6bd3ded38}{Range}}\ +=\ amount;}
+\DoxyCodeLine{00167\ \ \ \ \ \}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_af09dc9cb33d8d817ba1578141a79be63}{GetRegeneration}}()\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_player_aad3c89184fb64aa916cabecaa49e00cd}{Regeneration}};}
+\DoxyCodeLine{00175\ \ \ \ \ \}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a29b33f31b7131c4e6de0aa949090e4db}{addRegeneration}}(\textcolor{keywordtype}{float}\ amount)\ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_aad3c89184fb64aa916cabecaa49e00cd}{Regeneration}}\ +=\ amount;}
+\DoxyCodeLine{00183\ \ \ \ \ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a0e89928c885155e0802ef17d99aca11f}{printPlayerPosition}}()\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{comment}{//printf("{}Health:\ \%d\(\backslash\)n"{},\ Health);}}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{comment}{//printf("{}Position:\ (\%f,\ \%f)\(\backslash\)n"{},\ Position.x,\ Position.z);}}
+\DoxyCodeLine{00191\ \ \ \ \ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a8eee5e2dbad412ab56554279c004301f}{CalculateDistance}}(glm::vec3\ point)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ glm::distance(\mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}},\ point);}
+\DoxyCodeLine{00200\ \ \ \ \ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a096170331cfe94e9b6dbfb9f699191e3}{CheckDistanceAndModifyHealth}}(glm::vec3\ point,\ \textcolor{keywordtype}{float}\ threshold,\ \textcolor{keywordtype}{int}\ healthReduction,\ \textcolor{keywordtype}{bool}\ canDamage,\ \mbox{\hyperlink{class_enemy}{Enemy}}\&\ enemy)\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (canDamage)\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ distance\ =\ \mbox{\hyperlink{class_player_a8eee5e2dbad412ab56554279c004301f}{CalculateDistance}}(point);}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (distance\ <\ threshold)\ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy.\mbox{\hyperlink{class_enemy_a617d2a12657c3792f41f2767484d7709}{inRange}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!enemy.\mbox{\hyperlink{class_enemy_a12cedead90bb43208f7e84a7108598aa}{isAnimating}}\ \&\&\ !enemy.\mbox{\hyperlink{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a}{inAttackMode}})\ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy.\mbox{\hyperlink{class_enemy_a12cedead90bb43208f7e84a7108598aa}{isAnimating}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy.\mbox{\hyperlink{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a}{inAttackMode}}\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ Start\ attack\ mode}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy.\mbox{\hyperlink{class_enemy_a4dae78d11d711cd276c3ffab779c8e2f}{damagePlayer}})\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_afc68a8ff91830b716619bfd54321d1f1}{modifyCurrentHealth}}(-\/enemy.\mbox{\hyperlink{class_enemy_a8f4cb3fa5b1d3188baf2f4c898e2a87a}{Damage}});}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy.\mbox{\hyperlink{class_enemy_a4dae78d11d711cd276c3ffab779c8e2f}{damagePlayer}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy.\mbox{\hyperlink{class_enemy_a617d2a12657c3792f41f2767484d7709}{inRange}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!enemy.\mbox{\hyperlink{class_enemy_a12cedead90bb43208f7e84a7108598aa}{isAnimating}}\ \&\&\ enemy.\mbox{\hyperlink{class_enemy_a3fd2ad12e1e9a553408def3d68f5a914}{animationFinished}})\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy.\mbox{\hyperlink{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a}{inAttackMode}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ End\ attack\ mode\ when\ animation\ is\ finished}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00231\ \ \ \ \ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a4da37f569d65821507244092bed412d9}{RegenerateHealthAndCheckForMovement}}()\ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ glm::vec3\ lastPosition\ =\ \mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}};}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::high\_resolution\_clock::now();}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ std::chrono::duration<float>\ elapsedTime\ =\ now\ -\/\ lastHealthUpdateTime;}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (elapsedTime.count()\ >=\ 1.0f)\ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a42307950465241a438152efc68950298}{regenTime}}++;}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}}\ !=\ lastPosition)\ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Code\ to\ handle\ position\ change}}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ lastHealthUpdateTime\ =\ now;\ \textcolor{comment}{//\ Reset\ the\ timer}}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}RegenTime:\ "{}}\ <<\ \mbox{\hyperlink{class_player_a42307950465241a438152efc68950298}{regenTime}}\ <<\ std::endl;}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_a42307950465241a438152efc68950298}{regenTime}}\ ==\ 10)\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_afc68a8ff91830b716619bfd54321d1f1}{modifyCurrentHealth}}(\mbox{\hyperlink{class_player_aad3c89184fb64aa916cabecaa49e00cd}{Regeneration}});}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a42307950465241a438152efc68950298}{regenTime}}\ =\ 0;}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00253\ \ \ \ \ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_adeb54cafd7ccebbe3b074bffd70629c2}{UpdateSwordAnimation}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{deltaTime}},\ std::vector<Enemy>\&\ \mbox{\hyperlink{main_8cpp_ad3604be7ed778f90576433df66b61f8b}{enemies}})\ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_a277e978139db82aed94d1898af5741f7}{isAnimating}})\ \{}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_aa2acca0d0cd5696138ccfc1a588e784c}{animationTime}}\ +=\ \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{deltaTime}};}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ t;}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_player_ae867a701e810087ec579989d117ea697}{isReturning}})\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ \mbox{\hyperlink{class_player_aa2acca0d0cd5696138ccfc1a588e784c}{animationTime}}\ /\ \mbox{\hyperlink{class_player_a7d5cddaf3935aec90bddc5957d6870c7}{attackDuration}};}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_player_a60dc0d814d4d1f121b49d1b6277d716b}{playAttack}})\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a60dc0d814d4d1f121b49d1b6277d716b}{playAttack}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_sounds_8cpp_a4e343ea1590cade8d0a85c95a6ae4d27}{playAtackSound}}();}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Interpolate\ sword\ position\ from\ right\ to\ left}}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ startX\ =\ 0.23f;\ \textcolor{comment}{//\ Starting\ X\ offset}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ endX\ =\ -\/0.23f;\ \textcolor{comment}{//\ Ending\ X\ offset}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ currentX\ =\ glm::mix(startX,\ endX,\ t);}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ startZ\ =\ 0.5f;\ \textcolor{comment}{//\ Starting\ Z\ offset}}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ endZ\ =\ 0.8f;\ \textcolor{comment}{//\ Ending\ Z\ offset}}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ currentZ\ =\ glm::mix(startZ,\ endZ,\ t);}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{swordOffset}}.x\ =\ currentX;}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{swordOffset}}.z\ =\ currentZ;}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ sword\ has\ reached\ the\ end\ position}}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_aa2acca0d0cd5696138ccfc1a588e784c}{animationTime}}\ >=\ \mbox{\hyperlink{class_player_a7d5cddaf3935aec90bddc5957d6870c7}{attackDuration}})\ \{}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a60dc0d814d4d1f121b49d1b6277d716b}{playAttack}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ collisions\ with\ enemies}}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_enemy}{Enemy}}\&\ enemy\ :\ \mbox{\hyperlink{main_8cpp_ad3604be7ed778f90576433df66b61f8b}{enemies}})\ \{}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glm::vec3\ enemyPosition\ =\ enemy.GetPosition();}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glm::vec2\ playerPosition(\mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}}.x,\ \mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}}.z);}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glm::vec2\ enemyPos2D(enemyPosition.x,\ enemyPosition.z);}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ distance\ =\ glm::distance(playerPosition,\ enemyPos2D);}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (distance\ <\ \mbox{\hyperlink{class_player_a4c819c9ad1d6b8c561f511d6bd3ded38}{Range}})\ \{}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy.modifyHealth(-\/\mbox{\hyperlink{class_player_ab361860ffe2e0a3f1c2f38a897c6bd8b}{Damage}});}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Enemy\ health:\ "{}}\ <<\ enemy.GetHealth()\ <<\ std::endl\ <<\ enemy.Position.z\ <<\ std::endl;}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_aa2acca0d0cd5696138ccfc1a588e784c}{animationTime}}\ =\ 0.0f;\ \textcolor{comment}{//\ Reset\ animation\ time}}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_ae867a701e810087ec579989d117ea697}{isReturning}}\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ Start\ return\ phase}}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ \mbox{\hyperlink{class_player_aa2acca0d0cd5696138ccfc1a588e784c}{animationTime}}\ /\ \mbox{\hyperlink{class_player_a0fbc90e2733f79f4e44d9981f808896e}{returnDuration}};}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_player_ab47a2fd315da9d38992e5db3a0c3b1cc}{playReturn}})\ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_ab47a2fd315da9d38992e5db3a0c3b1cc}{playReturn}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_sounds_8cpp_a6a7109edd16efd6ce1da2e0a18472d92}{playAttackReturnSound}}();}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Interpolate\ sword\ position\ from\ left\ to\ right}}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ startX\ =\ -\/0.23f;\ \textcolor{comment}{//\ Starting\ X\ offset}}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ endX\ =\ 0.23f;\ \textcolor{comment}{//\ Ending\ X\ offset}}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ currentX\ =\ glm::mix(startX,\ endX,\ t);}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ startZ\ =\ 0.8f;\ \textcolor{comment}{//\ Starting\ Z\ offset}}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ endZ\ =\ 0.5f;\ \textcolor{comment}{//\ Ending\ Z\ offset}}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ currentZ\ =\ glm::mix(startZ,\ endZ,\ t);}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{swordOffset}}.x\ =\ currentX;}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{swordOffset}}.z\ =\ currentZ;}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ sword\ has\ returned\ to\ the\ initial\ position}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_player_aa2acca0d0cd5696138ccfc1a588e784c}{animationTime}}\ >=\ \mbox{\hyperlink{class_player_a0fbc90e2733f79f4e44d9981f808896e}{returnDuration}})\ \{}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_ab47a2fd315da9d38992e5db3a0c3b1cc}{playReturn}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a277e978139db82aed94d1898af5741f7}{isAnimating}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ End\ animation}}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_ae867a701e810087ec579989d117ea697}{isReturning}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ Reset\ return\ phase}}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{swordOffset}}.x\ =\ 0.23f;\ \textcolor{comment}{//\ Reset\ sword\ offset}}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{swordOffset}}.z\ =\ 0.5f;\ \textcolor{comment}{//\ Reset\ sword\ offset}}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00330\ \ \ \ \ \}}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00333\ \ \ \ \ std::chrono::time\_point<std::chrono::high\_resolution\_clock>\ lastHealthUpdateTime;\ }
+\DoxyCodeLine{00334\ \};}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLAYER\_H}}
+
+\end{DoxyCode}

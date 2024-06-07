@@ -1,0 +1,83 @@
+\doxysection{AABB Struct Reference}
+\hypertarget{struct_a_a_b_b}{}\label{struct_a_a_b_b}\index{AABB@{AABB}}
+
+
+Struktura reprezentująca Axis-\/\+Aligned Bounding Box (\doxylink{struct_a_a_b_b}{AABB}).  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{struct_a_a_b_b_a53295d8758f5b76e9e1ba4955cff7049}{contains}} (const glm\+::vec3 \&point) const
+\begin{DoxyCompactList}\small\item\em Sprawdza, czy punkt znajduje się wewnątrz \doxylink{struct_a_a_b_b}{AABB}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{struct_a_a_b_b_a9cbbfad395c838e67c25a06983309de2}{intersects}} (const \mbox{\hyperlink{struct_a_a_b_b}{AABB}} \&other) const
+\begin{DoxyCompactList}\small\item\em Sprawdza, czy \doxylink{struct_a_a_b_b}{AABB} koliduje z innym \doxylink{struct_a_a_b_b}{AABB}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::vec3 \mbox{\hyperlink{struct_a_a_b_b_a2f307038d1ca533aa2ebcc30452ede7f}{min}}
+\item 
+glm\+::vec3 \mbox{\hyperlink{struct_a_a_b_b_aac420f94f66a2d951239a892753ed4ae}{max}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Struktura reprezentująca Axis-\/\+Aligned Bounding Box (\doxylink{struct_a_a_b_b}{AABB}). 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_a_a_b_b_a53295d8758f5b76e9e1ba4955cff7049}\label{struct_a_a_b_b_a53295d8758f5b76e9e1ba4955cff7049} 
+\index{AABB@{AABB}!contains@{contains}}
+\index{contains@{contains}!AABB@{AABB}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily bool AABB\+::contains (\begin{DoxyParamCaption}\item[{const glm\+::vec3 \&}]{point }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sprawdza, czy punkt znajduje się wewnątrz \doxylink{struct_a_a_b_b}{AABB}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Punkt do sprawdzenia. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, jeśli punkt znajduje się wewnątrz \doxylink{struct_a_a_b_b}{AABB}, w przeciwnym razie false. 
+\end{DoxyReturn}
+\Hypertarget{struct_a_a_b_b_a9cbbfad395c838e67c25a06983309de2}\label{struct_a_a_b_b_a9cbbfad395c838e67c25a06983309de2} 
+\index{AABB@{AABB}!intersects@{intersects}}
+\index{intersects@{intersects}!AABB@{AABB}}
+\doxysubsubsection{\texorpdfstring{intersects()}{intersects()}}
+{\footnotesize\ttfamily bool AABB\+::intersects (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_a_a_b_b}{AABB}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sprawdza, czy \doxylink{struct_a_a_b_b}{AABB} koliduje z innym \doxylink{struct_a_a_b_b}{AABB}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Inny \doxylink{struct_a_a_b_b}{AABB} do sprawdzenia kolizji. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, jeśli \doxylink{struct_a_a_b_b}{AABB} kolidują, w przeciwnym razie false. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_a_a_b_b_aac420f94f66a2d951239a892753ed4ae}\label{struct_a_a_b_b_aac420f94f66a2d951239a892753ed4ae} 
+\index{AABB@{AABB}!max@{max}}
+\index{max@{max}!AABB@{AABB}}
+\doxysubsubsection{\texorpdfstring{max}{max}}
+{\footnotesize\ttfamily glm\+::vec3 AABB\+::max}
+
+Maksymalne współrzędne \doxylink{struct_a_a_b_b}{AABB}. \Hypertarget{struct_a_a_b_b_a2f307038d1ca533aa2ebcc30452ede7f}\label{struct_a_a_b_b_a2f307038d1ca533aa2ebcc30452ede7f} 
+\index{AABB@{AABB}!min@{min}}
+\index{min@{min}!AABB@{AABB}}
+\doxysubsubsection{\texorpdfstring{min}{min}}
+{\footnotesize\ttfamily glm\+::vec3 AABB\+::min}
+
+Minimalne współrzędne \doxylink{struct_a_a_b_b}{AABB}. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{main_8cpp}{main.\+cpp}}\end{DoxyCompactItemize}

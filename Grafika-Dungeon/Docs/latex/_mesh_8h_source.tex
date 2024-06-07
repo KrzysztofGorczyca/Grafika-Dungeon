@@ -1,0 +1,88 @@
+\doxysection{Mesh.\+h}
+\hypertarget{_mesh_8h_source}{}\label{_mesh_8h_source}\mbox{\hyperlink{_mesh_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{libs_8h}{libs.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vertex_8h}{Vertex.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_texture}{Texture}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_texture_aed42161a5c00b6020c85833401da6da6}{id}};\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_texture_adacb495ed5140ec76a09cd130e7d5c32}{type}};\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_texture_a2bb543fb01b98cc7406ee7466030e7d2}{path}};\ }
+\DoxyCodeLine{00013\ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mesh}{Mesh}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ mesh\ data}}
+\DoxyCodeLine{00021\ \ \ \ \ vector<Vertex>\ \mbox{\hyperlink{class_mesh_abe5c05c224e47ba1e8b6393759798a9b}{vertices}};\ }
+\DoxyCodeLine{00022\ \ \ \ \ vector<unsigned\ int>\ \mbox{\hyperlink{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}{indices}};\ }
+\DoxyCodeLine{00023\ \ \ \ \ vector<Texture>\ \mbox{\hyperlink{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}{textures}};\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_mesh_a2d6c71adb66e5f270cee7a60c4e23018}{Mesh}}(vector<Vertex>\ \mbox{\hyperlink{class_mesh_abe5c05c224e47ba1e8b6393759798a9b}{vertices}},\ vector<unsigned\ int>\ \mbox{\hyperlink{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}{indices}},\ vector<Texture>\ \mbox{\hyperlink{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}{textures}})}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ this-\/>vertices\ =\ \mbox{\hyperlink{class_mesh_abe5c05c224e47ba1e8b6393759798a9b}{vertices}};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ this-\/>indices\ =\ \mbox{\hyperlink{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}{indices}};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ this-\/>textures\ =\ \mbox{\hyperlink{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}{textures}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ setupMesh();}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mesh_ae5a32a9bc54c191d247638d09c050cbf}{Draw}}(\mbox{\hyperlink{class_shader}{Shader}}\&\ shader)}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ diffuseNr\ =\ 1;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ specularNr\ =\ 1;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}{textures}}.size();\ i++)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ glActiveTexture(GL\_TEXTURE0\ +\ i);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ number;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name\ =\ \mbox{\hyperlink{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}{textures}}[i].type;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name\ ==\ \textcolor{stringliteral}{"{}texture\_diffuse"{}})}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ number\ =\ std::to\_string(diffuseNr++);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (name\ ==\ \textcolor{stringliteral}{"{}texture\_specular"{}})}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ number\ =\ std::to\_string(specularNr++);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ shader.\mbox{\hyperlink{class_shader_ad362e2b654cd95a3574cd505411e41fd}{setInt}}((\textcolor{stringliteral}{"{}material."{}}\ +\ name\ +\ number).c\_str(),\ i);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ glBindTexture(GL\_TEXTURE\_2D,\ \mbox{\hyperlink{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}{textures}}[i].\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ glActiveTexture(GL\_TEXTURE0);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\ mesh}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ glBindVertexArray(VAO);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ glDrawElements(GL\_TRIANGLES,\ \mbox{\hyperlink{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}{indices}}.size(),\ GL\_UNSIGNED\_INT,\ 0);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ glBindVertexArray(0);}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ VAO,\ VBO,\ EBO;\ }
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ setupMesh()}
+\DoxyCodeLine{00078\ \ \ \ \ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ glGenVertexArrays(1,\ \&VAO);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ glGenBuffers(1,\ \&VBO);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ glGenBuffers(1,\ \&EBO);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ glBindVertexArray(VAO);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ glBindBuffer(GL\_ARRAY\_BUFFER,\ VBO);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ glBufferData(GL\_ARRAY\_BUFFER,\ \mbox{\hyperlink{class_mesh_abe5c05c224e47ba1e8b6393759798a9b}{vertices}}.size()\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_vertex}{Vertex}}),\ \&\mbox{\hyperlink{class_mesh_abe5c05c224e47ba1e8b6393759798a9b}{vertices}}[0],\ GL\_STATIC\_DRAW);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ glBindBuffer(GL\_ELEMENT\_ARRAY\_BUFFER,\ EBO);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ glBufferData(GL\_ELEMENT\_ARRAY\_BUFFER,\ \mbox{\hyperlink{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}{indices}}.size()\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}),}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}{indices}}[0],\ GL\_STATIC\_DRAW);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ vertex\ positions}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ glEnableVertexAttribArray(0);}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ glVertexAttribPointer(0,\ 3,\ GL\_FLOAT,\ GL\_FALSE,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_vertex}{Vertex}}),\ (\textcolor{keywordtype}{void}*)0);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ vertex\ normals}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ glEnableVertexAttribArray(1);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ glVertexAttribPointer(1,\ 3,\ GL\_FLOAT,\ GL\_FALSE,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_vertex}{Vertex}}),\ (\textcolor{keywordtype}{void}*)offsetof(\mbox{\hyperlink{struct_vertex}{Vertex}},\ Normal));}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ vertex\ texture\ coords}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ glEnableVertexAttribArray(2);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ glVertexAttribPointer(2,\ 2,\ GL\_FLOAT,\ GL\_FALSE,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_vertex}{Vertex}}),\ (\textcolor{keywordtype}{void}*)offsetof(\mbox{\hyperlink{struct_vertex}{Vertex}},\ TexCoords));}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ glBindVertexArray(0);}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \};}
+
+\end{DoxyCode}

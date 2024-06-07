@@ -1,0 +1,120 @@
+\doxysection{Input.\+cpp File Reference}
+\hypertarget{_input_8cpp}{}\label{_input_8cpp}\index{Input.cpp@{Input.cpp}}
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include "{}libs.\+h"{}}\newline
+{\ttfamily \#include "{}Player.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_input_8cpp_ab24638f72c92204b67f1d6bffd304efc}{process\+Input}} (GLFWwindow \texorpdfstring{$\ast$}{*}window, \mbox{\hyperlink{class_camera}{Camera}} \&\mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}}, float \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{delta\+Time}}, \mbox{\hyperlink{class_player}{Player}} \&\mbox{\hyperlink{main_8cpp_a113078dfda40cf61ffec3ec757ae6082}{player}}, bool \mbox{\hyperlink{main_8cpp_a64881c5f5f42c13aa0deb1dc0d7a8b26}{menu}}, bool \mbox{\hyperlink{main_8cpp_a49643181341d59a340e8f2247c6b4a96}{died}})
+\begin{DoxyCompactList}\small\item\em Processes input from the keyboard and mouse to control the camera and player actions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_input_8cpp_a97f51dbf82bbe8b517e1d42aaa901c5d}{mouse\+\_\+callback}} (GLFWwindow \texorpdfstring{$\ast$}{*}window, \mbox{\hyperlink{class_camera}{Camera}} \&\mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}}, double xpos\+In, double ypos\+In, bool \mbox{\hyperlink{main_8cpp_ac21731ba101e28334c34543121caa841}{first\+Mouse}}, float \mbox{\hyperlink{main_8cpp_a4664c5d930c290e6f82141a070cbea46}{lastX}}, float \mbox{\hyperlink{main_8cpp_a9d5b8dfd025caf1c0ed043132515f587}{lastY}})
+\begin{DoxyCompactList}\small\item\em Handles mouse movement to control the camera. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_input_8cpp_a0dd3af5879c785ecdbe2d4d8750ed49f}{scroll\+\_\+callback}} (GLFWwindow \texorpdfstring{$\ast$}{*}window, \mbox{\hyperlink{class_camera}{Camera}} \&\mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}}, double xoffset, double yoffset)
+\begin{DoxyCompactList}\small\item\em Handles mouse scroll to control the camera zoom. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{_input_8cpp_a1ab89d743b3bfc08745757fe09c1a774}{is\+Sound\+Playing}} = false
+\begin{DoxyCompactList}\small\item\em \texorpdfstring{$<$}{<} Header for the \doxylink{class_player}{Player} class \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_input_8cpp_a97f51dbf82bbe8b517e1d42aaa901c5d}\label{_input_8cpp_a97f51dbf82bbe8b517e1d42aaa901c5d} 
+\index{Input.cpp@{Input.cpp}!mouse\_callback@{mouse\_callback}}
+\index{mouse\_callback@{mouse\_callback}!Input.cpp@{Input.cpp}}
+\doxysubsubsection{\texorpdfstring{mouse\_callback()}{mouse\_callback()}}
+{\footnotesize\ttfamily void mouse\+\_\+callback (\begin{DoxyParamCaption}\item[{GLFWwindow \texorpdfstring{$\ast$}{*}}]{window,  }\item[{\mbox{\hyperlink{class_camera}{Camera}} \&}]{camera,  }\item[{double}]{xpos\+In,  }\item[{double}]{ypos\+In,  }\item[{bool}]{first\+Mouse,  }\item[{float}]{lastX,  }\item[{float}]{lastY }\end{DoxyParamCaption})}
+
+
+
+Handles mouse movement to control the camera. 
+
+Callback function to handle mouse movement.
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & The GLFW window context. \\
+\hline
+{\em camera} & The camera object to control. \\
+\hline
+{\em xpos\+In} & The current x position of the mouse. \\
+\hline
+{\em ypos\+In} & The current y position of the mouse. \\
+\hline
+{\em first\+Mouse} & Indicates if this is the first mouse movement. \\
+\hline
+{\em lastX} & The last x position of the mouse. \\
+\hline
+{\em lastY} & The last y position of the mouse. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_input_8cpp_ab24638f72c92204b67f1d6bffd304efc}\label{_input_8cpp_ab24638f72c92204b67f1d6bffd304efc} 
+\index{Input.cpp@{Input.cpp}!processInput@{processInput}}
+\index{processInput@{processInput}!Input.cpp@{Input.cpp}}
+\doxysubsubsection{\texorpdfstring{processInput()}{processInput()}}
+{\footnotesize\ttfamily void process\+Input (\begin{DoxyParamCaption}\item[{GLFWwindow \texorpdfstring{$\ast$}{*}}]{window,  }\item[{\mbox{\hyperlink{class_camera}{Camera}} \&}]{camera,  }\item[{float}]{delta\+Time,  }\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{player,  }\item[{bool}]{menu,  }\item[{bool}]{died }\end{DoxyParamCaption})}
+
+
+
+Processes input from the keyboard and mouse to control the camera and player actions. 
+
+Processes input from the keyboard and mouse for controlling the camera and player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & The GLFW window context. \\
+\hline
+{\em camera} & The camera object to control. \\
+\hline
+{\em delta\+Time} & The time elapsed between the current and previous frame. \\
+\hline
+{\em player} & The player object to control. \\
+\hline
+{\em menu} & Indicates if the menu is currently active. \\
+\hline
+{\em died} & Indicates if the player has died. \\
+\hline
+\end{DoxyParams}
+\texorpdfstring{$<$}{<} Timer for managing move sound intervals
+
+\texorpdfstring{$<$}{<} Function to play move sound
+
+\texorpdfstring{$<$}{<} Reset the move sound timer\Hypertarget{_input_8cpp_a0dd3af5879c785ecdbe2d4d8750ed49f}\label{_input_8cpp_a0dd3af5879c785ecdbe2d4d8750ed49f} 
+\index{Input.cpp@{Input.cpp}!scroll\_callback@{scroll\_callback}}
+\index{scroll\_callback@{scroll\_callback}!Input.cpp@{Input.cpp}}
+\doxysubsubsection{\texorpdfstring{scroll\_callback()}{scroll\_callback()}}
+{\footnotesize\ttfamily void scroll\+\_\+callback (\begin{DoxyParamCaption}\item[{GLFWwindow \texorpdfstring{$\ast$}{*}}]{window,  }\item[{\mbox{\hyperlink{class_camera}{Camera}} \&}]{camera,  }\item[{double}]{xoffset,  }\item[{double}]{yoffset }\end{DoxyParamCaption})}
+
+
+
+Handles mouse scroll to control the camera zoom. 
+
+Callback function to handle mouse scroll.
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & The GLFW window context. \\
+\hline
+{\em camera} & The camera object to control. \\
+\hline
+{\em xoffset} & The scroll offset in the x direction. \\
+\hline
+{\em yoffset} & The scroll offset in the y direction. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_input_8cpp_a1ab89d743b3bfc08745757fe09c1a774}\label{_input_8cpp_a1ab89d743b3bfc08745757fe09c1a774} 
+\index{Input.cpp@{Input.cpp}!isSoundPlaying@{isSoundPlaying}}
+\index{isSoundPlaying@{isSoundPlaying}!Input.cpp@{Input.cpp}}
+\doxysubsubsection{\texorpdfstring{isSoundPlaying}{isSoundPlaying}}
+{\footnotesize\ttfamily bool is\+Sound\+Playing = false}
+
+
+
+\texorpdfstring{$<$}{<} Header for the \doxylink{class_player}{Player} class 
+
+\texorpdfstring{$<$}{<} Header for external libraries Indicates if a sound is currently playing 

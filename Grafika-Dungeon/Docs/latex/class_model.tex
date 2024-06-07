@@ -1,0 +1,80 @@
+\doxysection{Model Class Reference}
+\hypertarget{class_model}{}\label{class_model}\index{Model@{Model}}
+
+
+Class to represent a 3D model.  
+
+
+
+
+{\ttfamily \#include $<$Model.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_model_a1e47b338ca8b4f60a5460e4658dd3443}{Model}} (string path)
+\begin{DoxyCompactList}\small\item\em Constructor to load a model from a file path. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_a9c66de8af7e48fefaccbb8a056ec3c1d}{Draw}} (\mbox{\hyperlink{class_shader}{Shader}} \&shader)
+\begin{DoxyCompactList}\small\item\em Draws the model using the given shader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \mbox{\hyperlink{struct_texture}{Texture}} $>$ \mbox{\hyperlink{class_model_aa0d87cb976812a96da160a85d7a610e8}{textures\+\_\+loaded}}
+\begin{DoxyCompactList}\small\item\em Vector of loaded textures to avoid redundant loading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to represent a 3D model. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_model_a1e47b338ca8b4f60a5460e4658dd3443}\label{class_model_a1e47b338ca8b4f60a5460e4658dd3443} 
+\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}}
+{\footnotesize\ttfamily Model\+::\+Model (\begin{DoxyParamCaption}\item[{string}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor to load a model from a file path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path to the model. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_model_a9c66de8af7e48fefaccbb8a056ec3c1d}\label{class_model_a9c66de8af7e48fefaccbb8a056ec3c1d} 
+\index{Model@{Model}!Draw@{Draw}}
+\index{Draw@{Draw}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Model\+::\+Draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shader}{Shader}} \&}]{shader }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Draws the model using the given shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shader} & Reference to the shader program. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_model_aa0d87cb976812a96da160a85d7a610e8}\label{class_model_aa0d87cb976812a96da160a85d7a610e8} 
+\index{Model@{Model}!textures\_loaded@{textures\_loaded}}
+\index{textures\_loaded@{textures\_loaded}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{textures\_loaded}{textures\_loaded}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{struct_texture}{Texture}}$>$ Model\+::textures\+\_\+loaded}
+
+
+
+Vector of loaded textures to avoid redundant loading. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_model_8h}{Model.\+h}}\end{DoxyCompactItemize}

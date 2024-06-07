@@ -1,0 +1,312 @@
+\doxysection{Sounds.\+cpp File Reference}
+\hypertarget{_sounds_8cpp}{}\label{_sounds_8cpp}\index{Sounds.cpp@{Sounds.cpp}}
+{\ttfamily \#include "{}Sounds.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{_sounds_8cpp_aec4a9c236beb4ec31e951c813f86860b}{irr\+Klang\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the Irr\+Klang sound engine. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_ae031229b2068929d2294a15c48c42daf}{irr\+Klang\+Cleanup}} ()
+\begin{DoxyCompactList}\small\item\em Cleans up and releases the Irr\+Klang sound engine. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a043ffbbe5ce6c9359afc7569338b42f2}{play\+Sound}} (const std\+::string \&sound\+File, bool loop)
+\begin{DoxyCompactList}\small\item\em Plays a specified sound file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_ae8d17c65f864659a3f9baf32f64a87a3}{play\+Music}} (const std\+::string \&music\+File)
+\begin{DoxyCompactList}\small\item\em Plays a specified music file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a4e343ea1590cade8d0a85c95a6ae4d27}{play\+Atack\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Plays the attack sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a6a7109edd16efd6ce1da2e0a18472d92}{play\+Attack\+Return\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Plays the attack return sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a0fa103b7c53fffd27195b3993a0af582}{play\+Player\+Death\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Plays the player death sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a7ca3ca4f639513572cb4e706247f3467}{play\+Player\+Take\+Damage\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Plays the player take damage sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a650672da3cbdbb4864058a1d27d89067}{play\+Move\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Plays the move sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a925646e3f6b9a45ce3a698f2cf89e6e4}{play\+Enemy\+Attack\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Plays the enemy attack sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a7d7b997e9c38ccfc80135d74b26ef439}{play\+Enemy\+Death\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Plays the enemy death sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_acc46f88c1a61b576f8d94422d1e0f4ea}{play\+Open\+Chest\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Plays the open chest sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_sounds_8cpp_a220fa5e825af23dcca7286cf96224c44}{play\+Background\+Music}} ()
+\begin{DoxyCompactList}\small\item\em Plays the background music. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_a97ee194342f2c56457f6df323f318594}{attack}} = "{}Assets/Sounds/attack.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the attack sound file. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_a4fa49b0e896784779970a9df92d9a260}{attack\+Return}} = "{}Assets/Sounds/attack\+Return.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the attack return sound file. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_ad51e0cd23eec8387058cf93a4382f59e}{player\+Death}} = "{}Assets/Sounds/player\+Death.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the player death sound file. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_a34d093098fb569738483cc8ff43ae171}{player\+Take\+Damage}} = "{}Assets/Sounds/player\+Take\+Damage.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the player take damage sound file. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_ae3408cf7af5aed8b908fa5e8dcea9c38}{move\+Sound}} = "{}Assets/Sounds/move.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the player movement sound file. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_ad7f6cab0b0fd7118cba9ac08e90003c4}{enemy\+Attack}} = "{}Assets/Sounds/enemy\+Attack.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the enemy attack sound file. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_ad280190b495db2bff55c119a1cee660d}{enemy\+Death}} = "{}Assets/Sounds/enemy\+Death.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the enemy death sound file. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_afedf8880d6d959f06163e90b460abfd4}{background\+Music}} = "{}Assets/Sounds/background\+Music.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the background music file. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{_sounds_8cpp_acb031e9182e3e131350128bfec0230cc}{open\+Chest}} = "{}Assets/Sounds/open\+Chest.\+wav"{}
+\begin{DoxyCompactList}\small\item\em Path to the open chest sound file. \end{DoxyCompactList}\item 
+irrklang\+::\+ISound\+Engine \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_sounds_8cpp_abdc117129aa4416c86e82601edb98cbf}{sound\+Engine}} = nullptr
+\begin{DoxyCompactList}\small\item\em Pointer to the sound engine instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_sounds_8cpp_ae031229b2068929d2294a15c48c42daf}\label{_sounds_8cpp_ae031229b2068929d2294a15c48c42daf} 
+\index{Sounds.cpp@{Sounds.cpp}!irrKlangCleanup@{irrKlangCleanup}}
+\index{irrKlangCleanup@{irrKlangCleanup}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{irrKlangCleanup()}{irrKlangCleanup()}}
+{\footnotesize\ttfamily void irr\+Klang\+Cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Cleans up and releases the Irr\+Klang sound engine. 
+
+Cleans up and shuts down the irr\+Klang sound engine. \Hypertarget{_sounds_8cpp_aec4a9c236beb4ec31e951c813f86860b}\label{_sounds_8cpp_aec4a9c236beb4ec31e951c813f86860b} 
+\index{Sounds.cpp@{Sounds.cpp}!irrKlangInit@{irrKlangInit}}
+\index{irrKlangInit@{irrKlangInit}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{irrKlangInit()}{irrKlangInit()}}
+{\footnotesize\ttfamily bool irr\+Klang\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the Irr\+Klang sound engine. 
+
+Initializes the irr\+Klang sound engine.
+
+\begin{DoxyReturn}{Returns}
+True if the sound engine was successfully initialized, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{_sounds_8cpp_a4e343ea1590cade8d0a85c95a6ae4d27}\label{_sounds_8cpp_a4e343ea1590cade8d0a85c95a6ae4d27} 
+\index{Sounds.cpp@{Sounds.cpp}!playAtackSound@{playAtackSound}}
+\index{playAtackSound@{playAtackSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playAtackSound()}{playAtackSound()}}
+{\footnotesize\ttfamily void play\+Atack\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the attack sound. 
+
+\Hypertarget{_sounds_8cpp_a6a7109edd16efd6ce1da2e0a18472d92}\label{_sounds_8cpp_a6a7109edd16efd6ce1da2e0a18472d92} 
+\index{Sounds.cpp@{Sounds.cpp}!playAttackReturnSound@{playAttackReturnSound}}
+\index{playAttackReturnSound@{playAttackReturnSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playAttackReturnSound()}{playAttackReturnSound()}}
+{\footnotesize\ttfamily void play\+Attack\+Return\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the attack return sound. 
+
+\Hypertarget{_sounds_8cpp_a220fa5e825af23dcca7286cf96224c44}\label{_sounds_8cpp_a220fa5e825af23dcca7286cf96224c44} 
+\index{Sounds.cpp@{Sounds.cpp}!playBackgroundMusic@{playBackgroundMusic}}
+\index{playBackgroundMusic@{playBackgroundMusic}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playBackgroundMusic()}{playBackgroundMusic()}}
+{\footnotesize\ttfamily void play\+Background\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the background music. 
+
+\Hypertarget{_sounds_8cpp_a925646e3f6b9a45ce3a698f2cf89e6e4}\label{_sounds_8cpp_a925646e3f6b9a45ce3a698f2cf89e6e4} 
+\index{Sounds.cpp@{Sounds.cpp}!playEnemyAttackSound@{playEnemyAttackSound}}
+\index{playEnemyAttackSound@{playEnemyAttackSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playEnemyAttackSound()}{playEnemyAttackSound()}}
+{\footnotesize\ttfamily void play\+Enemy\+Attack\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the enemy attack sound. 
+
+\Hypertarget{_sounds_8cpp_a7d7b997e9c38ccfc80135d74b26ef439}\label{_sounds_8cpp_a7d7b997e9c38ccfc80135d74b26ef439} 
+\index{Sounds.cpp@{Sounds.cpp}!playEnemyDeathSound@{playEnemyDeathSound}}
+\index{playEnemyDeathSound@{playEnemyDeathSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playEnemyDeathSound()}{playEnemyDeathSound()}}
+{\footnotesize\ttfamily void play\+Enemy\+Death\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the enemy death sound. 
+
+\Hypertarget{_sounds_8cpp_a650672da3cbdbb4864058a1d27d89067}\label{_sounds_8cpp_a650672da3cbdbb4864058a1d27d89067} 
+\index{Sounds.cpp@{Sounds.cpp}!playMoveSound@{playMoveSound}}
+\index{playMoveSound@{playMoveSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playMoveSound()}{playMoveSound()}}
+{\footnotesize\ttfamily void play\+Move\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the move sound. 
+
+Plays the movement sound. \Hypertarget{_sounds_8cpp_ae8d17c65f864659a3f9baf32f64a87a3}\label{_sounds_8cpp_ae8d17c65f864659a3f9baf32f64a87a3} 
+\index{Sounds.cpp@{Sounds.cpp}!playMusic@{playMusic}}
+\index{playMusic@{playMusic}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playMusic()}{playMusic()}}
+{\footnotesize\ttfamily void play\+Music (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{music\+File }\end{DoxyParamCaption})}
+
+
+
+Plays a specified music file. 
+
+Plays background music.
+
+
+\begin{DoxyParams}{Parameters}
+{\em music\+File} & The path to the music file. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_sounds_8cpp_acc46f88c1a61b576f8d94422d1e0f4ea}\label{_sounds_8cpp_acc46f88c1a61b576f8d94422d1e0f4ea} 
+\index{Sounds.cpp@{Sounds.cpp}!playOpenChestSound@{playOpenChestSound}}
+\index{playOpenChestSound@{playOpenChestSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playOpenChestSound()}{playOpenChestSound()}}
+{\footnotesize\ttfamily void play\+Open\+Chest\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the open chest sound. 
+
+\Hypertarget{_sounds_8cpp_a0fa103b7c53fffd27195b3993a0af582}\label{_sounds_8cpp_a0fa103b7c53fffd27195b3993a0af582} 
+\index{Sounds.cpp@{Sounds.cpp}!playPlayerDeathSound@{playPlayerDeathSound}}
+\index{playPlayerDeathSound@{playPlayerDeathSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playPlayerDeathSound()}{playPlayerDeathSound()}}
+{\footnotesize\ttfamily void play\+Player\+Death\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the player death sound. 
+
+\Hypertarget{_sounds_8cpp_a7ca3ca4f639513572cb4e706247f3467}\label{_sounds_8cpp_a7ca3ca4f639513572cb4e706247f3467} 
+\index{Sounds.cpp@{Sounds.cpp}!playPlayerTakeDamageSound@{playPlayerTakeDamageSound}}
+\index{playPlayerTakeDamageSound@{playPlayerTakeDamageSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playPlayerTakeDamageSound()}{playPlayerTakeDamageSound()}}
+{\footnotesize\ttfamily void play\+Player\+Take\+Damage\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the player take damage sound. 
+
+\Hypertarget{_sounds_8cpp_a043ffbbe5ce6c9359afc7569338b42f2}\label{_sounds_8cpp_a043ffbbe5ce6c9359afc7569338b42f2} 
+\index{Sounds.cpp@{Sounds.cpp}!playSound@{playSound}}
+\index{playSound@{playSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playSound()}{playSound()}}
+{\footnotesize\ttfamily void play\+Sound (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{sound\+File,  }\item[{bool}]{loop }\end{DoxyParamCaption})}
+
+
+
+Plays a specified sound file. 
+
+Plays a sound.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sound\+File} & The path to the sound file. \\
+\hline
+{\em loop} & Whether the sound should loop. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_sounds_8cpp_a97ee194342f2c56457f6df323f318594}\label{_sounds_8cpp_a97ee194342f2c56457f6df323f318594} 
+\index{Sounds.cpp@{Sounds.cpp}!attack@{attack}}
+\index{attack@{attack}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{attack}{attack}}
+{\footnotesize\ttfamily const std\+::string attack = "{}Assets/Sounds/attack.\+wav"{}}
+
+
+
+Path to the attack sound file. 
+
+\Hypertarget{_sounds_8cpp_a4fa49b0e896784779970a9df92d9a260}\label{_sounds_8cpp_a4fa49b0e896784779970a9df92d9a260} 
+\index{Sounds.cpp@{Sounds.cpp}!attackReturn@{attackReturn}}
+\index{attackReturn@{attackReturn}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{attackReturn}{attackReturn}}
+{\footnotesize\ttfamily const std\+::string attack\+Return = "{}Assets/Sounds/attack\+Return.\+wav"{}}
+
+
+
+Path to the attack return sound file. 
+
+\Hypertarget{_sounds_8cpp_afedf8880d6d959f06163e90b460abfd4}\label{_sounds_8cpp_afedf8880d6d959f06163e90b460abfd4} 
+\index{Sounds.cpp@{Sounds.cpp}!backgroundMusic@{backgroundMusic}}
+\index{backgroundMusic@{backgroundMusic}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{backgroundMusic}{backgroundMusic}}
+{\footnotesize\ttfamily const std\+::string background\+Music = "{}Assets/Sounds/background\+Music.\+wav"{}}
+
+
+
+Path to the background music file. 
+
+\Hypertarget{_sounds_8cpp_ad7f6cab0b0fd7118cba9ac08e90003c4}\label{_sounds_8cpp_ad7f6cab0b0fd7118cba9ac08e90003c4} 
+\index{Sounds.cpp@{Sounds.cpp}!enemyAttack@{enemyAttack}}
+\index{enemyAttack@{enemyAttack}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{enemyAttack}{enemyAttack}}
+{\footnotesize\ttfamily const std\+::string enemy\+Attack = "{}Assets/Sounds/enemy\+Attack.\+wav"{}}
+
+
+
+Path to the enemy attack sound file. 
+
+\Hypertarget{_sounds_8cpp_ad280190b495db2bff55c119a1cee660d}\label{_sounds_8cpp_ad280190b495db2bff55c119a1cee660d} 
+\index{Sounds.cpp@{Sounds.cpp}!enemyDeath@{enemyDeath}}
+\index{enemyDeath@{enemyDeath}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{enemyDeath}{enemyDeath}}
+{\footnotesize\ttfamily const std\+::string enemy\+Death = "{}Assets/Sounds/enemy\+Death.\+wav"{}}
+
+
+
+Path to the enemy death sound file. 
+
+\Hypertarget{_sounds_8cpp_ae3408cf7af5aed8b908fa5e8dcea9c38}\label{_sounds_8cpp_ae3408cf7af5aed8b908fa5e8dcea9c38} 
+\index{Sounds.cpp@{Sounds.cpp}!moveSound@{moveSound}}
+\index{moveSound@{moveSound}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{moveSound}{moveSound}}
+{\footnotesize\ttfamily const std\+::string move\+Sound = "{}Assets/Sounds/move.\+wav"{}}
+
+
+
+Path to the player movement sound file. 
+
+\Hypertarget{_sounds_8cpp_acb031e9182e3e131350128bfec0230cc}\label{_sounds_8cpp_acb031e9182e3e131350128bfec0230cc} 
+\index{Sounds.cpp@{Sounds.cpp}!openChest@{openChest}}
+\index{openChest@{openChest}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{openChest}{openChest}}
+{\footnotesize\ttfamily const std\+::string open\+Chest = "{}Assets/Sounds/open\+Chest.\+wav"{}}
+
+
+
+Path to the open chest sound file. 
+
+\Hypertarget{_sounds_8cpp_ad51e0cd23eec8387058cf93a4382f59e}\label{_sounds_8cpp_ad51e0cd23eec8387058cf93a4382f59e} 
+\index{Sounds.cpp@{Sounds.cpp}!playerDeath@{playerDeath}}
+\index{playerDeath@{playerDeath}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playerDeath}{playerDeath}}
+{\footnotesize\ttfamily const std\+::string player\+Death = "{}Assets/Sounds/player\+Death.\+wav"{}}
+
+
+
+Path to the player death sound file. 
+
+\Hypertarget{_sounds_8cpp_a34d093098fb569738483cc8ff43ae171}\label{_sounds_8cpp_a34d093098fb569738483cc8ff43ae171} 
+\index{Sounds.cpp@{Sounds.cpp}!playerTakeDamage@{playerTakeDamage}}
+\index{playerTakeDamage@{playerTakeDamage}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{playerTakeDamage}{playerTakeDamage}}
+{\footnotesize\ttfamily const std\+::string player\+Take\+Damage = "{}Assets/Sounds/player\+Take\+Damage.\+wav"{}}
+
+
+
+Path to the player take damage sound file. 
+
+\Hypertarget{_sounds_8cpp_abdc117129aa4416c86e82601edb98cbf}\label{_sounds_8cpp_abdc117129aa4416c86e82601edb98cbf} 
+\index{Sounds.cpp@{Sounds.cpp}!soundEngine@{soundEngine}}
+\index{soundEngine@{soundEngine}!Sounds.cpp@{Sounds.cpp}}
+\doxysubsubsection{\texorpdfstring{soundEngine}{soundEngine}}
+{\footnotesize\ttfamily irrklang\+::\+ISound\+Engine\texorpdfstring{$\ast$}{*} sound\+Engine = nullptr}
+
+
+
+Pointer to the sound engine instance. 
+

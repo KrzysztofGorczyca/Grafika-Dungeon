@@ -1,0 +1,108 @@
+\doxysection{Mesh Class Reference}
+\hypertarget{class_mesh}{}\label{class_mesh}\index{Mesh@{Mesh}}
+
+
+Class to represent a 3D mesh.  
+
+
+
+
+{\ttfamily \#include $<$Mesh.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_mesh_a2d6c71adb66e5f270cee7a60c4e23018}{Mesh}} (vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$ \mbox{\hyperlink{class_mesh_abe5c05c224e47ba1e8b6393759798a9b}{vertices}}, vector$<$ unsigned int $>$ \mbox{\hyperlink{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}{indices}}, vector$<$ \mbox{\hyperlink{struct_texture}{Texture}} $>$ \mbox{\hyperlink{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}{textures}})
+\begin{DoxyCompactList}\small\item\em Constructor to initialize the mesh with vertices, indices, and textures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_mesh_ae5a32a9bc54c191d247638d09c050cbf}{Draw}} (\mbox{\hyperlink{class_shader}{Shader}} \&shader)
+\begin{DoxyCompactList}\small\item\em Draws the mesh using the given shader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$ \mbox{\hyperlink{class_mesh_abe5c05c224e47ba1e8b6393759798a9b}{vertices}}
+\begin{DoxyCompactList}\small\item\em Vector of vertices in the mesh. \end{DoxyCompactList}\item 
+vector$<$ unsigned int $>$ \mbox{\hyperlink{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}{indices}}
+\begin{DoxyCompactList}\small\item\em Vector of indices for the mesh. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{struct_texture}{Texture}} $>$ \mbox{\hyperlink{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}{textures}}
+\begin{DoxyCompactList}\small\item\em Vector of textures used by the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to represent a 3D mesh. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_mesh_a2d6c71adb66e5f270cee7a60c4e23018}\label{class_mesh_a2d6c71adb66e5f270cee7a60c4e23018} 
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{Mesh()}{Mesh()}}
+{\footnotesize\ttfamily Mesh\+::\+Mesh (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$}]{vertices,  }\item[{vector$<$ unsigned int $>$}]{indices,  }\item[{vector$<$ \mbox{\hyperlink{struct_texture}{Texture}} $>$}]{textures }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor to initialize the mesh with vertices, indices, and textures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Vector of vertices. \\
+\hline
+{\em indices} & Vector of indices. \\
+\hline
+{\em textures} & Vector of textures. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_mesh_ae5a32a9bc54c191d247638d09c050cbf}\label{class_mesh_ae5a32a9bc54c191d247638d09c050cbf} 
+\index{Mesh@{Mesh}!Draw@{Draw}}
+\index{Draw@{Draw}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Mesh\+::\+Draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shader}{Shader}} \&}]{shader }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Draws the mesh using the given shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shader} & Reference to the shader program. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d}\label{class_mesh_a464d9a1d7e7a4f67321dffc1e8b44b7d} 
+\index{Mesh@{Mesh}!indices@{indices}}
+\index{indices@{indices}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{indices}{indices}}
+{\footnotesize\ttfamily vector$<$unsigned int$>$ Mesh\+::indices}
+
+
+
+Vector of indices for the mesh. 
+
+\Hypertarget{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0}\label{class_mesh_a09bf4e8307bf7717c56501ca6293c6c0} 
+\index{Mesh@{Mesh}!textures@{textures}}
+\index{textures@{textures}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{textures}{textures}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{struct_texture}{Texture}}$>$ Mesh\+::textures}
+
+
+
+Vector of textures used by the mesh. 
+
+\Hypertarget{class_mesh_abe5c05c224e47ba1e8b6393759798a9b}\label{class_mesh_abe5c05c224e47ba1e8b6393759798a9b} 
+\index{Mesh@{Mesh}!vertices@{vertices}}
+\index{vertices@{vertices}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{vertices}{vertices}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{struct_vertex}{Vertex}}$>$ Mesh\+::vertices}
+
+
+
+Vector of vertices in the mesh. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_mesh_8h}{Mesh.\+h}}\end{DoxyCompactItemize}
