@@ -31,6 +31,7 @@ public:
     float returnDuration = 1.5f; // Czas trwania animacji powrotu
     bool isReturning = false;  // Nowa zmienna do œledzenia fazy powrotu
     bool onceDone = false;
+    bool damagePlayer = false;
     glm::vec3 Position;
     glm::quat Rotation;
     float Speed;
@@ -76,6 +77,7 @@ public:
 
                     // SprawdŸ, czy miecz osi¹gn¹³ koñcow¹ pozycjê
                     if (animationTime >= attackDuration) {
+                        damagePlayer = true;
                         animationTime = 0.0f;  // Resetuj czas animacji
                         isReturning = true;    // Rozpocznij fazê powrotu
 

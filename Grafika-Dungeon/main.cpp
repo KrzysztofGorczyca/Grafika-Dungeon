@@ -10,6 +10,7 @@
 #include <random>
 
 // Struktura reprezentuj¹ca AABB
+// Struktura reprezentuj¹ca AABB
 struct AABB {
     glm::vec3 min;
     glm::vec3 max;
@@ -34,6 +35,7 @@ class AABBNode {
 public:
     AABB aabb;
     std::vector<AABBNode*> children;
+    std::vector<glm::vec3> vertices; // Dodano przechowywanie wierzcho³ków
 
     AABBNode(const AABB& aabb) : aabb(aabb) {}
 
@@ -44,25 +46,45 @@ public:
     }
 };
 
-// Funkcja do sprawdzania kolizji miêdzy dwoma AABB
-bool checkCollision(const glm::vec3& playerPosition, const AABBNode* root) {
+// Funkcja do sprawdzania kolizji miêdzy sfer¹ a AABB
+bool checkSphereAABBCollision(const glm::vec3& center, float radius, const AABB& aabb) {
+    float dmin = 0;
+
+    if (center.x < aabb.min.x) dmin += (center.x - aabb.min.x) * (center.x - aabb.min.x);
+    else if (center.x > aabb.max.x) dmin += (center.x - aabb.max.x) * (center.x - aabb.max.x);
+
+    if (center.y < aabb.min.y) dmin += (center.y - aabb.min.y) * (center.y - aabb.min.y);
+    else if (center.y > aabb.max.y) dmin += (center.y - aabb.max.y) * (center.y - aabb.max.y);
+
+    if (center.z < aabb.min.z) dmin += (center.z - aabb.min.z) * (center.z - aabb.min.z);
+    else if (center.z > aabb.max.z) dmin += (center.z - aabb.max.z) * (center.z - aabb.max.z);
+
+    return dmin <= (radius * radius);
+}
+
+// Funkcja do sprawdzania kolizji miêdzy sfer¹ gracza a wêz³em AABB
+bool checkCollision(const glm::vec3& playerPosition, float playerRadius, const AABBNode* root) {
     if (!root) {
         return false;
     }
 
-    // Jeœli gracz jest poza obszarem drzewa, to nie ma kolizji
-    if (!root->aabb.contains(playerPosition)) {
+    if (!checkSphereAABBCollision(playerPosition, playerRadius, root->aabb)) {
         return false;
     }
 
-    // Jeœli to liœæ, to sprawdzamy czy gracz koliduje z AABB tego liœcia
+    // Jeœli to liœæ, to sprawdzamy kolizje sfery gracza z wierzcho³kami
     if (root->children.empty()) {
-        return root->aabb.contains(playerPosition);
+        for (const auto& vertex : root->vertices) {
+            if (glm::distance(playerPosition, vertex) < playerRadius) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Rekurencyjnie sprawdzamy kolizjê z dzieæmi wêz³a
     for (auto child : root->children) {
-        if (checkCollision(playerPosition, child)) {
+        if (checkCollision(playerPosition, playerRadius, child)) {
             return true;
         }
     }
@@ -71,7 +93,7 @@ bool checkCollision(const glm::vec3& playerPosition, const AABBNode* root) {
 }
 
 // Funkcja do tworzenia drzewa AABB na podstawie wektorów opisuj¹cych obiekty na mapie
-AABBNode* buildAABBTree(const std::vector<AABB>& objectAABBs) {
+AABBNode* buildAABBTree(const std::vector<AABB>& objectAABBs, const std::vector<std::vector<glm::vec3>>& vertices) {
     if (objectAABBs.empty()) {
         return nullptr;
     }
@@ -87,9 +109,11 @@ AABBNode* buildAABBTree(const std::vector<AABB>& objectAABBs) {
     AABBNode* root = new AABBNode(combinedAABB);
 
     // Tworzymy dzieci korzenia i rekurencyjnie dodajemy obiekty
-    for (const auto& aabb : objectAABBs) {
-        if (root->aabb.intersects(aabb)) {
-            root->children.push_back(new AABBNode(aabb));
+    for (size_t i = 0; i < objectAABBs.size(); ++i) {
+        if (root->aabb.intersects(objectAABBs[i])) {
+            AABBNode* child = new AABBNode(objectAABBs[i]);
+            child->vertices = vertices[i];
+            root->children.push_back(child);
         }
     }
 
@@ -139,23 +163,6 @@ void loadOBJ(const std::string& filename, std::vector<glm::vec3>& vertices, std:
         }
     }
 
-    // Wyœwietlanie wczytanych danych
-    /*
-	std::cout << "Vertices:" << std::endl;
-    for (const auto& vertex : vertices) {
-        std::cout << vertex.x << " " << vertex.y << " " << vertex.z << std::endl;
-    }
-
-    std::cout << "Normals:" << std::endl;
-    for (const auto& normal : normals) {
-        std::cout << normal.x << " " << normal.y << " " << normal.z << std::endl;
-    }
-
-    std::cout << "Indices:" << std::endl;
-    for (const auto& index : indices) {
-        std::cout << index << std::endl;
-    }
-    */
     file.close();
 }
 
@@ -167,6 +174,7 @@ AABBNode* buildMapAABBTree() {
     loadOBJ("Assets/Map/Map.obj", vertices, normals, indices);
 
     std::vector<AABB> objectAABBs;
+    std::vector<std::vector<glm::vec3>> objectVertices;
 
     // Przekszta³æ wierzcho³ki na obiekty AABB
     for (size_t i = 0; i < indices.size(); i += 3) {
@@ -191,20 +199,23 @@ AABBNode* buildMapAABBTree() {
         objectAABB.max = max;
 
         objectAABBs.push_back(objectAABB);
+
+        std::vector<glm::vec3> triVertices = { v0, v1, v2 };
+        objectVertices.push_back(triVertices);
     }
 
-    return buildAABBTree(objectAABBs);
+    return buildAABBTree(objectAABBs, objectVertices);
 }
 
 // Funkcja do sprawdzania kolizji miêdzy graczem a map¹
-bool checkPlayerMapCollisionAndMoveBack(glm::vec3& playerPosition, const AABBNode* mapRoot, glm::vec3& previousPlayerPosition) {
-    bool collision = checkCollision(playerPosition, mapRoot);
+bool checkPlayerMapCollisionAndMoveBack(glm::vec3& playerPosition, const AABBNode* mapRoot, glm::vec3& previousPlayerPosition, float playerRadius) {
+    bool collision = checkCollision(playerPosition, playerRadius, mapRoot);
     if (collision) {
-        //std::cout << "Kolizja z map¹! Pozycja gracza: (" << playerPosition.x << ", " << playerPosition.y << ", " << playerPosition.z << ")" << std::endl;
-        //std::cout << "Poprzednia pozycja gracza: (" << previousPlayerPosition.x << ", " << previousPlayerPosition.y << ", " << previousPlayerPosition.z << ")" << std::endl;
+        playerPosition = previousPlayerPosition;
     }
-	return collision;
+    return collision;
 }
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -241,6 +252,8 @@ float lastFrame = 0.0f;
 // Grid settings
 int gridWidth = 10;
 int gridHeight = 10;
+
+float playerRadius = 0.1f;
 
 vector<Enemy> enemies; // Wektor przechowuj¹cy przeciwników
 vector<Chest> chests; // Wektor przechowuj¹cy skrzynie
@@ -818,7 +831,7 @@ int main()
                 }
 
                 //Collision with map
-                bool playerMapCollision = checkPlayerMapCollisionAndMoveBack(camera.Position, mapAABBRoot, previousPlayerPosition);
+                bool playerMapCollision = checkPlayerMapCollisionAndMoveBack(camera.Position, mapAABBRoot, previousPlayerPosition, playerRadius);
                 if (playerMapCollision) {
                     // Gracz koliduje z map¹, przywracamy poprzedni¹ pozycjê gracza
                     camera.SetPosition(previousPlayerPosition.x, previousPlayerPosition.y, previousPlayerPosition.z);

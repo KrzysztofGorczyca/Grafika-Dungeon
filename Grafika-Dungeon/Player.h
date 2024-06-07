@@ -21,6 +21,7 @@ public:
     glm::quat swordRotation; // Domyœlna rotacja miecza
     // Dodaj zmienne do œledzenia stanu animacji w klasie Player lub Sword
     bool isAnimating = false;
+    bool wasAttacked = false;
     float animationTime = 0.0f;
     float attackDuration = 0.3f; // Czas trwania animacji ataku
     float returnDuration = 0.6f; // Czas trwania animacji powrotu
@@ -88,6 +89,7 @@ public:
         if (Health < 0) Health = 0;
         if (Health > MaxHealth) Health = MaxHealth;
         setCurrentHealth(Health);
+        wasAttacked = true;
     }
 
     void addMaxHealth(float amount)
@@ -138,14 +140,18 @@ public:
     void CheckDistanceAndModifyHealth(glm::vec3 point, float threshold, int healthReduction, bool canDamage, Enemy& enemy) {
         if (canDamage)
         {
-            auto now = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<float> elapsedTime = now - lastHealthUpdateTime;
+            //auto now = std::chrono::high_resolution_clock::now();
+            //std::chrono::duration<float> elapsedTime = now - lastHealthUpdateTime;
 
             float distance = CalculateDistance(point);
-            if (distance < threshold && elapsedTime.count() >= 1.0f) {
-                modifyCurrentHealth(-healthReduction);
+            if (distance < threshold) {
+                //modifyCurrentHealth(-healthReduction);
                 enemy.inRange = true;
-                lastHealthUpdateTime = now; // reset the timer
+                if (enemy.damagePlayer)
+                {
+					modifyCurrentHealth(-enemy.Damage);
+					enemy.damagePlayer = false;
+				}
             }
             else if (distance > threshold)
             {
