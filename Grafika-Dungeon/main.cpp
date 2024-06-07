@@ -1,3 +1,8 @@
+/**
+ * @file main.cpp
+ * @brief Plik g³ówny implementuj¹cy funkcje do obs³ugi kolizji oraz renderowania gry.
+ */
+
 #include "libs.h"
 #include <chrono>
 #include "Shaders.h"
@@ -9,19 +14,29 @@
 #include "Chest.h"
 #include <random>
 
-// Struktura reprezentuj¹ca AABB
+ /**
+  * @brief Struktura reprezentuj¹ca Axis-Aligned Bounding Box (AABB).
+  */
 struct AABB {
-    glm::vec3 min;
-    glm::vec3 max;
+    glm::vec3 min; /**< Minimalne wspó³rzêdne AABB. */
+    glm::vec3 max; /**< Maksymalne wspó³rzêdne AABB. */
 
-    // Metoda sprawdzaj¹ca czy dany punkt znajduje siê wewn¹trz AABB
+    /**
+     * @brief Sprawdza, czy punkt znajduje siê wewn¹trz AABB.
+     * @param point Punkt do sprawdzenia.
+     * @return True, jeœli punkt znajduje siê wewn¹trz AABB, w przeciwnym razie false.
+     */
     bool contains(const glm::vec3& point) const {
         return point.x >= min.x && point.x <= max.x &&
             point.y >= min.y && point.y <= max.y &&
             point.z >= min.z && point.z <= max.z;
     }
 
-    // Metoda sprawdzaj¹ca czy dany AABB koliduje z innym AABB
+    /**
+     * @brief Sprawdza, czy AABB koliduje z innym AABB.
+     * @param other Inny AABB do sprawdzenia kolizji.
+     * @return True, jeœli AABB koliduj¹, w przeciwnym razie false.
+     */
     bool intersects(const AABB& other) const {
         return (min.x <= other.max.x && max.x >= other.min.x) &&
             (min.y <= other.max.y && max.y >= other.min.y) &&
@@ -29,15 +44,24 @@ struct AABB {
     }
 };
 
-// Klasa reprezentuj¹ca wêze³ drzewa AABB
+/**
+ * @brief Klasa reprezentuj¹ca wêze³ drzewa AABB.
+ */
 class AABBNode {
 public:
-    AABB aabb;
-    std::vector<AABBNode*> children;
-    std::vector<glm::vec3> vertices; // Dodano przechowywanie wierzcho³ków
+    AABB aabb; /**< Axis-Aligned Bounding Box dla wêz³a. */
+    std::vector<AABBNode*> children; /**< Dzieci wêz³a. */
+    std::vector<glm::vec3> vertices; /**< Wierzcho³ki zawarte w AABB. */
 
+    /**
+     * @brief Konstruktor wêz³a AABB.
+     * @param aabb AABB dla wêz³a.
+     */
     AABBNode(const AABB& aabb) : aabb(aabb) {}
 
+    /**
+     * @brief Destruktor wêz³a AABB.
+     */
     ~AABBNode() {
         for (auto child : children) {
             delete child;
@@ -45,7 +69,13 @@ public:
     }
 };
 
-// Funkcja do sprawdzania kolizji miêdzy sfer¹ a AABB
+/**
+ * @brief Sprawdza kolizjê miêdzy sfer¹ a AABB.
+ * @param center Œrodek sfery.
+ * @param radius Promieñ sfery.
+ * @param aabb AABB do sprawdzenia kolizji.
+ * @return True, jeœli sfera koliduje z AABB, w przeciwnym razie false.
+ */
 bool checkSphereAABBCollision(const glm::vec3& center, float radius, const AABB& aabb) {
     float dmin = 0;
 
@@ -61,7 +91,13 @@ bool checkSphereAABBCollision(const glm::vec3& center, float radius, const AABB&
     return dmin <= (radius * radius);
 }
 
-// Funkcja do sprawdzania kolizji miêdzy sfer¹ gracza a wêz³em AABB
+/**
+ * @brief Sprawdza kolizjê miêdzy sfer¹ gracza a wêz³em AABB.
+ * @param playerPosition Pozycja gracza.
+ * @param playerRadius Promieñ sfery gracza.
+ * @param root Korzeñ drzewa AABB.
+ * @return True, jeœli gracz koliduje z wêz³em AABB, w przeciwnym razie false.
+ */
 bool checkCollision(const glm::vec3& playerPosition, float playerRadius, const AABBNode* root) {
     if (!root) {
         return false;
@@ -71,7 +107,6 @@ bool checkCollision(const glm::vec3& playerPosition, float playerRadius, const A
         return false;
     }
 
-    // Jeœli to liœæ, to sprawdzamy kolizje sfery gracza z wierzcho³kami
     if (root->children.empty()) {
         for (const auto& vertex : root->vertices) {
             if (glm::distance(playerPosition, vertex) < playerRadius) {
@@ -81,7 +116,6 @@ bool checkCollision(const glm::vec3& playerPosition, float playerRadius, const A
         return false;
     }
 
-    // Rekurencyjnie sprawdzamy kolizjê z dzieæmi wêz³a
     for (auto child : root->children) {
         if (checkCollision(playerPosition, playerRadius, child)) {
             return true;
@@ -91,13 +125,17 @@ bool checkCollision(const glm::vec3& playerPosition, float playerRadius, const A
     return false;
 }
 
-// Funkcja do tworzenia drzewa AABB na podstawie wektorów opisuj¹cych obiekty na mapie
+/**
+ * @brief Tworzy drzewo AABB na podstawie wektorów opisuj¹cych obiekty na mapie.
+ * @param objectAABBs Wektory AABB obiektów.
+ * @param vertices Wektory wierzcho³ków obiektów.
+ * @return Korzeñ drzewa AABB.
+ */
 AABBNode* buildAABBTree(const std::vector<AABB>& objectAABBs, const std::vector<std::vector<glm::vec3>>& vertices) {
     if (objectAABBs.empty()) {
         return nullptr;
     }
 
-    // Tworzymy korzeñ drzewa
     AABB combinedAABB = objectAABBs[0];
     for (size_t i = 1; i < objectAABBs.size(); ++i) {
         const AABB& aabb = objectAABBs[i];
@@ -107,7 +145,6 @@ AABBNode* buildAABBTree(const std::vector<AABB>& objectAABBs, const std::vector<
 
     AABBNode* root = new AABBNode(combinedAABB);
 
-    // Tworzymy dzieci korzenia i rekurencyjnie dodajemy obiekty
     for (size_t i = 0; i < objectAABBs.size(); ++i) {
         if (root->aabb.intersects(objectAABBs[i])) {
             AABBNode* child = new AABBNode(objectAABBs[i]);
@@ -119,7 +156,13 @@ AABBNode* buildAABBTree(const std::vector<AABB>& objectAABBs, const std::vector<
     return root;
 }
 
-// Funkcja wczytuj¹ca plik OBJ i zapisuj¹ca wierzcho³ki, normalne i indeksy
+/**
+ * @brief Wczytuje plik OBJ i zapisuje wierzcho³ki, normalne i indeksy.
+ * @param filename Nazwa pliku OBJ.
+ * @param vertices Wektory wierzcho³ków.
+ * @param normals Wektory normalnych.
+ * @param indices Wektory indeksów.
+ */
 void loadOBJ(const std::string& filename, std::vector<glm::vec3>& vertices, std::vector<glm::vec3>& normals, std::vector<unsigned int>& indices) {
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -151,7 +194,7 @@ void loadOBJ(const std::string& filename, std::vector<glm::vec3>& vertices, std:
             for (int i = 0; i < 3; ++i) {
                 std::istringstream viss(vIndices[i]);
                 viss >> vIndex;
-                indices.push_back(vIndex - 1); // OBJ indeksuje od 1, dlatego odejmujemy 1
+                indices.push_back(vIndex - 1);
                 if (viss.peek() == '/') {
                     viss.ignore();
                     if (viss.peek() != '/') {
@@ -165,7 +208,10 @@ void loadOBJ(const std::string& filename, std::vector<glm::vec3>& vertices, std:
     file.close();
 }
 
-// Funkcja do wczytywania mapy i tworzenia drzewa AABB
+/**
+ * @brief Wczytuje mapê i tworzy drzewo AABB.
+ * @return Korzeñ drzewa AABB mapy.
+ */
 AABBNode* buildMapAABBTree() {
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> normals;
@@ -176,32 +222,17 @@ AABBNode* buildMapAABBTree() {
     std::vector<AABB> objectAABBs;
     std::vector<std::vector<glm::vec3>> objectVertices;
 
-    // Przekszta³æ wierzcho³ki na obiekty AABB
     for (size_t i = 0; i < indices.size(); i += 3) {
         glm::vec3 v0 = vertices[indices[i]];
         glm::vec3 v1 = vertices[indices[i + 1]];
         glm::vec3 v2 = vertices[indices[i + 2]];
 
-        glm::vec3 min = glm::vec3(
-            std::min(v0.x, std::min(v1.x, v2.x)),
-            std::min(v0.y, std::min(v1.y, v2.y)),
-            std::min(v0.z, std::min(v1.z, v2.z))
-        );
+        AABB aabb;
+        aabb.min = glm::min(glm::min(v0, v1), v2);
+        aabb.max = glm::max(glm::max(v0, v1), v2);
 
-        glm::vec3 max = glm::vec3(
-            std::max(v0.x, std::max(v1.x, v2.x)),
-            std::max(v0.y, std::max(v1.y, v2.y)),
-            std::max(v0.z, std::max(v1.z, v2.z))
-        );
-
-        AABB objectAABB;
-        objectAABB.min = min;
-        objectAABB.max = max;
-
-        objectAABBs.push_back(objectAABB);
-
-        std::vector<glm::vec3> triVertices = { v0, v1, v2 };
-        objectVertices.push_back(triVertices);
+        objectAABBs.push_back(aabb);
+        objectVertices.push_back({ v0, v1, v2 });
     }
 
     return buildAABBTree(objectAABBs, objectVertices);
