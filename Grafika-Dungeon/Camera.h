@@ -79,6 +79,11 @@ public:
         Position.y = FixedY;
     }
 
+    void SetPosition(float x, float y, float z)
+    {
+	    		Position = glm::vec3(x, y, z);
+	}
+
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
     {
         xoffset *= MouseSensitivity;
