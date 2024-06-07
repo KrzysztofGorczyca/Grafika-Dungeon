@@ -11,9 +11,12 @@ class Player
 {
 public:
     glm::vec3 Position;     // Pozycja gracza na mapie
-    float Health = 100.0;       // Zdrowie gracza
-    float MaxHealth = 100.0;    // Maksymalne zdrowie gracza
+    float Health = 100.00;       // Zdrowie gracza
+    float MaxHealth = 150.00;    // Maksymalne zdrowie gracza
     float Damage = 25;        // Obra¿enia zadawane przez gracza
+    float Range = 1.50f;        // Zasiêg ataku gracza
+    float Regeneration = 5.0f; // Regeneracja zdrowia gracza
+    int regenTime = 0;
     glm::vec3 swordOffset;
     glm::quat swordRotation; // Domyœlna rotacja miecza
     // Dodaj zmienne do œledzenia stanu animacji w klasie Player lub Sword
@@ -39,6 +42,7 @@ public:
         return Position;
     }
 
+    // Metody do modyfikacji obra¿eñ
     float GetDamage()
     {
     	return Damage;
@@ -49,6 +53,7 @@ public:
     	Damage += amount;
     }
 
+    //Metody do modyfikacji szybkoœci ataku
     void addAtackSpeed(float amount)
     {
     	attackDuration -= amount;
@@ -94,6 +99,28 @@ public:
         return MaxHealth;
     }
 
+    //Metody do modyfikacji zasiegu ataku
+    float GetAttackRange()
+    {
+    	return Range;
+	}
+
+    void addAttackRange(float amount)
+    {
+    		Range += amount;
+    }
+
+    //Metody do modyfikacji regeneracji zdrowia
+    float GetRegeneration()
+    {
+    	return Regeneration;
+	}
+
+    void addRegeneration(float amount)
+    {
+    	Regeneration+=amount;
+    }
+
     void printPlayerPosition() {
        //printf("Health: %d\n", Health);
        //printf("Position: (%f, %f)\n", Position.x, Position.z);
@@ -119,6 +146,23 @@ public:
 	    		lastHealthUpdateTime = now; // reset the timer
 	    	}
 	    }
+    }
+
+    void RegenerateHealth()
+    {
+    	auto now = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<float> elapsedTime = now - lastHealthUpdateTime;
+		if (elapsedTime.count() >= 1.0f)
+		{
+			regenTime++;
+			lastHealthUpdateTime = now; // reset the timer
+            std::cout<<"RegenTime: "<<regenTime<<std::endl;
+            if(regenTime==10)
+            {
+                modifyCurrentHealth(Regeneration);
+                regenTime = 0;
+            }
+		}
     }
 
     void UpdateSwordAnimation(float deltaTime, std::vector<Enemy>& enemies) {
@@ -156,7 +200,7 @@ public:
                         //printf("Enemy position -0.016375f, 10.050759f : (%f, %f)\n", enemyPosition.x, enemyPosition.z);
                         float distance = glm::distance(playerPosition, enemyPos2D);
                         //printf("Distance: %f\n", distance);
-                        if (distance < 1.5f) {
+                        if (distance < Range) {
                             enemy.modifyHealth(-Damage);
                             std::cout<<"Enemy health: "<<enemy.GetHealth()<<std::endl<<enemy.Position.z<<std::endl;
                         }
@@ -199,7 +243,7 @@ public:
 
     bool isDead()
     {
-    	if(Health <= 0)
+    	if(Health <= 0.01)
     	{
     		return true;
 		}

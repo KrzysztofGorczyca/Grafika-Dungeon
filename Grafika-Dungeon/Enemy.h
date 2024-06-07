@@ -14,15 +14,14 @@ public:
     glm::vec3 Position;
     glm::quat Rotation;
     float Speed;
-    float Health;
-    float Damage;
+    float Health = 100.f;
+    float Damage = 10;
+    float MaxHealth = 100.0f;
     // Constructor
     Enemy(glm::vec3 position)
         :Position(position)
         , Rotation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f))
-        , Health(100.0f)
         , Speed(1.0f)
-		, Damage(25.0f)
     {
 
     }
@@ -63,8 +62,20 @@ public:
     {
     	Health += amount;
 		if (Health < 0.0f) Health = 0.0f;
-		if (Health > 100.0f) Health = 100.0f;
+		if (Health > MaxHealth) Health = MaxHealth;
 	}
+
+    void modifyDamage(float amount)
+    {
+	    		Damage += amount;
+    }
+
+
+    void powerUp(int amount)
+    {
+    	Health += 2*amount;
+
+    }
 
     bool isDead()
     {

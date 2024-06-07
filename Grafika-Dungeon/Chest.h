@@ -10,7 +10,9 @@ enum class PlayerAttribute {
     MaxHealth,
     CurrentHealth,
     Damage,
-    AttackSpeed
+    AttackSpeed,
+    Regeneration,
+    Range
 };
 
 class Chest {
@@ -47,7 +49,7 @@ private:
     PlayerAttribute RandomAttribute() {
         static std::random_device rd;
         static std::mt19937 gen(rd());
-        static std::uniform_int_distribution<> randomAttribute(0, 3);
+        static std::uniform_int_distribution<> randomAttribute(0, 5);
 
         return static_cast<PlayerAttribute>(randomAttribute(gen));
     }
@@ -61,9 +63,13 @@ private:
 
     void ApplyAttribute(Player& player) {
         switch (attribute) {
-        case PlayerAttribute::MaxHealth:
+        case PlayerAttribute::MaxHealth: {
+            float before = player.GetMaxHealth();
             player.addMaxHealth(RandomValue());
+            float after = player.GetMaxHealth();
+            player.modifyCurrentHealth((after - before) / 2);
             break;
+        }
         case PlayerAttribute::CurrentHealth:
             player.modifyCurrentHealth(RandomValue());
             break;
@@ -71,8 +77,14 @@ private:
             player.addDamage(RandomValue());
             break;
         case PlayerAttribute::AttackSpeed:
-            player.addAtackSpeed(RandomValue());
+            player.addAtackSpeed(RandomValue()/150);
             break;
+		case PlayerAttribute::Range:
+            player.addAttackRange(RandomValue()/8);
+            break;
+		case PlayerAttribute::Regeneration:
+			player.addRegeneration(RandomValue());
+			break;
         }
     }
 };

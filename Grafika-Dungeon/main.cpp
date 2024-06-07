@@ -61,7 +61,7 @@ int main()
 #endif
 
     // glfw window creation
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Dungeon", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Dungeon", glfwGetPrimaryMonitor(), NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -184,7 +184,7 @@ int main()
 
     //Chest
     {
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest1(glm::vec3(-3.33969f, 0.3f, -5.33003f), 90.0f);
             chests.push_back(chest1);
         }
@@ -194,182 +194,182 @@ int main()
             chests.push_back(chest2);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest3(glm::vec3(9.01465f, 0.3f, 5.79264f), 90.0f);
             chests.push_back(chest3);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest4(glm::vec3(10.1609f, 0.3f, 6.9917f), 0.0f);
             chests.push_back(chest4);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest5(glm::vec3(8.97347f, 0.3f, 8.18384f), -90.0f);
             chests.push_back(chest5);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest6(glm::vec3(7.17944f, 0.3f, 21.43f), 0.0f);
             chests.push_back(chest6);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest7(glm::vec3(5.97503f, 0.3f, 22.2366f), -90.0f);
             chests.push_back(chest7);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest8(glm::vec3(-5.09801f, 0.3f, 19.8613f), 90.0f);
             chests.push_back(chest8);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest9(glm::vec3(-17.0788f, 0.3f, 19.8751f), 90.0f);
             chests.push_back(chest9);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest10(glm::vec3(-9.87756f, 0.3f, 7.02046f), 0.0f);
             chests.push_back(chest10);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest11(glm::vec3(-11.0927f, 0.3f, 5.82239f), 90.0f);
             chests.push_back(chest11);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest12(glm::vec3(-14.1043f, 0.3f, 11.1898f), -90.0f);
             chests.push_back(chest12);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest13(glm::vec3(-15.2466f, 0.3f, 9.99498f), 180.0f);
             chests.push_back(chest13);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest14(glm::vec3(-14.0877f, 0.3f, -5.30439f), 90.0f);
             chests.push_back(chest14);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest15(glm::vec3(-11.0805f, 0.3f, -7.98703f), -90.0f);
             chests.push_back(chest15);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest16(glm::vec3(-9.89421f, 0.3f, -9.17691f), 0.0f);
             chests.push_back(chest16);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest17(glm::vec3(-15.2498f, 0.3f, -12.1821f), 180.0f);
             chests.push_back(chest17);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest18(glm::vec3(-14.0587f, 0.3f, -13.3533f), 90.0f);
             chests.push_back(chest18);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest19(glm::vec3(-3.0095f, 0.3f, -10.9699f), -90.0f);
             chests.push_back(chest19);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest20(glm::vec3(4.81888f, 0.3f, -12.1666f), 180.0f);
             chests.push_back(chest20);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest21(glm::vec3(14.055f, 0.3f, -13.3138f), 90.0f);
             chests.push_back(chest21);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest22(glm::vec3(18.2704f, 0.3f, -12.1454f), 0.0f);
             chests.push_back(chest22);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest23(glm::vec3(18.2621f, 0.3f, -4.07328f), 0.0f);
             chests.push_back(chest23);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest24(glm::vec3(2.98643f, 0.3f, -24.4461f), 90.0f);
             chests.push_back(chest24);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest25(glm::vec3(7.19058f, 0.3f, -23.2428f), 0.0f);
             chests.push_back(chest25);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest26(glm::vec3(-8.078f, 0.3f, -24.4193f), 90.0f);
             chests.push_back(chest26);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest27(glm::vec3(-9.88308f, 0.3f, -20.2373f), 0.0f);
             chests.push_back(chest27);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest28(glm::vec3(-11.067f, 0.3f, -19.0355f), -90.0f);
             chests.push_back(chest28);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest29(glm::vec3(-12.2597f, 0.3f, -20.234f), 180.0f);
             chests.push_back(chest29);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest30(glm::vec3(-14.4506f, 0.3f, -24.4312f), 90.0f);
             chests.push_back(chest30);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest33(glm::vec3(-25.1724f, 0.3f, 19.8899f), 90.0f);
             chests.push_back(chest33);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest34(glm::vec3(-29.3303f, 0.3f, 9.98386f), 180.0f);
             chests.push_back(chest34);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest35(glm::vec3(-26.9758f, 0.3f, -6.17842f), 0.0f);
             chests.push_back(chest35);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest36(glm::vec3(-34.118f, 0.3f, -7.95768f), -90.0f);
             chests.push_back(chest36);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest37(glm::vec3(-35.3373f, 0.3f, -9.14862f), 180.0f);
             chests.push_back(chest37);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest38(glm::vec3(-34.1369f, 0.3f, -10.3523f), 90.0f);
             chests.push_back(chest38);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest39(glm::vec3(-29.3188f, 0.3f, -20.2508f), 180.0f);
             chests.push_back(chest39);
         }
 
-        if (dis(gen) < 0.2) {
+        if (dis(gen) < 0.25) {
             Chest chest40(glm::vec3(-29.3179f, 0.3f, -26.2363f), 180.0f);
             chests.push_back(chest40);
         }
@@ -378,6 +378,7 @@ int main()
             Chest chest41(glm::vec3(1.1842f, 0.3f, 7.01446f), 0.0f);
             chests.push_back(chest41);
         }
+
     }
 
     // load models
@@ -586,7 +587,7 @@ int main()
                 //Enemy collision and damage
                 for (Enemy& enemy : enemies)
                 {
-                    player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.35f, 10, enemy.canDamage);
+                    player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.35f, enemy.Damage, enemy.canDamage);
                 }
 
                 // Chest interaction
@@ -608,6 +609,7 @@ int main()
                 enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& enemy) {
                     return enemy.GetHealth() <= 0.0f;
                     }), enemies.end());
+
 
                 //Remove opened chests
                 chests.erase(std::remove_if(chests.begin(), chests.end(), [](const Chest& chest) {
@@ -669,6 +671,9 @@ int main()
                 //printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
                 //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
+                //Regeneration
+                player.RegenerateHealth();
+
                 //Change game state if player dies
                 if(player.GetHealth() <= 0.0f)
                 {
@@ -678,16 +683,28 @@ int main()
 
                 //Render UI
 	            {
-                    ImGui::SetNextWindowSize(ImVec2(400, 100));
-		            ImGui::Begin("Hud");
+                    ImGui::SetNextWindowPos(ImVec2( 50, SCR_HEIGHT-175));
+                    ImGui::SetNextWindowSize(ImVec2(400, 125));
+		            ImGui::Begin(" ");
 
-                	ImGui::Text("Player Health: %.1f", player.GetHealth());
+                	ImGui::Text("Player Health: %.1f / %.1f", player.GetHealth(), player.GetMaxHealth());
+
+                    ImGui::Text("Player Regeneration: %.3f", player.GetRegeneration());
 
                 	ImGui::Text("Player Damage: %.1f", player.GetDamage());
 
-                    ImGui::Text("Player Attack Speed: %.1f", player.GetAttackSpeed());
+                    ImGui::Text("Player Attack Speed: %.3f", player.GetAttackSpeed());
+
+                    ImGui::Text("Player Attack Range: %.1f", player.GetAttackRange());
 
                 	ImGui::End();
+
+                    ImGui::SetNextWindowPos(ImVec2(50, 50));
+                    ImGui::SetNextWindowSize(ImVec2(200, 75));
+                    ImGui::Begin("Entities");
+                    ImGui::Text("Enemies: %d", enemies.size());
+                    ImGui::Text("Chests: %d", chests.size());
+                    ImGui::End();
 	            }
 
                 //Render UI
