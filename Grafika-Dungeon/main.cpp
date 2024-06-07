@@ -238,7 +238,14 @@ AABBNode* buildMapAABBTree() {
     return buildAABBTree(objectAABBs, objectVertices);
 }
 
-// Funkcja do sprawdzania kolizji miêdzy graczem a map¹
+/**
+ * @brief Funkcja sprawdzaj¹ca kolizjê miêdzy graczem a map¹. Jeœli kolizja zostanie wykryta, pozycja gracza zostaje cofniêta do poprzedniej.
+ * @param playerPosition Aktualna pozycja gracza.
+ * @param mapRoot Korzeñ drzewa AABB mapy.
+ * @param previousPlayerPosition Poprzednia pozycja gracza.
+ * @param playerRadius Promieñ sfery gracza.
+ * @return True, jeœli kolizja zosta³a wykryta, w przeciwnym razie false.
+ */
 bool checkPlayerMapCollisionAndMoveBack(glm::vec3& playerPosition, const AABBNode* mapRoot, glm::vec3& previousPlayerPosition, float playerRadius) {
     bool collision = checkCollision(playerPosition, playerRadius, mapRoot);
     if (collision) {
@@ -247,53 +254,80 @@ bool checkPlayerMapCollisionAndMoveBack(glm::vec3& playerPosition, const AABBNod
     return collision;
 }
 
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
-// settings
-bool menu = true;
-bool game = false;
-bool died = false;
-AABBNode* mapAABBRoot = nullptr;
+// Globalne zmienne konfiguracyjne
+bool menu = true; /**< Flaga okreœlaj¹ca, czy menu jest aktywne. */
+bool game = false; /**< Flaga okreœlaj¹ca, czy gra jest aktywna. */
+bool died = false; /**< Flaga okreœlaj¹ca, czy gracz zgin¹³. */
+AABBNode* mapAABBRoot = nullptr; /**< Korzeñ drzewa AABB mapy. */
 
-// settings
-const unsigned int SCR_WIDTH = 1920;
-const unsigned int SCR_HEIGHT = 1080;
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+const unsigned int SCR_WIDTH = 1920; /**< Szerokoœæ okna. */
+const unsigned int SCR_HEIGHT = 1080; /**< Wysokoœæ okna. */
+glm::vec3 lightPos(1.2f, 1.0f, 2.0f); /**< Pozycja œwiat³a. */
 
-// camera
+// Kamera
 Camera camera(glm::vec3(-0.000978f, 0.9f, 15.233716f));
-float lastX = SCR_WIDTH / 2.0f;
-float lastY = SCR_HEIGHT / 2.0f;
-bool firstMouse = true;
+float lastX = SCR_WIDTH / 2.0f; /**< Ostatnia pozycja kursora X. */
+float lastY = SCR_HEIGHT / 2.0f; /**< Ostatnia pozycja kursora Y. */
+bool firstMouse = true; /**< Flaga okreœlaj¹ca, czy mysz jest u¿ywana po raz pierwszy. */
 
-// Player
-Player player(glm::vec3(-0.000978f, 0.9f, 15.233716f));
+// Gracz
+Player player(glm::vec3(-0.000978f, 0.9f, 15.233716f)); /**< Inicjalizacja gracza na pocz¹tkowej pozycji. */
 
-// Testing
-glm::vec3 targetPoint(-0.016375f, 0.0f, 10.050759f);
+// Punkt testowy
+glm::vec3 targetPoint(-0.016375f, 0.0f, 10.050759f); /**< Punkt testowy na mapie. */
 
-glm::vec3 skeletonHandOffset(0.088918f, 0.77669f, 0.014702f);
+glm::vec3 skeletonHandOffset(0.088918f, 0.77669f, 0.014702f); /**< Przesuniêcie rêki szkieletu. */
 
-// timing
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
+// Timery
+float deltaTime = 0.0f; /**< Czas miêdzy klatkami. */
+float lastFrame = 0.0f; /**< Czas ostatniej klatki. */
 
-// Grid settings
-int gridWidth = 10;
-int gridHeight = 10;
+// Ustawienia siatki
+int gridWidth = 10; /**< Szerokoœæ siatki. */
+int gridHeight = 10; /**< Wysokoœæ siatki. */
 
-float playerRadius = 0.1f;
+float playerRadius = 0.1f; /**< Promieñ gracza. */
 
-vector<Enemy> enemies; // Wektor przechowuj¹cy przeciwników
-vector<Chest> chests; // Wektor przechowuj¹cy skrzynie
+std::vector<Enemy> enemies; /**< Wektor przechowuj¹cy przeciwników. */
+std::vector<Chest> chests; /**< Wektor przechowuj¹cy skrzynie. */
 
 std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_real_distribution<> dis(0.0, 1.0);
 
+/**
+ * @brief G³ówna funkcja programu, która inicjalizuje i uruchamia grê 3D.
+ *
+ * Funkcja `int main()` pe³ni rolê punktu wejœcia do aplikacji, uruchamiaj¹cej grê 3D z wykorzystaniem OpenGL, GLFW, irrKlang oraz Dear ImGui.
+ *
+ * - Inicjalizacja i konfiguracja:
+ *   - `glfwInit()`, `glfwWindowHint()` - inicjalizacja GLFW i konfiguracja kontekstu OpenGL.
+ *   - `irrKlangInit()` - inicjalizacja irrKlang.
+ *   - `glfwCreateWindow()` - tworzenie okna GLFW.
+ *   - `glfwMakeContextCurrent()`, `gladLoadGLLoader()` - ustawienie kontekstu OpenGL.
+ *   - `stbi_set_flip_vertically_on_load(true)`, `glEnable(GL_DEPTH_TEST)` - globalne ustawienia OpenGL.
+ * - Kompilacja shaderów i ³adowanie modeli:
+ *   - `Shader` - kompilacja programów shaderów.
+ *   - `Model` - ³adowanie modeli z plików .obj.
+ * - Tworzenie wrogów i skrzyñ:
+ *   - Tworzenie instancji obiektów `Enemy` i `Chest`, dodawanie do odpowiednich wektorów.
+ * - Budowanie drzewa AABB do detekcji kolizji.
+ * - Inicjalizacja zmiennych czasu:
+ *   - `lastTime` i `deltaTime` - inicjalizacja zmiennych czasu miêdzy klatkami.
+ * - Inicjalizacja Dear ImGui:
+ *   - Konfiguracja Dear ImGui do pracy z GLFW i OpenGL.
+ * - Pêtla renderowania:
+ *   - Obs³uga wejœcia u¿ytkownika, aktualizacja animacji, ustawianie pozycji gracza.
+ *   - Czyszczenie ekranu, u¿ycie shaderów, ustawianie macierzy projekcji i widoku.
+ *   - Renderowanie modeli i interfejsu u¿ytkownika.
+ *   - Wymiana buforów i obs³uga zdarzeñ.
+ *
+ * @return Zwraca 0 po zakoñczeniu programu.
+ */
 
 int main()
 {
@@ -1064,41 +1098,56 @@ int main()
     return 0;
 }
 
-
+/**
+ * @brief Callback do zmiany rozmiaru okna.
+ * @param window WskaŸnik do okna GLFW.
+ * @param width Nowa szerokoœæ okna.
+ * @param height Nowa wysokoœæ okna.
+ */
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
 
-// Obsluga myszy
+/**
+ * @brief Callback obs³uguj¹cy ruch mysz¹.
+ * @param window WskaŸnik do okna GLFW.
+ * @param xposIn Pozycja kursora X.
+ * @param yposIn Pozycja kursora Y.
+ */
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
-    if(!menu)
-        if(!died)
+    if (!menu)
+        if (!died)
         {
-	        {
-	        	float xpos = static_cast<float>(xposIn);
-	        	float ypos = static_cast<float>(yposIn);
+            {
+                float xpos = static_cast<float>(xposIn);
+                float ypos = static_cast<float>(yposIn);
 
-	        	if (firstMouse)
-	        	{
-	        		lastX = xpos;
-	        		lastY = ypos;
-	        		firstMouse = false;
-	        	}
+                if (firstMouse)
+                {
+                    lastX = xpos;
+                    lastY = ypos;
+                    firstMouse = false;
+                }
 
-	        	float xoffset = xpos - lastX;
-	        	float yoffset = lastY - ypos;
+                float xoffset = xpos - lastX;
+                float yoffset = lastY - ypos;
 
-	        	lastX = xpos;
-	        	lastY = ypos;
+                lastX = xpos;
+                lastY = ypos;
 
-	        	camera.ProcessMouseMovement(xoffset, yoffset);
-	        }
+                camera.ProcessMouseMovement(xoffset, yoffset);
+            }
         }
 }
 
-// Obsluga scrollowania
+/**
+ * @brief Callback obs³uguj¹cy scrollowanie myszk¹.
+ * @param window WskaŸnik do okna GLFW.
+ * @param xoffset Przesuniêcie scrolla w osi X.
+ * @param yoffset Przesuniêcie scrolla w osi Y.
+ */
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
