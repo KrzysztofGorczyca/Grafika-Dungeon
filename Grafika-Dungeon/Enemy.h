@@ -9,6 +9,12 @@
 
 #define ModelPath "Assets/Skeleton/skeleton.obj"
 
+class enemyHand {
+public:
+    glm::vec3 position;
+    enemyHand(const glm::vec3& pos) : position(pos) {}
+};
+
 class Enemy {
 public:
     glm::vec3 Position;
@@ -17,11 +23,13 @@ public:
     float Health = 100.f;
     float Damage = 10;
     float MaxHealth = 100.0f;
+    enemyHand hand;
     // Constructor
     Enemy(glm::vec3 position)
         :Position(position)
         , Rotation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f))
         , Speed(1.0f)
+        , hand(position + glm::vec3(0.088918f, 0.014702f, 0.77669f))
     {
 
     }

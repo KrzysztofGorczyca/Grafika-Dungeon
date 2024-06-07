@@ -34,6 +34,7 @@ Player player(glm::vec3(-0.000978f, 0.9f, 15.233716f));
 // Testing
 glm::vec3 targetPoint(-0.016375f, 0.0f, 10.050759f);
 
+glm::vec3 skeletonHandOffset(0.088918f, 0.77669f, 0.014702f);
 // timing
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -389,7 +390,7 @@ int main()
     Model swordModel("Assets/Blade/Blade.obj");
     Model mainMenuModel("Assets/Menu/mainMenu.obj");
     Model deathMenuModel("Assets/Menu/deathMenu.obj");
-
+    Model skeletonHandModel("Assets/SkeletonHand/handSkeleton.obj");
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -627,6 +628,16 @@ int main()
                     enemyModel.Draw(Shader);
                 }
 
+                
+                for (const Enemy& enemy : enemies) {
+                    // Renderowanie rêki wroga
+                    glm::mat4 model = glm::mat4(1.0f);
+                    model = glm::translate(model, enemy.GetPosition() + skeletonHandOffset);
+                    model *= glm::mat4_cast(enemy.Rotation); // Rêka obraca siê tak samo jak wróg
+                    model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+                    Shader.setMat4("model", model);
+                    skeletonHandModel.Draw(Shader); // Zak³adam, ¿e handModel jest modelem rêki wroga
+                }
                 // render the sword model
                 {
                     glm::vec3 swordPosition = camera.Position
