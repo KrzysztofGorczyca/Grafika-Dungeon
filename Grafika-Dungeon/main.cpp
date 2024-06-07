@@ -454,12 +454,7 @@ int main()
         // Player position
         player.SetPosition(camera.Position.x, camera.Position.y, camera.Position.z);
         player.printPlayerPosition();
-        player.CheckDistanceAndModifyHealth(targetPoint, 2.0f, 20);
-
-        for(Enemy& enemy : enemies)
-        {
-        	player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.35f, 10);
-		}
+        //player.CheckDistanceAndModifyHealth(targetPoint, 2.0f, 20);
 
 
         // render
@@ -588,7 +583,11 @@ int main()
                     chestModel.Draw(Shader);
                 }
 
-                
+                for (Enemy& enemy : enemies)
+                {
+                    player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.35f, 10, enemy.canDamage);
+                }
+
                 player.UpdateSwordAnimation(deltaTime, enemies);
 
                 for (Enemy& enemy : enemies)

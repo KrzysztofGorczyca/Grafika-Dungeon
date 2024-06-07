@@ -26,6 +26,7 @@ public:
     {
 
     }
+    bool canDamage = true;
 
     // Destructor
     ~Enemy() {}
@@ -40,6 +41,7 @@ public:
 	    	direction = glm::normalize(direction);  // Normalizuj wektor kierunku
 	    	if(isDead())
 	    	{
+                canDamage = false;
 	    		std::cout << "Enemy is dead" << std::endl;
 	    	}
 

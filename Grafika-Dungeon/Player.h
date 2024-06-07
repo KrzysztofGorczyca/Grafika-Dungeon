@@ -12,7 +12,7 @@ class Player
 public:
     glm::vec3 Position;     // Pozycja gracza na mapie
     float Health = 100.0;       // Zdrowie gracza
-    float MaxHealth = 200.0;    // Maksymalne zdrowie gracza
+    float MaxHealth = 100.0;    // Maksymalne zdrowie gracza
     float Damage = 25;        // Obra¿enia zadawane przez gracza
     glm::vec3 swordOffset;
     glm::quat swordRotation; // Domyœlna rotacja miecza
@@ -99,15 +99,18 @@ public:
     }
 
     // Metoda do sprawdzania odleg³oœci i modyfikacji zdrowia co sekundê
-    void CheckDistanceAndModifyHealth(glm::vec3 point, float threshold, int healthReduction) {
-        auto now = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<float> elapsedTime = now - lastHealthUpdateTime;
+    void CheckDistanceAndModifyHealth(glm::vec3 point, float threshold, int healthReduction, bool canDamage) {
+        if(canDamage)
+    	{
+		    auto now = std::chrono::high_resolution_clock::now();
+	    	std::chrono::duration<float> elapsedTime = now - lastHealthUpdateTime;
 
-        float distance = CalculateDistance(point);
-        if (distance < threshold && elapsedTime.count() >= 1.0f) {
-            modifyCurrentHealth(-healthReduction);
-            lastHealthUpdateTime = now; // reset the timer
-        }
+	    	float distance = CalculateDistance(point);
+	    	if (distance < threshold && elapsedTime.count() >= 1.0f) {
+	    		modifyCurrentHealth(-healthReduction);
+	    		lastHealthUpdateTime = now; // reset the timer
+	    	}
+	    }
     }
 
     void UpdateSwordAnimation(float deltaTime, std::vector<Enemy>& enemies) {
