@@ -47,6 +47,7 @@ public:
     }
 
 private:
+    // Metoda losuj¹ca atrybut
     PlayerAttribute RandomAttribute() {
         static std::random_device rd;
         static std::mt19937 gen(rd());
@@ -54,14 +55,14 @@ private:
 
         return static_cast<PlayerAttribute>(randomAttribute(gen));
     }
-
+    // Metoda losuj¹ca wartoœæ atrybutu
     float RandomValue() {
 		static std::random_device rd;
 		static std::mt19937 gen(rd());
 		static std::uniform_real_distribution<> randomValue(0, 10);
 		return randomValue(gen);
 	}
-
+    // Metoda aplikuj¹ca atrybut
     void ApplyAttribute(Player& player) {
         switch (attribute) {
         case PlayerAttribute::MaxHealth: {

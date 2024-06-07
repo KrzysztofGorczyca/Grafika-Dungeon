@@ -10,9 +10,10 @@ void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& p
     static float moveSoundTimer = 0.0f; // Zmienna do odmierzania czasu
 
     if (menu || died) return;
+    // Jeœli gracz nacisn¹³ klawisz ESC, zamknij okno
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-
+    // Jeœli gracz nacisna³ klawisz W, S, A lub D, przesuñ kamerê
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         camera.ProcessKeyboard(FORWARD, deltaTime);
         moveSoundTimer += deltaTime; // Dodaj czas do odmierzacza
@@ -29,6 +30,8 @@ void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& p
         camera.ProcessKeyboard(RIGHT, deltaTime);
         moveSoundTimer += deltaTime; // Dodaj czas do odmierzacza
     }
+
+    // Jeœli gracz nacisn¹³ klawisz E, ustaw zmienn¹ holdingE na true
     if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
         player.holdingE = true;
     }
@@ -49,6 +52,7 @@ void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& p
     }
 }
 
+// Funkcja obs³uguj¹ca ruch myszk¹
 void mouse_callback(GLFWwindow* window, Camera& camera, double xposIn, double yposIn, bool firstMouse, float lastX, float lastY)
 {
     float xpos = static_cast<float>(xposIn);
@@ -70,6 +74,7 @@ void mouse_callback(GLFWwindow* window, Camera& camera, double xposIn, double yp
     camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
+// Funkcja obs³uguj¹ca scrollowanie myszk¹
 void scroll_callback(GLFWwindow* window, Camera& camera, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));

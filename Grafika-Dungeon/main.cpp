@@ -603,48 +603,54 @@ int main()
     }
 
     // load models
-    // -----------
-    Model mapModel("Assets/Map/Map.obj");
-    Model chestModel("Assets/Chest/Chest.obj");
-    Model enemyModel("Assets/Skeleton/skeleton.obj");
-    Model swordModel("Assets/Blade/Blade.obj");
-    Model mainMenuModel("Assets/Menu/mainMenu.obj");
-    Model deathMenuModel("Assets/Menu/deathMenu.obj");
-    Model skeletonHandModel("Assets/SkeletonHand/handSkeleton.obj");
+	
+		Model mapModel("Assets/Map/Map.obj");
+    	Model chestModel("Assets/Chest/Chest.obj");
+    	Model enemyModel("Assets/Skeleton/skeleton.obj");
+    	Model swordModel("Assets/Blade/Blade.obj");
+    	Model mainMenuModel("Assets/Menu/mainMenu.obj");
+    	Model deathMenuModel("Assets/Menu/deathMenu.obj");
+    	Model skeletonHandModel("Assets/SkeletonHand/handSkeleton.obj");
+	
 
     std::vector<glm::vec3> vertices1;
     std::vector<glm::vec3> normals1;
     std::vector<unsigned int> indices1;
 
-    loadOBJ("Assets/Map/Map.obj", vertices1, normals1, indices1);
-    AABBNode* mapAABBRoot = buildMapAABBTree();
-
-    // draw in wireframe
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    // Wczytaj mapê i zbuduj drzewo AABB
+	
+		loadOBJ("Assets/Map/Map.obj", vertices1, normals1, indices1);
+    	AABBNode* mapAABBRoot = buildMapAABBTree();
+	
 
     // Inicjalizacja zmiennych do mierzenia czasu
-    auto lastTime = std::chrono::high_resolution_clock::now();
-    float deltaTime = 0.0f;
+	
+		auto lastTime = std::chrono::high_resolution_clock::now();
+    	float deltaTime = 0.0f;
+	
 
     // Setup Dear ImGui context
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.Fonts->AddFontDefault();
-    io.Fonts->Build();
-    ImGui::StyleColorsDark(); // Choose a default theme
+	
+		IMGUI_CHECKVERSION();
+    	ImGui::CreateContext();
+    	ImGuiIO& io = ImGui::GetIO(); (void)io;
+    	io.Fonts->AddFontDefault();
+    	io.Fonts->Build();
+    	ImGui::StyleColorsDark();
+	
 
     // Setup Platform/Renderer bindings
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 330");
-    glm::vec3 previousPlayerPosition = player.GetPosition(); // Zapamiêtaj poprzedni¹ pozycjê gracza
-    // render loop
-    // -----------
-    playBackgroundMusic();
+	
+		ImGui_ImplGlfw_InitForOpenGL(window, true);
+    	ImGui_ImplOpenGL3_Init("#version 330");
+    	glm::vec3 previousPlayerPosition = player.GetPosition(); // Zapamiêtaj poprzedni¹ pozycjê gracza
+    	// render loop
+    	playBackgroundMusic();
+	
+
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
-       // --------------------
         auto currentTime = std::chrono::high_resolution_clock::now();
         std::chrono::duration<float> elapsedTime = currentTime - lastTime;
         deltaTime = elapsedTime.count();
@@ -656,7 +662,6 @@ int main()
         ImGui::NewFrame();
 
         // input
-        // -----
         processInput(window, camera, deltaTime, player, menu, died);
         player.UpdateSwordAnimation(deltaTime, enemies);
 
@@ -954,10 +959,10 @@ int main()
                     ImGui::End();
 	            }
 
-                //Render UI
+                // Render UI
                 ImGui::Render();
                 ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
+                // Swap the screen buffers
                 glfwSwapBuffers(window);
                 glfwPollEvents();
             }
@@ -1001,6 +1006,7 @@ int main()
                 deathMenuModel.Draw(Shader);
 			}
 
+            // Resetowanie pozycji kamery
             camera.ResetCameraAngles();
 
 			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -1009,9 +1015,10 @@ int main()
                 return 0;
 			}
 
+            // Render UI
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
+            // Swap the screen buffers
 			glfwSwapBuffers(window);
 			glfwPollEvents();
         }

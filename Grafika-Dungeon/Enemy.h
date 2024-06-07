@@ -137,23 +137,12 @@ public:
         }
     }
 
+    // Metoda do modyfikacji zdrowia
     void modifyHealth(float amount)
     {
         Health += amount;
         if (Health < 0.0f) Health = 0.0f;
         if (Health > MaxHealth) Health = MaxHealth;
-    }
-
-    void modifyDamage(float amount)
-    {
-        Damage += amount;
-    }
-
-
-    void powerUp(int amount)
-    {
-        Health += 2 * amount;
-
     }
 
     bool isDead()

@@ -64,6 +64,7 @@ public:
         return glm::lookAt(Position, Position + Front, Up);
     }
 
+    // Metoda do obs³ugi klawiatury
     void ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
         float velocity = MovementSpeed * deltaTime;
@@ -79,11 +80,13 @@ public:
         Position.y = FixedY;
     }
 
+    // Setter do zmiennej Position
     void SetPosition(float x, float y, float z)
     {
 	    		Position = glm::vec3(x, y, z);
 	}
 
+    // Metoda do obs³ugi myszki
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
     {
         xoffset *= MouseSensitivity;
@@ -103,7 +106,7 @@ public:
         // update Front, Right and Up Vectors using the updated Euler angles
         updateCameraVectors();
     }
-
+    // Metoda do obs³ugi zoomu
     void ProcessMouseScroll(float yoffset)
     {
         Zoom -= (float)yoffset;
@@ -113,11 +116,13 @@ public:
             Zoom = 45.0f;
     }
 
+    // Getter do Pozycji kamery
     glm::vec3 getCameraPosition() const
     {
 	    return Position;
     }
 
+    // Resetuje k¹ty kamery
     void ResetCameraAngles() {
         Yaw = YAW;
         Pitch = PITCH;

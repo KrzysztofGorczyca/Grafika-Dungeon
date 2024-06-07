@@ -24,9 +24,6 @@
     <ClCompile Include="Input.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="Libraries\include\IMGUI\imgui.cpp">
       <Filter>Pliki zasobów</Filter>
     </ClCompile>

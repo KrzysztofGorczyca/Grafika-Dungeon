@@ -12,7 +12,7 @@ class Player
 public:
     glm::vec3 Position;     // Pozycja gracza na mapie
     float Health = 100.00;       // Zdrowie gracza
-    float MaxHealth = 150.00;    // Maksymalne zdrowie gracza
+    float MaxHealth = 100.00;    // Maksymalne zdrowie gracza
     float Damage = 25;        // Obra¿enia zadawane przez gracza
     float Range = 1.50f;        // Zasiêg ataku gracza
     float Regeneration = 5.0f; // Regeneracja zdrowia gracza
@@ -23,8 +23,8 @@ public:
     bool isAnimating = false;
     bool wasAttacked = false;
     float animationTime = 0.0f;
-    float attackDuration = 0.1f; // Czas trwania animacji ataku
-    float returnDuration = 0.2f; // Czas trwania animacji powrotu
+    float attackDuration = 0.4f; // Czas trwania animacji ataku
+    float returnDuration = 0.8f; // Czas trwania animacji powrotu
     bool isReturning = false;  // Nowa zmienna do œledzenia fazy powrotu
 
     bool holdingE = false;  // Czy gracz trzyma klawisz E
@@ -170,15 +170,8 @@ public:
         }
     }
 
-    void enemyLandHit(Enemy& enemy)
-    {
-        if(enemy.dealDamage)
-        {
-            enemy.dealDamage=false;
-        	modifyCurrentHealth(-enemy.Damage);
-        }
-	}
 
+    // Metoda do regeneracji zdrowia co sekundê
     void RegenerateHealthAndCheckForMovement()
     {
         glm::vec3 lastPosition = Position;
@@ -202,6 +195,7 @@ public:
         }
     }
 
+    // Metoda do aktualizacji animacji miecza
     void UpdateSwordAnimation(float deltaTime, std::vector<Enemy>& enemies) {
         if (isAnimating) {
             animationTime += deltaTime;
@@ -283,17 +277,6 @@ public:
                 }
             }
         }
-    }
-
-
-
-    bool isDead()
-    {
-        if (Health <= 0.01)
-        {
-            return true;
-        }
-        return false;
     }
 
 private:
