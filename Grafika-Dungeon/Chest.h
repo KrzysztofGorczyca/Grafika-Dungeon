@@ -6,36 +6,68 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include "Player.h"
 
+/**
+ * @brief Enumeration for player attributes that can be modified by a chest.
+ */
 enum class PlayerAttribute {
-    MaxHealth,
-    CurrentHealth,
-    Damage,
-    AttackSpeed,
-    Regeneration,
-    Range
+    MaxHealth,      ///< Maximum health of the player
+    CurrentHealth,  ///< Current health of the player
+    Damage,         ///< Damage dealt by the player
+    AttackSpeed,    ///< Attack speed of the player
+    Regeneration,   ///< Health regeneration rate of the player
+    Range           ///< Attack range of the player
 };
 
+/**
+ * @brief Class representing a chest in the game, which can provide bonuses to the player.
+ */
 class Chest {
 public:
-    glm::vec3 Position;
-    glm::quat Rotation;
-    float rotationRadians;
-    PlayerAttribute attribute;
-    bool opened = false;
+    glm::vec3 Position; ///< Position of the chest
+    glm::quat Rotation; ///< Rotation of the chest
+    float rotationRadians; ///< Rotation angle of the chest in radians
+    PlayerAttribute attribute; ///< Attribute that the chest provides
+    bool opened = false; ///< Indicates if the chest has been opened
 
-    // Constructor
+    /**
+     * @brief Constructs a Chest object.
+     *
+     * @param position Initial position of the chest.
+     * @param rotation Initial rotation of the chest in radians.
+     */
     Chest(glm::vec3 position, float rotation)
-        :Position(position)
+        : Position(position)
         , Rotation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f))
         , rotationRadians(rotation)
         , attribute(RandomAttribute())
-    {
+    {}
 
-    }
+    /**
+     * @brief Gets the position of the chest.
+     *
+     * @return The current position of the chest.
+     */
     inline glm::vec3 GetPosition() const { return Position; }
+
+    /**
+     * @brief Gets the rotation angle of the chest in radians.
+     *
+     * @return The current rotation angle in radians.
+     */
     inline float getRadians() const { return rotationRadians; }
+
+    /**
+     * @brief Gets the attribute provided by the chest.
+     *
+     * @return The attribute provided by the chest.
+     */
     inline PlayerAttribute getAttribute() const { return attribute; }
 
+    /**
+     * @brief Checks if the player is interacting with the chest and applies the attribute if so.
+     *
+     * @param player The player interacting with the chest.
+     */
     void CheckInteraction(Player& player) {
         glm::vec3 playerPosition = player.GetPosition();
         float distance = glm::distance(playerPosition, Position);
@@ -47,7 +79,11 @@ public:
     }
 
 private:
-    // Metoda losuj¹ca atrybut
+    /**
+     * @brief Randomly selects a player attribute.
+     *
+     * @return A randomly selected player attribute.
+     */
     PlayerAttribute RandomAttribute() {
         static std::random_device rd;
         static std::mt19937 gen(rd());
@@ -55,14 +91,24 @@ private:
 
         return static_cast<PlayerAttribute>(randomAttribute(gen));
     }
-    // Metoda losuj¹ca wartoœæ atrybutu
+
+    /**
+     * @brief Randomly selects a value for the attribute.
+     *
+     * @return A randomly selected value for the attribute.
+     */
     float RandomValue() {
-		static std::random_device rd;
-		static std::mt19937 gen(rd());
-		static std::uniform_real_distribution<> randomValue(0, 10);
-		return randomValue(gen);
-	}
-    // Metoda aplikuj¹ca atrybut
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+        static std::uniform_real_distribution<> randomValue(0, 10);
+        return randomValue(gen);
+    }
+
+    /**
+     * @brief Applies the attribute to the player.
+     *
+     * @param player The player to apply the attribute to.
+     */
     void ApplyAttribute(Player& player) {
         switch (attribute) {
         case PlayerAttribute::MaxHealth: {
@@ -79,14 +125,14 @@ private:
             player.addDamage(RandomValue());
             break;
         case PlayerAttribute::AttackSpeed:
-            player.addAtackSpeed(RandomValue()/150);
+            player.addAttackSpeed(RandomValue() / 150);
             break;
-		case PlayerAttribute::Range:
-            player.addAttackRange(RandomValue()/8);
+        case PlayerAttribute::Range:
+            player.addAttackRange(RandomValue() / 8);
             break;
-		case PlayerAttribute::Regeneration:
-			player.addRegeneration(RandomValue());
-			break;
+        case PlayerAttribute::Regeneration:
+            player.addRegeneration(RandomValue());
+            break;
         }
     }
 };

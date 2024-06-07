@@ -3,20 +3,32 @@
 #include "Vertex.h"
 using namespace std;
 
+/**
+ * @brief Structure to represent a texture.
+ */
 struct Texture {
-    unsigned int id;
-    string type;
-    string path;
+    unsigned int id; ///< The ID of the texture.
+    string type; ///< The type of the texture (e.g., diffuse, specular).
+    string path; ///< The path to the texture file.
 };
 
-
+/**
+ * @brief Class to represent a 3D mesh.
+ */
 class Mesh {
 public:
     // mesh data
-    vector<Vertex>       vertices;
-    vector<unsigned int> indices;
-    vector<Texture>      textures;
+    vector<Vertex> vertices; ///< Vector of vertices in the mesh.
+    vector<unsigned int> indices; ///< Vector of indices for the mesh.
+    vector<Texture> textures; ///< Vector of textures used by the mesh.
 
+    /**
+     * @brief Constructor to initialize the mesh with vertices, indices, and textures.
+     *
+     * @param vertices Vector of vertices.
+     * @param indices Vector of indices.
+     * @param textures Vector of textures.
+     */
     Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
     {
         this->vertices = vertices;
@@ -25,13 +37,19 @@ public:
 
         setupMesh();
     }
+
+    /**
+     * @brief Draws the mesh using the given shader.
+     *
+     * @param shader Reference to the shader program.
+     */
     void Draw(Shader& shader)
     {
         unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;
         for (unsigned int i = 0; i < textures.size(); i++)
         {
-            glActiveTexture(GL_TEXTURE0 + i); 
+            glActiveTexture(GL_TEXTURE0 + i);
             string number;
             string name = textures[i].type;
             if (name == "texture_diffuse")
@@ -49,10 +67,13 @@ public:
         glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
     }
-private:
-    //  render data
-    unsigned int VAO, VBO, EBO;
 
+private:
+    unsigned int VAO, VBO, EBO; ///< Vertex Array Object, Vertex Buffer Object, and Element Buffer Object.
+
+    /**
+     * @brief Sets up the mesh by initializing the buffers and vertex attributes.
+     */
     void setupMesh()
     {
         glGenVertexArrays(1, &VAO);

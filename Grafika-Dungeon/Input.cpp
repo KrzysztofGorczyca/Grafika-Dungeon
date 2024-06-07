@@ -1,58 +1,82 @@
 #include <ctime>
 #include <chrono>
-#include "libs.h" // Dodaj nag³ówek dla bibliotek
-#include "Player.h" // Dodaj nag³ówek dla klasy Player
+#include "libs.h"      ///< Header for external libraries
+#include "Player.h"    ///< Header for the Player class
 
-bool isSoundPlaying = false;
+bool isSoundPlaying = false; ///< Indicates if a sound is currently playing
 
+/**
+ * @brief Processes input from the keyboard and mouse to control the camera and player actions.
+ *
+ * @param window The GLFW window context.
+ * @param camera The camera object to control.
+ * @param deltaTime The time elapsed between the current and previous frame.
+ * @param player The player object to control.
+ * @param menu Indicates if the menu is currently active.
+ * @param died Indicates if the player has died.
+ */
 void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& player, bool menu, bool died)
 {
-    static float moveSoundTimer = 0.0f; // Zmienna do odmierzania czasu
+    static float moveSoundTimer = 0.0f; ///< Timer for managing move sound intervals
 
     if (menu || died) return;
-    // Jeœli gracz nacisn¹³ klawisz ESC, zamknij okno
+
+    // If the player presses the ESC key, close the window
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-    // Jeœli gracz nacisna³ klawisz W, S, A lub D, przesuñ kamerê
+
+    // Move the camera if the player presses W, S, A, or D keys
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         camera.ProcessKeyboard(FORWARD, deltaTime);
-        moveSoundTimer += deltaTime; // Dodaj czas do odmierzacza
+        moveSoundTimer += deltaTime;
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
         camera.ProcessKeyboard(BACKWARD, deltaTime);
-        moveSoundTimer += deltaTime; // Dodaj czas do odmierzacza
+        moveSoundTimer += deltaTime;
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
         camera.ProcessKeyboard(LEFT, deltaTime);
-        moveSoundTimer += deltaTime; // Dodaj czas do odmierzacza
+        moveSoundTimer += deltaTime;
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
         camera.ProcessKeyboard(RIGHT, deltaTime);
-        moveSoundTimer += deltaTime; // Dodaj czas do odmierzacza
+        moveSoundTimer += deltaTime;
     }
 
-    // Jeœli gracz nacisn¹³ klawisz E, ustaw zmienn¹ holdingE na true
+    // Set holdingE to true if the player presses the E key
     if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
         player.holdingE = true;
     }
     else {
         player.holdingE = false;
     }
+
+    // Trigger player animation if the left mouse button is pressed and the player is not already animating
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS && !player.isAnimating) {
         player.isAnimating = true;
         player.animationTime = 0.0f;
     }
 
-    // Odtwarzaj dŸwiêk ruchu co 0.5 sekundy
-    if (moveSoundTimer >= 0.5f && isSoundPlaying==false) {
+    // Play move sound every 0.5 seconds
+    if (moveSoundTimer >= 0.5f && isSoundPlaying == false) {
         isSoundPlaying = true;
-        playMoveSound(); // Funkcja odtwarzaj¹ca dŸwiêk ruchu
-        moveSoundTimer = 0.0f; // Zresetuj odmierzacz czasu
+        playMoveSound(); ///< Function to play move sound
+        moveSoundTimer = 0.0f; ///< Reset the move sound timer
         isSoundPlaying = false;
     }
 }
 
-// Funkcja obs³uguj¹ca ruch myszk¹
+/**
+ * @brief Handles mouse movement to control the camera.
+ *
+ * @param window The GLFW window context.
+ * @param camera The camera object to control.
+ * @param xposIn The current x position of the mouse.
+ * @param yposIn The current y position of the mouse.
+ * @param firstMouse Indicates if this is the first mouse movement.
+ * @param lastX The last x position of the mouse.
+ * @param lastY The last y position of the mouse.
+ */
 void mouse_callback(GLFWwindow* window, Camera& camera, double xposIn, double yposIn, bool firstMouse, float lastX, float lastY)
 {
     float xpos = static_cast<float>(xposIn);
@@ -66,7 +90,7 @@ void mouse_callback(GLFWwindow* window, Camera& camera, double xposIn, double yp
     }
 
     float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; 
+    float yoffset = lastY - ypos;
 
     lastX = xpos;
     lastY = ypos;
@@ -74,7 +98,14 @@ void mouse_callback(GLFWwindow* window, Camera& camera, double xposIn, double yp
     camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
-// Funkcja obs³uguj¹ca scrollowanie myszk¹
+/**
+ * @brief Handles mouse scroll to control the camera zoom.
+ *
+ * @param window The GLFW window context.
+ * @param camera The camera object to control.
+ * @param xoffset The scroll offset in the x direction.
+ * @param yoffset The scroll offset in the y direction.
+ */
 void scroll_callback(GLFWwindow* window, Camera& camera, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
