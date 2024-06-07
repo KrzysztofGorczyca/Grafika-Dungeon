@@ -73,19 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\irrKlang;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\irrKlang;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI\backends;$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI\backends;$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\irrKlang;$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI\backends;$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ExternalIncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLM;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLEW;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(SolutionDir)Libraries\include\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Grafika-Dungeon\Libraries\include\irrKlang;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -93,12 +96,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\irrKlang;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;soil2-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>irrKlang.lib;glfw3.lib;opengl32.lib;glew32.lib;soil2-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -110,14 +113,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\irrKlang;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>irrKlang.lib;glfw3.lib;opengl32.lib;glew32.lib;soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -127,12 +130,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\irrKlang;$(SolutionDir)Grafika-Dungeon\Libraries\include\IMGUI;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;glew32.lib;soil2-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>irrKlang.lib;assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;glew32.lib;soil2-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -144,14 +147,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\include\irrKlang;$(SolutionDir)Grafika-Dungeon\Libraries\include\SOIL2;$(SolutionDir)Grafika-Dungeon\Libraries\include\assimp;$(SolutionDir)Grafika-Dungeon\Libraries\include\GLFW;$(SolutionDir)Grafika-Dungeon\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>irrKlang.lib;glfw3.lib;opengl32.lib;glew32.lib;soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Grafika-Dungeon\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -168,6 +171,7 @@
     <ClCompile Include="Libraries\include\IMGUI\imgui_tables.cpp" />
     <ClCompile Include="Libraries\include\IMGUI\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sounds.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -190,6 +194,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="libs.h" />
+    <ClInclude Include="Sounds.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>

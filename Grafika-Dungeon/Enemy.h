@@ -41,6 +41,8 @@ public:
     float Damage = 10;
     float MaxHealth = 100.0f;
     enemyHand hand;
+    bool attacked = false;
+
     // Constructor
     Enemy(glm::vec3 position)
         :Position(position)
@@ -64,19 +66,18 @@ public:
 
             if (!isReturning) {
                 t = animationTime / attackDuration;
-
                 // Interpolacja pozycji miecza od prawej do lewej strony
                 float startX = 0.0f;  // Pocz¹tkowy X offset
                 float endX = -70.0f;   // Koñcowy X offset
                 float currentX = glm::mix(startX, endX, t);
                 // Aktualizacja pozycji miecza
                 hand.rotationAngle = currentX;
-
                 // SprawdŸ, czy miecz osi¹gn¹³ koñcow¹ pozycjê
                 if (animationTime >= attackDuration) {
                     damagePlayer = true;
                     animationTime = 0.0f;  // Resetuj czas animacji
                     isReturning = true;    // Rozpocznij fazê powrotu
+                    attacked = true;
                 }
             }
             else {

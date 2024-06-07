@@ -10,7 +10,6 @@
 #include <random>
 
 // Struktura reprezentuj¹ca AABB
-// Struktura reprezentuj¹ca AABB
 struct AABB {
     glm::vec3 min;
     glm::vec3 max;
@@ -166,6 +165,7 @@ void loadOBJ(const std::string& filename, std::vector<glm::vec3>& vertices, std:
     file.close();
 }
 
+// Funkcja do wczytywania mapy i tworzenia drzewa AABB
 AABBNode* buildMapAABBTree() {
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> normals;
@@ -221,6 +221,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
+// settings
 bool menu = true;
 bool game = false;
 bool died = false;
@@ -261,6 +262,8 @@ vector<Chest> chests; // Wektor przechowuj¹cy skrzynie
 std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_real_distribution<> dis(0.0, 1.0);
+
+
 int main()
 {
     // glfw: initialize and configure
@@ -268,6 +271,8 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    irrKlangInit();
 
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -285,6 +290,9 @@ int main()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
+
+    
+
 
     // Mouse capture
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -632,6 +640,7 @@ int main()
     glm::vec3 previousPlayerPosition = player.GetPosition(); // Zapamiêtaj poprzedni¹ pozycjê gracza
     // render loop
     // -----------
+    playBackgroundMusic();
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -650,29 +659,7 @@ int main()
         // -----
         processInput(window, camera, deltaTime, player, menu, died);
         player.UpdateSwordAnimation(deltaTime, enemies);
-        /*
-        if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
-            // Start the ImGui frame
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
 
-            // ImGui Window
-
-            ImGui::Begin("Settings");
-            if (ImGui::Button("Set Grid 100x100"))
-            {
-                gridWidth = 100;
-                gridHeight = 100;
-            }
-            ImGui::Text("Current Grid Size: %d x %d", gridWidth, gridHeight);
-            ImGui::End();
-
-            // Rendering
-            ImGui::Render();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        }
-        */
         // Player position
         player.SetPosition(camera.Position.x, camera.Position.y, camera.Position.z);
         player.printPlayerPosition();
@@ -694,7 +681,6 @@ int main()
         Shader.setFloat("material.shininess", 32.0f);
 
         if (menu) {
-
             camera.Position = glm::vec3(0.0f, 0.0f, 2.0f);
 
             // ---------Directional light settings-----------------
@@ -808,9 +794,17 @@ int main()
                 //Enemy collision and damage
                 for (Enemy& enemy : enemies)
                 {
-                    player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 2.0f, enemy.Damage, enemy.canDamage, enemy);
+                    player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.5f, enemy.Damage, enemy.canDamage, enemy);
                     enemy.playHandAnimation(deltaTime);
+                    if (enemy.attacked)
+                    {
+                        enemy.attacked = false;
+                        playEnemyAttackSound();
+                        enemy.attacked = false;
+                    }
                 }
+
+
 
                 // Chest interaction
                 for (Chest& chest : chests) {
@@ -850,7 +844,12 @@ int main()
                 {
                     enemy.Update(deltaTime, camera);
                     enemy.Position = enemy.GetPosition();
+                    if (enemy.Health==0.0f)
+                    {
+                        playEnemyDeathSound();
+                    }
                 }
+
 
                 //Remove dead enemies
                 enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& enemy) {
@@ -919,11 +918,12 @@ int main()
                 //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
                 //Regeneration
-                player.RegenerateHealth();
+                player.RegenerateHealthAndCheckForMovement();
 
                 //Change game state if player dies
                 if(player.GetHealth() <= 0.0f)
                 {
+                    playPlayerDeathSound();
 					game = false;
 					died = true;
 				}
@@ -1021,6 +1021,8 @@ int main()
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
     */
+
+    soundEngine->drop();
     glfwTerminate();
     return 0;
 }

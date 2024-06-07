@@ -41,6 +41,7 @@ public:
         float distance = glm::distance(playerPosition, Position);
         if (distance <= 2.0f && player.holdingE == true) {
             ApplyAttribute(player);
+            playOpenChestSound();
             opened = true;
         }
     }

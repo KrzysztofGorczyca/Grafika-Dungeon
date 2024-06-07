@@ -23,11 +23,15 @@ public:
     bool isAnimating = false;
     bool wasAttacked = false;
     float animationTime = 0.0f;
-    float attackDuration = 0.3f; // Czas trwania animacji ataku
-    float returnDuration = 0.6f; // Czas trwania animacji powrotu
+    float attackDuration = 0.1f; // Czas trwania animacji ataku
+    float returnDuration = 0.2f; // Czas trwania animacji powrotu
     bool isReturning = false;  // Nowa zmienna do œledzenia fazy powrotu
 
     bool holdingE = false;  // Czy gracz trzyma klawisz E
+
+    bool playAtack = false;
+    bool playReturn = false;
+    bool playDamageSound = false;
 
     // Konstruktor
     Player(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f))
@@ -85,11 +89,17 @@ public:
     }
 
     void modifyCurrentHealth(int amount) {
+        playDamageSound = false;
         Health += amount;
         if (Health < 0) Health = 0;
         if (Health > MaxHealth) Health = MaxHealth;
         setCurrentHealth(Health);
         wasAttacked = true;
+        if(amount<0 && !playDamageSound)
+        {
+            playPlayerTakeDamageSound();
+            playDamageSound = true;
+		}
     }
 
     void addMaxHealth(float amount)
@@ -164,18 +174,24 @@ public:
     {
         if(enemy.dealDamage)
         {
+            enemy.dealDamage=false;
         	modifyCurrentHealth(-enemy.Damage);
-			enemy.dealDamage = false;
         }
 	}
 
-    void RegenerateHealth()
+    void RegenerateHealthAndCheckForMovement()
     {
+        glm::vec3 lastPosition = Position;
         auto now = std::chrono::high_resolution_clock::now();
         std::chrono::duration<float> elapsedTime = now - lastHealthUpdateTime;
+        
         if (elapsedTime.count() >= 1.0f)
         {
             regenTime++;
+            if(Position!=lastPosition)
+            {
+	            
+            }
             lastHealthUpdateTime = now; // reset the timer
             std::cout << "RegenTime: " << regenTime << std::endl;
             if (regenTime == 10)
@@ -193,7 +209,11 @@ public:
 
             if (!isReturning) {
                 t = animationTime / attackDuration;
-
+                if(!playAtack)
+                {
+                    playAtack = true;
+                	playAtackSound();
+				}
                 // Interpolacja pozycji miecza od prawej do lewej strony
                 float startX = 0.23f;  // Pocz¹tkowy X offset
                 float endX = -0.23f;   // Koñcowy X offset
@@ -211,7 +231,7 @@ public:
 
                 // SprawdŸ, czy miecz osi¹gn¹³ koñcow¹ pozycjê
                 if (animationTime >= attackDuration) {
-
+                    playAtack = false;
                     // SprawdŸ kolizje z przeciwnikami
                     for (Enemy& enemy : enemies) {
                         glm::vec3 enemyPosition = enemy.GetPosition();
@@ -234,7 +254,11 @@ public:
             }
             else {
                 t = animationTime / returnDuration;
-
+                if (!playReturn)
+                {
+                    playReturn = true;
+                    playAttackReturnSound();
+                }
                 // Interpolacja pozycji miecza od lewej do prawej strony
                 float startX = -0.23f;  // Pocz¹tkowy X offset
                 float endX = 0.23f;     // Koñcowy X offset
@@ -251,6 +275,7 @@ public:
 
                 // SprawdŸ, czy miecz powróci³ do pocz¹tkowej pozycji
                 if (animationTime >= returnDuration) {
+                    playReturn = false;
                     isAnimating = false;  // Zakoñcz animacjê
                     isReturning = false;  // Zresetuj fazê powrotu
                     swordOffset.x = 0.23f; // Przywróæ pocz¹tkowy offset miecza
