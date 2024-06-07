@@ -454,7 +454,6 @@ int main()
         // Player position
         player.SetPosition(camera.Position.x, camera.Position.y, camera.Position.z);
         player.printPlayerPosition();
-        //player.CheckDistanceAndModifyHealth(targetPoint, 2.0f, 20);
 
 
         // render
@@ -572,6 +571,7 @@ int main()
                     mapModel.Draw(Shader);
                 }
 
+                // render the chests models
                 for (const Chest& chest : chests)
                 {
                     glm::mat4 model = glm::mat4(1.0f);
@@ -583,19 +583,23 @@ int main()
                     chestModel.Draw(Shader);
                 }
 
+                //Enemy collision and damage
                 for (Enemy& enemy : enemies)
                 {
                     player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.35f, 10, enemy.canDamage);
                 }
 
+                //Update Sword Animation
                 player.UpdateSwordAnimation(deltaTime, enemies);
 
+                //Update Enemies
                 for (Enemy& enemy : enemies)
                 {
                     enemy.Update(deltaTime, camera);
                     enemy.Position = enemy.GetPosition();
                 }
 
+                //Remove dead enemies
                 enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& enemy) {
                     return enemy.GetHealth() <= 0.0f;
                     }), enemies.end());
@@ -647,12 +651,15 @@ int main()
                     swordModel.Draw(Shader);
                 }
 
+
+                //Debugging
                 //printf("Distance: %f\n", (glm::distance(player.GetPosition(), enemy1.GetPosition())-0.9));
                 //std::cout<<"(" << player.Position.x << "f," << "0.0f," << player.Position.z << "f" <<")" << std::endl;
                 //printf("Enemy position: (%f, %f, %f)\n", enemy1.GetPosition().x, enemy1.GetPosition().y, enemy1.GetPosition().z);
                 //printf("Camera position: (%f, %f, %f)\n", camera.Position.x, camera.Position.y, camera.Position.z);
                 //std::cout << glm::distance(player.GetPosition(), enemyEO.GetPosition()) << std::endl;
 
+                //Change game state if player dies
                 if(player.GetHealth() <= 0.0f)
                 {
 					game = false;
@@ -673,14 +680,40 @@ int main()
                 	ImGui::End();
 	            }
 
-                if(GLFW_PRESS == glfwGetKey(window, GLFW_KEY_I))
+                //Cheats
+                bool isCheating = false;
+                if(GLFW_PRESS == glfwGetKey(window, GLFW_KEY_P))
                 {
-                    glfwSetInputMode(window, GLFW_LOCK_KEY_MODS, GLFW_TRUE);
-                        player.addDamage(10.0f);
-                        player.modifyCurrentHealth(10.0f);
-					
+                    isCheating = true;
+                    std::cout<<"Cheating"<<std::endl;
 				}
 
+                if(GLFW_PRESS == glfwGetKey(window, GLFW_KEY_O))
+                {
+                    std::cout << "No more Cheating" << std::endl;
+                	isCheating = false;
+                }
+
+                if(isCheating)
+                {
+                    if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_1))
+                    {
+                        player.addDamage(10.0f);
+                        std::cout << "DamageAdded" << std::endl;
+                    }
+                    if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_2))
+                    {
+                        player.modifyCurrentHealth(10.0f);
+                        std::cout << "HealthAdded" << std::endl;
+                    }
+                    if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_3))
+                    {
+                        player.addAtackSpeed(0.1f);
+                        std::cout << "AttackSpeedAdded" << std::endl;
+                    }
+                }
+
+                //Render UI
                 ImGui::Render();
                 ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
