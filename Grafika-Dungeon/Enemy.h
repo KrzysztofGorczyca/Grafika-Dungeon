@@ -32,6 +32,8 @@ public:
     bool isReturning = false;  // Nowa zmienna do œledzenia fazy powrotu
     bool onceDone = false;
     bool damagePlayer = false;
+    bool animationFinished = false;
+    bool inAttackMode = false;  // Dodana flaga
     glm::vec3 Position;
     glm::quat Rotation;
     float Speed;
@@ -56,51 +58,46 @@ public:
     ~Enemy() {}
 
     void playHandAnimation(float deltaTime) {
-        if (inRange)
-        {
-            if (isAnimating) {
-                animationTime += deltaTime;
-                float t;
+        if (inAttackMode) {
+            animationTime += deltaTime;
+            float t;
 
-                if (!isReturning) {
-                    t = animationTime / attackDuration;
+            if (!isReturning) {
+                t = animationTime / attackDuration;
 
-                    // Interpolacja pozycji miecza od prawej do lewej strony
-                    float startX = 0.0f;  // Pocz¹tkowy X offset
-                    float endX = -70.0f;   // Koñcowy X offset
-                    float currentX = glm::mix(startX, endX, t);
-                    printf("CurrentX: %f\n", currentX);
-                    // Aktualizacja pozycji miecza
-                    hand.rotationAngle = currentX;
-                    //hand.SetRotation(currentX);
+                // Interpolacja pozycji miecza od prawej do lewej strony
+                float startX = 0.0f;  // Pocz¹tkowy X offset
+                float endX = -70.0f;   // Koñcowy X offset
+                float currentX = glm::mix(startX, endX, t);
+                // Aktualizacja pozycji miecza
+                hand.rotationAngle = currentX;
 
-
-                    // SprawdŸ, czy miecz osi¹gn¹³ koñcow¹ pozycjê
-                    if (animationTime >= attackDuration) {
-                        damagePlayer = true;
-                        animationTime = 0.0f;  // Resetuj czas animacji
-                        isReturning = true;    // Rozpocznij fazê powrotu
-
-                    }
+                // SprawdŸ, czy miecz osi¹gn¹³ koñcow¹ pozycjê
+                if (animationTime >= attackDuration) {
+                    damagePlayer = true;
+                    animationTime = 0.0f;  // Resetuj czas animacji
+                    isReturning = true;    // Rozpocznij fazê powrotu
                 }
-                else {
-                    t = animationTime / returnDuration;
+            }
+            else {
+                t = animationTime / returnDuration;
 
-                    // Interpolacja pozycji miecza od lewej do prawej strony
-                    float startX = -70.0f;  // Pocz¹tkowy X offset
-                    float endX = 0.0f;     // Koñcowy X offset
-                    float currentX = glm::mix(startX, endX, t);
+                // Interpolacja pozycji miecza od lewej do prawej strony
+                float startX = -70.0f;  // Pocz¹tkowy X offset
+                float endX = 0.0f;     // Koñcowy X offset
+                float currentX = glm::mix(startX, endX, t);
 
-                    hand.rotationAngle = currentX;
+                hand.rotationAngle = currentX;
 
-                    // SprawdŸ, czy miecz powróci³ do pocz¹tkowej pozycji
-                    if (animationTime >= returnDuration) {
-                        isAnimating = false;  // Zakoñcz animacjê
-                        isReturning = false;  // Zresetuj fazê powrotu
-                        animationTime = 0.0f;  // Resetuj czas animacji
-                        //inRange = false;
-                        hand.rotationAngle = 0.0f;
-                    }
+                // SprawdŸ, czy miecz powróci³ do pocz¹tkowej pozycji
+                if (animationTime >= returnDuration) {
+                    isAnimating = false;  // Zakoñcz animacjê
+                    isReturning = false;  // Zresetuj fazê powrotu
+                    animationTime = 0.0f;  // Resetuj czas animacji
+                    damagePlayer = false;
+                    hand.rotationAngle = 0.0f;
+                    animationFinished = true; // Animacja zakoñczona
+                    inAttackMode = false; // Atak zakoñczony
                 }
             }
         }

@@ -809,7 +809,6 @@ int main()
                 for (Enemy& enemy : enemies)
                 {
                     player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 2.0f, enemy.Damage, enemy.canDamage, enemy);
-                    enemy.isAnimating = true;
                     enemy.playHandAnimation(deltaTime);
                 }
 
@@ -822,12 +821,13 @@ int main()
                 for (const Enemy& enemy : enemies) {
                     // Renderowanie rêki wroga
                     glm::mat4 model = glm::mat4(1.0f);
-                    model = glm::translate(model, enemy.GetPosition() + skeletonHandOffset);
-                    model *= glm::mat4_cast(enemy.Rotation); // Rêka obraca siê tak samo jak wróg
-                    model = glm::rotate(model, glm::radians(enemy.hand.rotationAngle), glm::vec3(1.0f, 0.0f, 0.0f));
+                    model = glm::translate(model, enemy.GetPosition());
+                    model *= glm::mat4_cast(enemy.Rotation); // Rotacja wroga
+                    model = glm::translate(model, skeletonHandOffset); // Offset rêki wzglêdem wroga
+                    model = glm::rotate(model, glm::radians(enemy.hand.rotationAngle), glm::vec3(1.0f, 0.0f, 0.0f)); // Rotacja rêki
                     model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
                     Shader.setMat4("model", model);
-                    skeletonHandModel.Draw(Shader); // Zak³adam, ¿e handModel jest modelem rêki wroga
+                    skeletonHandModel.Draw(Shader);
                 }
 
                 //Collision with map

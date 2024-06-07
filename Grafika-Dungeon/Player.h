@@ -138,24 +138,24 @@ public:
 
     // Metoda do sprawdzania odleg³oœci i modyfikacji zdrowia co sekundê
     void CheckDistanceAndModifyHealth(glm::vec3 point, float threshold, int healthReduction, bool canDamage, Enemy& enemy) {
-        if (canDamage)
-        {
-            //auto now = std::chrono::high_resolution_clock::now();
-            //std::chrono::duration<float> elapsedTime = now - lastHealthUpdateTime;
-
+        if (canDamage) {
             float distance = CalculateDistance(point);
             if (distance < threshold) {
-                //modifyCurrentHealth(-healthReduction);
                 enemy.inRange = true;
-                if (enemy.damagePlayer)
-                {
-					modifyCurrentHealth(-enemy.Damage);
-					enemy.damagePlayer = false;
-				}
+                if (!enemy.isAnimating && !enemy.inAttackMode) {
+                    enemy.isAnimating = true;
+                    enemy.inAttackMode = true; // Rozpocznij tryb ataku
+                }
+                if (enemy.damagePlayer) {
+                    modifyCurrentHealth(-enemy.Damage);
+                    enemy.damagePlayer = false;
+                }
             }
-            else if (distance > threshold)
-            {
+            else {
                 enemy.inRange = false;
+                if (!enemy.isAnimating && enemy.animationFinished) {
+                    enemy.inAttackMode = false; // Zakoñcz tryb ataku, gdy animacja jest zakoñczona
+                }
             }
         }
     }
