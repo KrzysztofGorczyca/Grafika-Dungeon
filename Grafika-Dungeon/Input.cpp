@@ -15,6 +15,12 @@ void processInput(GLFWwindow* window, Camera& camera, float deltaTime, Player& p
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+        player.holdingE = true;
+    }
+    else {
+        player.holdingE = false;
+    }
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS && !player.isAnimating) {
         player.isAnimating = true;
         player.animationTime = 0.0f;

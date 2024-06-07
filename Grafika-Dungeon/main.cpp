@@ -589,6 +589,7 @@ int main()
                     player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.35f, 10, enemy.canDamage);
                 }
 
+                // Chest interaction
                 for (Chest& chest : chests) {
                     chest.CheckInteraction(player);
                 }
@@ -607,6 +608,11 @@ int main()
                 enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& enemy) {
                     return enemy.GetHealth() <= 0.0f;
                     }), enemies.end());
+
+                //Remove opened chests
+                chests.erase(std::remove_if(chests.begin(), chests.end(), [](const Chest& chest) {
+                    return chest.opened == true;
+                    }), chests.end());
 
                 // render the enemy model
                 for (const Enemy& enemy : enemies)

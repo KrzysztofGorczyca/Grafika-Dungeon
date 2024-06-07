@@ -20,7 +20,7 @@ public:
     bool isAnimating = false;
     float animationTime = 0.0f;
     float attackDuration = 0.3f; // Czas trwania animacji ataku
-    float returnDuration = 0.5f; // Czas trwania animacji powrotu
+    float returnDuration = 0.6f; // Czas trwania animacji powrotu
     bool isReturning = false;  // Nowa zmienna do œledzenia fazy powrotu
     bool holdingE = false;  // Czy gracz trzyma klawisz E
 
@@ -53,6 +53,14 @@ public:
     {
     	attackDuration -= amount;
         returnDuration -= amount/2;
+        if (attackDuration < 0.1f)
+        {
+			attackDuration = 0.1f;
+		}
+        if (returnDuration < 0.1f)
+        {
+            returnDuration = 0.2f;
+        }
     }
 
     float GetAttackSpeed()
