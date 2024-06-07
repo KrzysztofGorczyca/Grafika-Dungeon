@@ -604,13 +604,13 @@ int main()
 
     // load models
 	
-		Model mapModel("Assets/Map/Map.obj");
-    	Model chestModel("Assets/Chest/Chest.obj");
-    	Model enemyModel("Assets/Skeleton/skeleton.obj");
-    	Model swordModel("Assets/Blade/Blade.obj");
-    	Model mainMenuModel("Assets/Menu/mainMenu.obj");
-    	Model deathMenuModel("Assets/Menu/deathMenu.obj");
-    	Model skeletonHandModel("Assets/SkeletonHand/handSkeleton.obj");
+	Model mapModel("Assets/Map/Map.obj");
+    Model chestModel("Assets/Chest/Chest.obj");
+    Model enemyModel("Assets/Skeleton/skeleton.obj");
+    Model swordModel("Assets/Blade/Blade.obj");
+    Model mainMenuModel("Assets/Menu/mainMenu.obj");
+    Model deathMenuModel("Assets/Menu/deathMenu.obj");
+	Model skeletonHandModel("Assets/SkeletonHand/handSkeleton.obj");
 	
 
     std::vector<glm::vec3> vertices1;
@@ -647,7 +647,7 @@ int main()
     	// render loop
     	playBackgroundMusic();
 	
-
+	// Main loop
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -671,20 +671,20 @@ int main()
 
 
         // render
-        // ------
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // Shader
         Shader.use();
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         Shader.setMat4("projection", projection);
         Shader.setMat4("view", view);
-
         Shader.setInt("material.diffuse", 0);
         Shader.setFloat("material.shininess", 32.0f);
 
+        // Mainmenu Loop
         if (menu) {
             camera.Position = glm::vec3(0.0f, 0.0f, 2.0f);
 
@@ -738,7 +738,8 @@ int main()
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
-        else if (game)
+        // Game Loop
+    	else if (game)
         {
             {
                 
@@ -966,7 +967,9 @@ int main()
                 glfwSwapBuffers(window);
                 glfwPollEvents();
             }
-        } else if(died)
+        }
+        // Died Loop
+    	else if(died)
         {
             camera.Position = glm::vec3(5000.0f, 0.0f, -4998.0f);
 
@@ -1023,22 +1026,20 @@ int main()
 			glfwPollEvents();
         }
     }
-    /*
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-    */
 
+    // Cleanup
     soundEngine->drop();
     glfwTerminate();
     return 0;
 }
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
 
+// Obsluga myszy
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
     if(!menu)
@@ -1066,6 +1067,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
         }
 }
 
+// Obsluga scrollowania
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
