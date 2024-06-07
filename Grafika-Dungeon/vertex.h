@@ -1,22 +1,11 @@
 #pragma once
 #include "libs.h"
-// --------------------------VERTEX GLOBAL VARIABLES--------------------------
-struct Vertex
-{
-    glm::vec3 Position;
-    glm::vec3 Color;
-    glm::vec2 TexCoords;
-    glm::vec3 Normal;
+
+/**
+ * @brief A structure representing a vertex in a 3D model.
+ */
+struct Vertex {
+    glm::vec3 Position; ///< The position of the vertex.
+    glm::vec3 Normal; ///< The normal vector at the vertex.
+    glm::vec2 TexCoords; ///< The texture coordinates at the vertex.
 };
-
-extern Vertex vertices[];
-
-extern unsigned nrOfVertices;
-
-GLuint indices[];
-extern unsigned nrOfIndices;
-extern GLuint VAO;
-
-// ------------------------------VERTEX FUNCTIONS------------------------------
-void enableBuffers();
-void enableAndSetVertexAtributesPointers();

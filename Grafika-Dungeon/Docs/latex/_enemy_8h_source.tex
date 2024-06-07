@@ -1,0 +1,164 @@
+\doxysection{Enemy.\+h}
+\hypertarget{_enemy_8h_source}{}\label{_enemy_8h_source}\mbox{\hyperlink{_enemy_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ENEMY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ENEMY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{libs_8h}{libs.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_camera_8h}{Camera.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <glm/gtx/quaternion.hpp>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <glm/gtx/vector\_angle.hpp>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <glm/gtx/rotate\_vector.hpp>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ ModelPath\ "{}Assets/Skeleton/skeleton.obj"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classenemy_hand}{enemyHand}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ glm::vec3\ \mbox{\hyperlink{classenemy_hand_ad26ad4043b579061116d307afca5dc11}{position}};\ }
+\DoxyCodeLine{00018\ \ \ \ \ glm::quat\ \mbox{\hyperlink{classenemy_hand_a7dc4482c8fd3805cfd9243843f91763b}{rotation}};\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classenemy_hand_a69a4cd350a95e617eae54b7d3dfdf123}{rotationAngle}}\ =\ 0.0f;\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classenemy_hand_a64d033af27d48f5030a8830474cb2a6f}{enemyHand}}(\textcolor{keyword}{const}\ glm::vec3\&\ pos)}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classenemy_hand_ad26ad4043b579061116d307afca5dc11}{position}}(pos),\ \mbox{\hyperlink{classenemy_hand_a7dc4482c8fd3805cfd9243843f91763b}{rotation}}(glm::quat(1.0f,\ 0.0f,\ 0.0f,\ 0.0f))}
+\DoxyCodeLine{00028\ \ \ \ \ \{\}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classenemy_hand_af7ccf646624f706bf78fa531f8925842}{SetRotation}}(\textcolor{keywordtype}{float}\ angle)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classenemy_hand_a7dc4482c8fd3805cfd9243843f91763b}{rotation}}\ =\ glm::angleAxis(glm::radians(angle),\ glm::vec3(1.0f,\ 0.0f,\ 0.0f));}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_enemy}{Enemy}}\ \{}
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a12cedead90bb43208f7e84a7108598aa}{isAnimating}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animationTime}}\ =\ 0.0f;\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_enemy_ad4d20cb56869aab203b6b295cfae2cf7}{attackDuration}}\ =\ 1.5f;\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_enemy_a6b63a0873b8001ddb7b478d0eb964913}{returnDuration}}\ =\ 1.5f;\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_afe01bd4e6b09d747d4af95a269b59cf2}{isReturning}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a32f3c699f3fb23423a5d6e04c15bb403}{onceDone}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a4dae78d11d711cd276c3ffab779c8e2f}{damagePlayer}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a3fd2ad12e1e9a553408def3d68f5a914}{animationFinished}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a}{inAttackMode}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00054\ \ \ \ \ glm::vec3\ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}};\ }
+\DoxyCodeLine{00055\ \ \ \ \ glm::quat\ \mbox{\hyperlink{class_enemy_a83ba249e99fa49b4c17b53d8db165f06}{Rotation}};\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_enemy_a77fda4977da2209e2e49fba767f45b4c}{Speed}};\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}}\ =\ 100.f;\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_enemy_a8f4cb3fa5b1d3188baf2f4c898e2a87a}{Damage}}\ =\ 10;\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_enemy_a720dbfd35828a881caef2e5eadb30131}{MaxHealth}}\ =\ 100.0f;\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classenemy_hand}{enemyHand}}\ \mbox{\hyperlink{class_enemy_a4018e72a1eca51719593637dd2ca3c18}{hand}};\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_ab80ead7883d5b9fff3b5f7f3f471506a}{attacked}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a61c279a69811ee5a011f2d0e8fe70a4d}{canDamage}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a617d2a12657c3792f41f2767484d7709}{inRange}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a29fc25f7935052538d8bed4e0fee125e}{dealDamage}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_enemy_a22af0a2768ce70b3d08f3b5e12d593f1}{Enemy}}(glm::vec3\ position)}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}}(position)}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_enemy_a83ba249e99fa49b4c17b53d8db165f06}{Rotation}}(glm::quat(1.0f,\ 0.0f,\ 0.0f,\ 0.0f))}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_enemy_a77fda4977da2209e2e49fba767f45b4c}{Speed}}(1.0f)}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_enemy_a4018e72a1eca51719593637dd2ca3c18}{hand}}(position\ +\ glm::vec3(0.088918f,\ 0.014702f,\ 0.77669f))}
+\DoxyCodeLine{00076\ \ \ \ \ \{\}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{class_enemy_ac0eec4755e28c02688065f9657150ac3}{\string~Enemy}}()\ \{\}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_afc70f614df367561bf67c4095bf33b74}{playHandAnimation}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{deltaTime}})\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a}{inAttackMode}})\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animationTime}}\ +=\ \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{deltaTime}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ t;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_enemy_afe01bd4e6b09d747d4af95a269b59cf2}{isReturning}})\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ \mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animationTime}}\ /\ \mbox{\hyperlink{class_enemy_ad4d20cb56869aab203b6b295cfae2cf7}{attackDuration}};}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ startX\ =\ 0.0f;\ \ \textcolor{comment}{//\ Starting\ X\ offset}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ endX\ =\ -\/70.0f;\ \ \ \textcolor{comment}{//\ Ending\ X\ offset}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ currentX\ =\ glm::mix(startX,\ endX,\ t);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a4018e72a1eca51719593637dd2ca3c18}{hand}}.\mbox{\hyperlink{classenemy_hand_a69a4cd350a95e617eae54b7d3dfdf123}{rotationAngle}}\ =\ currentX;}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animationTime}}\ >=\ \mbox{\hyperlink{class_enemy_ad4d20cb56869aab203b6b295cfae2cf7}{attackDuration}})\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a4dae78d11d711cd276c3ffab779c8e2f}{damagePlayer}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animationTime}}\ =\ 0.0f;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_afe01bd4e6b09d747d4af95a269b59cf2}{isReturning}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_ab80ead7883d5b9fff3b5f7f3f471506a}{attacked}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ \mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animationTime}}\ /\ \mbox{\hyperlink{class_enemy_a6b63a0873b8001ddb7b478d0eb964913}{returnDuration}};}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ startX\ =\ -\/70.0f;\ \ \textcolor{comment}{//\ Starting\ X\ offset}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ endX\ =\ 0.0f;\ \ \ \ \ \textcolor{comment}{//\ Ending\ X\ offset}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ currentX\ =\ glm::mix(startX,\ endX,\ t);}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a4018e72a1eca51719593637dd2ca3c18}{hand}}.\mbox{\hyperlink{classenemy_hand_a69a4cd350a95e617eae54b7d3dfdf123}{rotationAngle}}\ =\ currentX;}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animationTime}}\ >=\ \mbox{\hyperlink{class_enemy_a6b63a0873b8001ddb7b478d0eb964913}{returnDuration}})\ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a12cedead90bb43208f7e84a7108598aa}{isAnimating}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_afe01bd4e6b09d747d4af95a269b59cf2}{isReturning}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animationTime}}\ =\ 0.0f;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a4dae78d11d711cd276c3ffab779c8e2f}{damagePlayer}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a4018e72a1eca51719593637dd2ca3c18}{hand}}.\mbox{\hyperlink{classenemy_hand_a69a4cd350a95e617eae54b7d3dfdf123}{rotationAngle}}\ =\ 0.0f;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a3fd2ad12e1e9a553408def3d68f5a914}{animationFinished}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a}{inAttackMode}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a903904b1d894956ab359cfba94efdc80}{Update}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{deltaTime}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_camera}{Camera}}\&\ \mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}})\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_enemy_a038e636d16b708f92627348a36750702}{isDead}}())\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ glm::vec3\ direction\ =\ \mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}}.\mbox{\hyperlink{class_camera_afd24148aa2fc17591cfbd3e910379a48}{getCameraPosition}}()\ -\/\ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}};}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ direction.y\ =\ 0.0f;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ direction\ =\ glm::normalize(direction);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_a038e636d16b708f92627348a36750702}{isDead}}())\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a61c279a69811ee5a011f2d0e8fe70a4d}{canDamage}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Enemy\ is\ dead"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ distance\ =\ glm::distance(glm::vec2(\mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}}.x,\ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}}.z),\ glm::vec2(\mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}}.\mbox{\hyperlink{class_camera_afd24148aa2fc17591cfbd3e910379a48}{getCameraPosition}}().x,\ \mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}}.\mbox{\hyperlink{class_camera_afd24148aa2fc17591cfbd3e910379a48}{getCameraPosition}}().z));}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (distance\ <\ 5.0f\ \&\&\ distance\ >\ 1.0f)\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}}\ +=\ direction\ *\ \mbox{\hyperlink{class_enemy_a77fda4977da2209e2e49fba767f45b4c}{Speed}}\ *\ \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{deltaTime}};}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rotateEnemy(direction);}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (direction.x\ <\ -\/69.0f)\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a29fc25f7935052538d8bed4e0fee125e}{dealDamage}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (distance\ <\ 1.0f)\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rotateEnemy(direction);}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}}.y\ =\ 0.0f;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_aadb48094d070ffe1bd8a3f83a35b1c76}{modifyHealth}}(\textcolor{keywordtype}{float}\ amount)\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}}\ +=\ amount;}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}}\ <\ 0.0f)\ \mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}}\ =\ 0.0f;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}}\ >\ \mbox{\hyperlink{class_enemy_a720dbfd35828a881caef2e5eadb30131}{MaxHealth}})\ \mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}}\ =\ \mbox{\hyperlink{class_enemy_a720dbfd35828a881caef2e5eadb30131}{MaxHealth}};}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a038e636d16b708f92627348a36750702}{isDead}}()\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}}\ <=\ 0.0f)\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}}\ =\ glm::vec3(0.0f,\ 0.0f,\ 100.0f);}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keyword}{inline}\ glm::vec3\ \mbox{\hyperlink{class_enemy_a8ba4fc9b6ddc379bb2fe31d6a563e27b}{GetPosition}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}};\ \}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_enemy_a965c6de593a46bdeb9a21cd92248bb17}{GetHealth}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}};\ \}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a888e5066c6720ceee95dab533e99e5f7}{UpdatePosition}}(glm::vec3\ position)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}}\ =\ position;}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordtype}{void}\ rotateEnemy(glm::vec3\ direction)\ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ glm::vec3\ forward\ =\ glm::vec3(0.0f,\ 0.0f,\ 1.0f);\ \ \textcolor{comment}{//\ Assume\ initial\ direction\ is\ along\ Z\ axis}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ glm::vec2\ dir2D\ =\ glm::normalize(glm::vec2(direction.x,\ direction.z));}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ glm::vec2\ forward2D\ =\ glm::normalize(glm::vec2(forward.x,\ forward.z));}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ angle\ =\ atan2(dir2D.y,\ dir2D.x)\ -\/\ atan2(forward2D.y,\ forward2D.x);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ glm::quat\ rotationQuat\ =\ glm::angleAxis(-\/angle,\ glm::vec3(0.0f,\ 1.0f,\ 0.0f));}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a83ba249e99fa49b4c17b53d8db165f06}{Rotation}}\ =\ rotationQuat;}
+\DoxyCodeLine{00221\ \ \ \ \ \}}
+\DoxyCodeLine{00222\ \};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ENEMY\_H}}
+
+\end{DoxyCode}

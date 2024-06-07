@@ -1,0 +1,612 @@
+\doxysection{Player Class Reference}
+\hypertarget{class_player}{}\label{class_player}\index{Player@{Player}}
+
+
+Class representing the player character in the game.  
+
+
+
+
+{\ttfamily \#include $<$Player.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_a55db2c837b2794d790102dda17f0d2bd}{Player}} (glm\+::vec3 position=glm\+::vec3(0.\+0f, 0.\+0f, 0.\+0f))
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_player}{Player} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a3a36e731f0bcff0f76ce4be364ba0db7}{Set\+Position}} (float x, float y, float z)
+\begin{DoxyCompactList}\small\item\em Set the position of the player. \end{DoxyCompactList}\item 
+glm\+::vec3 \mbox{\hyperlink{class_player_a346c4199f3f11e11849bb34b18c237fd}{Get\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Get the position of the player. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a0f4b39d88315a8fa6ac6e7f3c3db33a1}{Get\+Damage}} ()
+\begin{DoxyCompactList}\small\item\em Get the damage dealt by the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_aadc0d69ac54a6ee2402635c63dd5a4a9}{add\+Damage}} (float amount)
+\begin{DoxyCompactList}\small\item\em Increase the player\textquotesingle{}s damage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a9bd9822c2da4e2c8ac7f92712325c0eb}{add\+Attack\+Speed}} (float amount)
+\begin{DoxyCompactList}\small\item\em Increase the player\textquotesingle{}s attack speed. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a2a37658a435d9a71d3a434f6b1ab47aa}{Get\+Attack\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em Get the player\textquotesingle{}s attack speed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_aacf2ec715d5a2f746d2edf214ae17538}{set\+Current\+Health}} (int health)
+\begin{DoxyCompactList}\small\item\em Set the current health of the player. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a416f2ccebb25dabc1359dc49debd1aad}{Get\+Health}} () const
+\begin{DoxyCompactList}\small\item\em Get the player\textquotesingle{}s current health. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_afc68a8ff91830b716619bfd54321d1f1}{modify\+Current\+Health}} (int amount)
+\begin{DoxyCompactList}\small\item\em Modify the player\textquotesingle{}s current health. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_aa0d61e0cc29601311553d628c7c62441}{add\+Max\+Health}} (float amount)
+\begin{DoxyCompactList}\small\item\em Increase the player\textquotesingle{}s maximum health. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a39085f1175a86924b7825cfe1b3b090d}{Get\+Max\+Health}} ()
+\begin{DoxyCompactList}\small\item\em Get the player\textquotesingle{}s maximum health. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a5d5e677d0a2bb9635e46b1a8e5789171}{Get\+Attack\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Get the player\textquotesingle{}s attack range. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a1bbb828707d80e0599d9f49a30cc3637}{add\+Attack\+Range}} (float amount)
+\begin{DoxyCompactList}\small\item\em Increase the player\textquotesingle{}s attack range. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_af09dc9cb33d8d817ba1578141a79be63}{Get\+Regeneration}} ()
+\begin{DoxyCompactList}\small\item\em Get the player\textquotesingle{}s health regeneration rate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a29b33f31b7131c4e6de0aa949090e4db}{add\+Regeneration}} (float amount)
+\begin{DoxyCompactList}\small\item\em Increase the player\textquotesingle{}s health regeneration rate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a0e89928c885155e0802ef17d99aca11f}{print\+Player\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Print the player\textquotesingle{}s position. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a8eee5e2dbad412ab56554279c004301f}{Calculate\+Distance}} (glm\+::vec3 point) const
+\begin{DoxyCompactList}\small\item\em Calculate the distance from the player to a given point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a096170331cfe94e9b6dbfb9f699191e3}{Check\+Distance\+And\+Modify\+Health}} (glm\+::vec3 point, float threshold, int health\+Reduction, bool can\+Damage, \mbox{\hyperlink{class_enemy}{Enemy}} \&enemy)
+\begin{DoxyCompactList}\small\item\em Check the distance to a point and modify health based on the threshold. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a4da37f569d65821507244092bed412d9}{Regenerate\+Health\+And\+Check\+For\+Movement}} ()
+\begin{DoxyCompactList}\small\item\em Regenerate health every second and check for movement. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_adeb54cafd7ccebbe3b074bffd70629c2}{Update\+Sword\+Animation}} (float \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{delta\+Time}}, std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $>$ \&\mbox{\hyperlink{main_8cpp_ad3604be7ed778f90576433df66b61f8b}{enemies}})
+\begin{DoxyCompactList}\small\item\em Update the sword animation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::vec3 \mbox{\hyperlink{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}{Position}}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_player}{Player}\textquotesingle{}s position on the map. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a00030bf8da0fd5796334404e11af45f5}{Health}} = 100.\+00f
+\begin{DoxyCompactList}\small\item\em \doxylink{class_player}{Player}\textquotesingle{}s health. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a7e07709060a3b6d44f47bd920e600094}{Max\+Health}} = 100.\+00f
+\begin{DoxyCompactList}\small\item\em \doxylink{class_player}{Player}\textquotesingle{}s maximum health. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_ab361860ffe2e0a3f1c2f38a897c6bd8b}{Damage}} = 25.\+0f
+\begin{DoxyCompactList}\small\item\em Damage dealt by the player. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a4c819c9ad1d6b8c561f511d6bd3ded38}{Range}} = 1.\+50f
+\begin{DoxyCompactList}\small\item\em \doxylink{class_player}{Player}\textquotesingle{}s attack range. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_aad3c89184fb64aa916cabecaa49e00cd}{Regeneration}} = 5.\+0f
+\begin{DoxyCompactList}\small\item\em \doxylink{class_player}{Player}\textquotesingle{}s health regeneration rate. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_player_a42307950465241a438152efc68950298}{regen\+Time}} = 0
+\begin{DoxyCompactList}\small\item\em Time counter for health regeneration. \end{DoxyCompactList}\item 
+glm\+::vec3 \mbox{\hyperlink{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}{sword\+Offset}}
+\begin{DoxyCompactList}\small\item\em Offset for the sword\textquotesingle{}s position. \end{DoxyCompactList}\item 
+glm\+::quat \mbox{\hyperlink{class_player_ab3ad28052a2bd25609339016c7eeee78}{sword\+Rotation}}
+\begin{DoxyCompactList}\small\item\em Default rotation of the sword. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a277e978139db82aed94d1898af5741f7}{is\+Animating}} = false
+\begin{DoxyCompactList}\small\item\em Flag to check if the player is animating. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_afe40a4e05d36c8a4159f0e826a8648f7}{was\+Attacked}} = false
+\begin{DoxyCompactList}\small\item\em Flag to check if the player was attacked. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_aa2acca0d0cd5696138ccfc1a588e784c}{animation\+Time}} = 0.\+0f
+\begin{DoxyCompactList}\small\item\em Timer for the sword animation. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a7d5cddaf3935aec90bddc5957d6870c7}{attack\+Duration}} = 0.\+4f
+\begin{DoxyCompactList}\small\item\em Duration of the attack animation. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a0fbc90e2733f79f4e44d9981f808896e}{return\+Duration}} = 0.\+8f
+\begin{DoxyCompactList}\small\item\em Duration of the return animation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_ae867a701e810087ec579989d117ea697}{is\+Returning}} = false
+\begin{DoxyCompactList}\small\item\em Flag to check if the sword is returning. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a1bac66c3184fcf2a2f54085c5048aa3a}{holdingE}} = false
+\begin{DoxyCompactList}\small\item\em Flag to check if the player is holding the \textquotesingle{}E\textquotesingle{} key. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a60dc0d814d4d1f121b49d1b6277d716b}{play\+Attack}} = false
+\begin{DoxyCompactList}\small\item\em Flag to check if the attack sound should play. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_ab47a2fd315da9d38992e5db3a0c3b1cc}{play\+Return}} = false
+\begin{DoxyCompactList}\small\item\em Flag to check if the return sound should play. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a5a5bdc93315abaaddce1dae5df767030}{play\+Damage\+Sound}} = false
+\begin{DoxyCompactList}\small\item\em Flag to check if the damage sound should play. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing the player character in the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_a55db2c837b2794d790102dda17f0d2bd}\label{class_player_a55db2c837b2794d790102dda17f0d2bd} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0.0f,~0.0f,~0.0f)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the \doxylink{class_player}{Player} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Initial position of the player. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_a1bbb828707d80e0599d9f49a30cc3637}\label{class_player_a1bbb828707d80e0599d9f49a30cc3637} 
+\index{Player@{Player}!addAttackRange@{addAttackRange}}
+\index{addAttackRange@{addAttackRange}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{addAttackRange()}{addAttackRange()}}
+{\footnotesize\ttfamily void Player\+::add\+Attack\+Range (\begin{DoxyParamCaption}\item[{float}]{amount }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Increase the player\textquotesingle{}s attack range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & Amount to increase. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_a9bd9822c2da4e2c8ac7f92712325c0eb}\label{class_player_a9bd9822c2da4e2c8ac7f92712325c0eb} 
+\index{Player@{Player}!addAttackSpeed@{addAttackSpeed}}
+\index{addAttackSpeed@{addAttackSpeed}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{addAttackSpeed()}{addAttackSpeed()}}
+{\footnotesize\ttfamily void Player\+::add\+Attack\+Speed (\begin{DoxyParamCaption}\item[{float}]{amount }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Increase the player\textquotesingle{}s attack speed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & Amount to increase. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_aadc0d69ac54a6ee2402635c63dd5a4a9}\label{class_player_aadc0d69ac54a6ee2402635c63dd5a4a9} 
+\index{Player@{Player}!addDamage@{addDamage}}
+\index{addDamage@{addDamage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{addDamage()}{addDamage()}}
+{\footnotesize\ttfamily void Player\+::add\+Damage (\begin{DoxyParamCaption}\item[{float}]{amount }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Increase the player\textquotesingle{}s damage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & Amount to increase. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_aa0d61e0cc29601311553d628c7c62441}\label{class_player_aa0d61e0cc29601311553d628c7c62441} 
+\index{Player@{Player}!addMaxHealth@{addMaxHealth}}
+\index{addMaxHealth@{addMaxHealth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{addMaxHealth()}{addMaxHealth()}}
+{\footnotesize\ttfamily void Player\+::add\+Max\+Health (\begin{DoxyParamCaption}\item[{float}]{amount }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Increase the player\textquotesingle{}s maximum health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & Amount to increase. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_a29b33f31b7131c4e6de0aa949090e4db}\label{class_player_a29b33f31b7131c4e6de0aa949090e4db} 
+\index{Player@{Player}!addRegeneration@{addRegeneration}}
+\index{addRegeneration@{addRegeneration}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{addRegeneration()}{addRegeneration()}}
+{\footnotesize\ttfamily void Player\+::add\+Regeneration (\begin{DoxyParamCaption}\item[{float}]{amount }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Increase the player\textquotesingle{}s health regeneration rate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & Amount to increase. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_a8eee5e2dbad412ab56554279c004301f}\label{class_player_a8eee5e2dbad412ab56554279c004301f} 
+\index{Player@{Player}!CalculateDistance@{CalculateDistance}}
+\index{CalculateDistance@{CalculateDistance}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{CalculateDistance()}{CalculateDistance()}}
+{\footnotesize\ttfamily float Player\+::\+Calculate\+Distance (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{point }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate the distance from the player to a given point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point to calculate distance to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distance to the point. 
+\end{DoxyReturn}
+\Hypertarget{class_player_a096170331cfe94e9b6dbfb9f699191e3}\label{class_player_a096170331cfe94e9b6dbfb9f699191e3} 
+\index{Player@{Player}!CheckDistanceAndModifyHealth@{CheckDistanceAndModifyHealth}}
+\index{CheckDistanceAndModifyHealth@{CheckDistanceAndModifyHealth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{CheckDistanceAndModifyHealth()}{CheckDistanceAndModifyHealth()}}
+{\footnotesize\ttfamily void Player\+::\+Check\+Distance\+And\+Modify\+Health (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{point,  }\item[{float}]{threshold,  }\item[{int}]{health\+Reduction,  }\item[{bool}]{can\+Damage,  }\item[{\mbox{\hyperlink{class_enemy}{Enemy}} \&}]{enemy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check the distance to a point and modify health based on the threshold. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point to check distance to. \\
+\hline
+{\em threshold} & Distance threshold. \\
+\hline
+{\em health\+Reduction} & Amount of health to reduce. \\
+\hline
+{\em can\+Damage} & Flag to allow damage. \\
+\hline
+{\em enemy} & Reference to the enemy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_a5d5e677d0a2bb9635e46b1a8e5789171}\label{class_player_a5d5e677d0a2bb9635e46b1a8e5789171} 
+\index{Player@{Player}!GetAttackRange@{GetAttackRange}}
+\index{GetAttackRange@{GetAttackRange}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetAttackRange()}{GetAttackRange()}}
+{\footnotesize\ttfamily float Player\+::\+Get\+Attack\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the player\textquotesingle{}s attack range. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_player}{Player}\textquotesingle{}s attack range. 
+\end{DoxyReturn}
+\Hypertarget{class_player_a2a37658a435d9a71d3a434f6b1ab47aa}\label{class_player_a2a37658a435d9a71d3a434f6b1ab47aa} 
+\index{Player@{Player}!GetAttackSpeed@{GetAttackSpeed}}
+\index{GetAttackSpeed@{GetAttackSpeed}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetAttackSpeed()}{GetAttackSpeed()}}
+{\footnotesize\ttfamily float Player\+::\+Get\+Attack\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the player\textquotesingle{}s attack speed. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_player}{Player}\textquotesingle{}s attack duration. 
+\end{DoxyReturn}
+\Hypertarget{class_player_a0f4b39d88315a8fa6ac6e7f3c3db33a1}\label{class_player_a0f4b39d88315a8fa6ac6e7f3c3db33a1} 
+\index{Player@{Player}!GetDamage@{GetDamage}}
+\index{GetDamage@{GetDamage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetDamage()}{GetDamage()}}
+{\footnotesize\ttfamily float Player\+::\+Get\+Damage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the damage dealt by the player. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_player}{Player}\textquotesingle{}s damage. 
+\end{DoxyReturn}
+\Hypertarget{class_player_a416f2ccebb25dabc1359dc49debd1aad}\label{class_player_a416f2ccebb25dabc1359dc49debd1aad} 
+\index{Player@{Player}!GetHealth@{GetHealth}}
+\index{GetHealth@{GetHealth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetHealth()}{GetHealth()}}
+{\footnotesize\ttfamily float Player\+::\+Get\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the player\textquotesingle{}s current health. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_player}{Player}\textquotesingle{}s health. 
+\end{DoxyReturn}
+\Hypertarget{class_player_a39085f1175a86924b7825cfe1b3b090d}\label{class_player_a39085f1175a86924b7825cfe1b3b090d} 
+\index{Player@{Player}!GetMaxHealth@{GetMaxHealth}}
+\index{GetMaxHealth@{GetMaxHealth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetMaxHealth()}{GetMaxHealth()}}
+{\footnotesize\ttfamily float Player\+::\+Get\+Max\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the player\textquotesingle{}s maximum health. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_player}{Player}\textquotesingle{}s maximum health. 
+\end{DoxyReturn}
+\Hypertarget{class_player_a346c4199f3f11e11849bb34b18c237fd}\label{class_player_a346c4199f3f11e11849bb34b18c237fd} 
+\index{Player@{Player}!GetPosition@{GetPosition}}
+\index{GetPosition@{GetPosition}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetPosition()}{GetPosition()}}
+{\footnotesize\ttfamily glm\+::vec3 Player\+::\+Get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the position of the player. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_player}{Player}\textquotesingle{}s position as glm\+::vec3. 
+\end{DoxyReturn}
+\Hypertarget{class_player_af09dc9cb33d8d817ba1578141a79be63}\label{class_player_af09dc9cb33d8d817ba1578141a79be63} 
+\index{Player@{Player}!GetRegeneration@{GetRegeneration}}
+\index{GetRegeneration@{GetRegeneration}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetRegeneration()}{GetRegeneration()}}
+{\footnotesize\ttfamily float Player\+::\+Get\+Regeneration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the player\textquotesingle{}s health regeneration rate. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_player}{Player}\textquotesingle{}s health regeneration rate. 
+\end{DoxyReturn}
+\Hypertarget{class_player_afc68a8ff91830b716619bfd54321d1f1}\label{class_player_afc68a8ff91830b716619bfd54321d1f1} 
+\index{Player@{Player}!modifyCurrentHealth@{modifyCurrentHealth}}
+\index{modifyCurrentHealth@{modifyCurrentHealth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{modifyCurrentHealth()}{modifyCurrentHealth()}}
+{\footnotesize\ttfamily void Player\+::modify\+Current\+Health (\begin{DoxyParamCaption}\item[{int}]{amount }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Modify the player\textquotesingle{}s current health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & Amount to modify. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_a0e89928c885155e0802ef17d99aca11f}\label{class_player_a0e89928c885155e0802ef17d99aca11f} 
+\index{Player@{Player}!printPlayerPosition@{printPlayerPosition}}
+\index{printPlayerPosition@{printPlayerPosition}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{printPlayerPosition()}{printPlayerPosition()}}
+{\footnotesize\ttfamily void Player\+::print\+Player\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Print the player\textquotesingle{}s position. 
+
+\Hypertarget{class_player_a4da37f569d65821507244092bed412d9}\label{class_player_a4da37f569d65821507244092bed412d9} 
+\index{Player@{Player}!RegenerateHealthAndCheckForMovement@{RegenerateHealthAndCheckForMovement}}
+\index{RegenerateHealthAndCheckForMovement@{RegenerateHealthAndCheckForMovement}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{RegenerateHealthAndCheckForMovement()}{RegenerateHealthAndCheckForMovement()}}
+{\footnotesize\ttfamily void Player\+::\+Regenerate\+Health\+And\+Check\+For\+Movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Regenerate health every second and check for movement. 
+
+\Hypertarget{class_player_aacf2ec715d5a2f746d2edf214ae17538}\label{class_player_aacf2ec715d5a2f746d2edf214ae17538} 
+\index{Player@{Player}!setCurrentHealth@{setCurrentHealth}}
+\index{setCurrentHealth@{setCurrentHealth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setCurrentHealth()}{setCurrentHealth()}}
+{\footnotesize\ttfamily void Player\+::set\+Current\+Health (\begin{DoxyParamCaption}\item[{int}]{health }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the current health of the player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em health} & Health to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_a3a36e731f0bcff0f76ce4be364ba0db7}\label{class_player_a3a36e731f0bcff0f76ce4be364ba0db7} 
+\index{Player@{Player}!SetPosition@{SetPosition}}
+\index{SetPosition@{SetPosition}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetPosition()}{SetPosition()}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Position (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the position of the player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X coordinate. \\
+\hline
+{\em y} & Y coordinate. \\
+\hline
+{\em z} & Z coordinate. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_adeb54cafd7ccebbe3b074bffd70629c2}\label{class_player_adeb54cafd7ccebbe3b074bffd70629c2} 
+\index{Player@{Player}!UpdateSwordAnimation@{UpdateSwordAnimation}}
+\index{UpdateSwordAnimation@{UpdateSwordAnimation}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{UpdateSwordAnimation()}{UpdateSwordAnimation()}}
+{\footnotesize\ttfamily void Player\+::\+Update\+Sword\+Animation (\begin{DoxyParamCaption}\item[{float}]{delta\+Time,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $>$ \&}]{enemies }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the sword animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+Time} & Time elapsed since the last frame. \\
+\hline
+{\em enemies} & List of enemies. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_player_aa2acca0d0cd5696138ccfc1a588e784c}\label{class_player_aa2acca0d0cd5696138ccfc1a588e784c} 
+\index{Player@{Player}!animationTime@{animationTime}}
+\index{animationTime@{animationTime}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{animationTime}{animationTime}}
+{\footnotesize\ttfamily float Player\+::animation\+Time = 0.\+0f}
+
+
+
+Timer for the sword animation. 
+
+\Hypertarget{class_player_a7d5cddaf3935aec90bddc5957d6870c7}\label{class_player_a7d5cddaf3935aec90bddc5957d6870c7} 
+\index{Player@{Player}!attackDuration@{attackDuration}}
+\index{attackDuration@{attackDuration}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{attackDuration}{attackDuration}}
+{\footnotesize\ttfamily float Player\+::attack\+Duration = 0.\+4f}
+
+
+
+Duration of the attack animation. 
+
+\Hypertarget{class_player_ab361860ffe2e0a3f1c2f38a897c6bd8b}\label{class_player_ab361860ffe2e0a3f1c2f38a897c6bd8b} 
+\index{Player@{Player}!Damage@{Damage}}
+\index{Damage@{Damage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Damage}{Damage}}
+{\footnotesize\ttfamily float Player\+::\+Damage = 25.\+0f}
+
+
+
+Damage dealt by the player. 
+
+\Hypertarget{class_player_a00030bf8da0fd5796334404e11af45f5}\label{class_player_a00030bf8da0fd5796334404e11af45f5} 
+\index{Player@{Player}!Health@{Health}}
+\index{Health@{Health}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Health}{Health}}
+{\footnotesize\ttfamily float Player\+::\+Health = 100.\+00f}
+
+
+
+\doxylink{class_player}{Player}\textquotesingle{}s health. 
+
+\Hypertarget{class_player_a1bac66c3184fcf2a2f54085c5048aa3a}\label{class_player_a1bac66c3184fcf2a2f54085c5048aa3a} 
+\index{Player@{Player}!holdingE@{holdingE}}
+\index{holdingE@{holdingE}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{holdingE}{holdingE}}
+{\footnotesize\ttfamily bool Player\+::holdingE = false}
+
+
+
+Flag to check if the player is holding the \textquotesingle{}E\textquotesingle{} key. 
+
+\Hypertarget{class_player_a277e978139db82aed94d1898af5741f7}\label{class_player_a277e978139db82aed94d1898af5741f7} 
+\index{Player@{Player}!isAnimating@{isAnimating}}
+\index{isAnimating@{isAnimating}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{isAnimating}{isAnimating}}
+{\footnotesize\ttfamily bool Player\+::is\+Animating = false}
+
+
+
+Flag to check if the player is animating. 
+
+\Hypertarget{class_player_ae867a701e810087ec579989d117ea697}\label{class_player_ae867a701e810087ec579989d117ea697} 
+\index{Player@{Player}!isReturning@{isReturning}}
+\index{isReturning@{isReturning}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{isReturning}{isReturning}}
+{\footnotesize\ttfamily bool Player\+::is\+Returning = false}
+
+
+
+Flag to check if the sword is returning. 
+
+\Hypertarget{class_player_a7e07709060a3b6d44f47bd920e600094}\label{class_player_a7e07709060a3b6d44f47bd920e600094} 
+\index{Player@{Player}!MaxHealth@{MaxHealth}}
+\index{MaxHealth@{MaxHealth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{MaxHealth}{MaxHealth}}
+{\footnotesize\ttfamily float Player\+::\+Max\+Health = 100.\+00f}
+
+
+
+\doxylink{class_player}{Player}\textquotesingle{}s maximum health. 
+
+\Hypertarget{class_player_a60dc0d814d4d1f121b49d1b6277d716b}\label{class_player_a60dc0d814d4d1f121b49d1b6277d716b} 
+\index{Player@{Player}!playAttack@{playAttack}}
+\index{playAttack@{playAttack}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{playAttack}{playAttack}}
+{\footnotesize\ttfamily bool Player\+::play\+Attack = false}
+
+
+
+Flag to check if the attack sound should play. 
+
+\Hypertarget{class_player_a5a5bdc93315abaaddce1dae5df767030}\label{class_player_a5a5bdc93315abaaddce1dae5df767030} 
+\index{Player@{Player}!playDamageSound@{playDamageSound}}
+\index{playDamageSound@{playDamageSound}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{playDamageSound}{playDamageSound}}
+{\footnotesize\ttfamily bool Player\+::play\+Damage\+Sound = false}
+
+
+
+Flag to check if the damage sound should play. 
+
+\Hypertarget{class_player_ab47a2fd315da9d38992e5db3a0c3b1cc}\label{class_player_ab47a2fd315da9d38992e5db3a0c3b1cc} 
+\index{Player@{Player}!playReturn@{playReturn}}
+\index{playReturn@{playReturn}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{playReturn}{playReturn}}
+{\footnotesize\ttfamily bool Player\+::play\+Return = false}
+
+
+
+Flag to check if the return sound should play. 
+
+\Hypertarget{class_player_aa724e4e040240a4cbfa2a3c3c7f29362}\label{class_player_aa724e4e040240a4cbfa2a3c3c7f29362} 
+\index{Player@{Player}!Position@{Position}}
+\index{Position@{Position}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily glm\+::vec3 Player\+::\+Position}
+
+
+
+\doxylink{class_player}{Player}\textquotesingle{}s position on the map. 
+
+\Hypertarget{class_player_a4c819c9ad1d6b8c561f511d6bd3ded38}\label{class_player_a4c819c9ad1d6b8c561f511d6bd3ded38} 
+\index{Player@{Player}!Range@{Range}}
+\index{Range@{Range}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Range}{Range}}
+{\footnotesize\ttfamily float Player\+::\+Range = 1.\+50f}
+
+
+
+\doxylink{class_player}{Player}\textquotesingle{}s attack range. 
+
+\Hypertarget{class_player_aad3c89184fb64aa916cabecaa49e00cd}\label{class_player_aad3c89184fb64aa916cabecaa49e00cd} 
+\index{Player@{Player}!Regeneration@{Regeneration}}
+\index{Regeneration@{Regeneration}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Regeneration}{Regeneration}}
+{\footnotesize\ttfamily float Player\+::\+Regeneration = 5.\+0f}
+
+
+
+\doxylink{class_player}{Player}\textquotesingle{}s health regeneration rate. 
+
+\Hypertarget{class_player_a42307950465241a438152efc68950298}\label{class_player_a42307950465241a438152efc68950298} 
+\index{Player@{Player}!regenTime@{regenTime}}
+\index{regenTime@{regenTime}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{regenTime}{regenTime}}
+{\footnotesize\ttfamily int Player\+::regen\+Time = 0}
+
+
+
+Time counter for health regeneration. 
+
+\Hypertarget{class_player_a0fbc90e2733f79f4e44d9981f808896e}\label{class_player_a0fbc90e2733f79f4e44d9981f808896e} 
+\index{Player@{Player}!returnDuration@{returnDuration}}
+\index{returnDuration@{returnDuration}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{returnDuration}{returnDuration}}
+{\footnotesize\ttfamily float Player\+::return\+Duration = 0.\+8f}
+
+
+
+Duration of the return animation. 
+
+\Hypertarget{class_player_a97cde2e5fe95314cc3954ca2a30ad99f}\label{class_player_a97cde2e5fe95314cc3954ca2a30ad99f} 
+\index{Player@{Player}!swordOffset@{swordOffset}}
+\index{swordOffset@{swordOffset}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{swordOffset}{swordOffset}}
+{\footnotesize\ttfamily glm\+::vec3 Player\+::sword\+Offset}
+
+
+
+Offset for the sword\textquotesingle{}s position. 
+
+\Hypertarget{class_player_ab3ad28052a2bd25609339016c7eeee78}\label{class_player_ab3ad28052a2bd25609339016c7eeee78} 
+\index{Player@{Player}!swordRotation@{swordRotation}}
+\index{swordRotation@{swordRotation}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{swordRotation}{swordRotation}}
+{\footnotesize\ttfamily glm\+::quat Player\+::sword\+Rotation}
+
+
+
+Default rotation of the sword. 
+
+\Hypertarget{class_player_afe40a4e05d36c8a4159f0e826a8648f7}\label{class_player_afe40a4e05d36c8a4159f0e826a8648f7} 
+\index{Player@{Player}!wasAttacked@{wasAttacked}}
+\index{wasAttacked@{wasAttacked}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{wasAttacked}{wasAttacked}}
+{\footnotesize\ttfamily bool Player\+::was\+Attacked = false}
+
+
+
+Flag to check if the player was attacked. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_player_8h}{Player.\+h}}\end{DoxyCompactItemize}

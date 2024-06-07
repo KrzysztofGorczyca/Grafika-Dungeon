@@ -1,0 +1,80 @@
+\doxysection{AABBNode Class Reference}
+\hypertarget{class_a_a_b_b_node}{}\label{class_a_a_b_b_node}\index{AABBNode@{AABBNode}}
+
+
+Klasa reprezentująca węzeł drzewa \doxylink{struct_a_a_b_b}{AABB}.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_a_b_b_node_a687ba246e9200019adf0b3e05c2a9c46}{AABBNode}} (const \mbox{\hyperlink{struct_a_a_b_b}{AABB}} \&\mbox{\hyperlink{class_a_a_b_b_node_a60e4c030c774bd46d3ec2c8db8dc3961}{aabb}})
+\begin{DoxyCompactList}\small\item\em Konstruktor węzła \doxylink{struct_a_a_b_b}{AABB}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_a_b_b_node_a7a158ca8af7d36786613947cc851aaca}{\texorpdfstring{$\sim$}{\string~}\+AABBNode}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor węzła \doxylink{struct_a_a_b_b}{AABB}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_a_a_b_b}{AABB}} \mbox{\hyperlink{class_a_a_b_b_node_a60e4c030c774bd46d3ec2c8db8dc3961}{aabb}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_a_a_b_b_node_a8a5e1123cfb950440b594a212150591d}{children}}
+\item 
+std\+::vector$<$ glm\+::vec3 $>$ \mbox{\hyperlink{class_a_a_b_b_node_a47d24ef49901eb595e3af4a57d4e81ae}{vertices}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa reprezentująca węzeł drzewa \doxylink{struct_a_a_b_b}{AABB}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_a_a_b_b_node_a687ba246e9200019adf0b3e05c2a9c46}\label{class_a_a_b_b_node_a687ba246e9200019adf0b3e05c2a9c46} 
+\index{AABBNode@{AABBNode}!AABBNode@{AABBNode}}
+\index{AABBNode@{AABBNode}!AABBNode@{AABBNode}}
+\doxysubsubsection{\texorpdfstring{AABBNode()}{AABBNode()}}
+{\footnotesize\ttfamily AABBNode\+::\+AABBNode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_a_a_b_b}{AABB}} \&}]{aabb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Konstruktor węzła \doxylink{struct_a_a_b_b}{AABB}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aabb} & \doxylink{struct_a_a_b_b}{AABB} dla węzła. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_a_a_b_b_node_a7a158ca8af7d36786613947cc851aaca}\label{class_a_a_b_b_node_a7a158ca8af7d36786613947cc851aaca} 
+\index{AABBNode@{AABBNode}!````~AABBNode@{\texorpdfstring{$\sim$}{\string~}AABBNode}}
+\index{````~AABBNode@{\texorpdfstring{$\sim$}{\string~}AABBNode}!AABBNode@{AABBNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AABBNode()}{\string~AABBNode()}}
+{\footnotesize\ttfamily AABBNode\+::\texorpdfstring{$\sim$}{\string~}\+AABBNode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destruktor węzła \doxylink{struct_a_a_b_b}{AABB}. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_a_a_b_b_node_a60e4c030c774bd46d3ec2c8db8dc3961}\label{class_a_a_b_b_node_a60e4c030c774bd46d3ec2c8db8dc3961} 
+\index{AABBNode@{AABBNode}!aabb@{aabb}}
+\index{aabb@{aabb}!AABBNode@{AABBNode}}
+\doxysubsubsection{\texorpdfstring{aabb}{aabb}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_a_a_b_b}{AABB}} AABBNode\+::aabb}
+
+Axis-\/\+Aligned Bounding Box dla węzła. \Hypertarget{class_a_a_b_b_node_a8a5e1123cfb950440b594a212150591d}\label{class_a_a_b_b_node_a8a5e1123cfb950440b594a212150591d} 
+\index{AABBNode@{AABBNode}!children@{children}}
+\index{children@{children}!AABBNode@{AABBNode}}
+\doxysubsubsection{\texorpdfstring{children}{children}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}}\texorpdfstring{$\ast$}{*}$>$ AABBNode\+::children}
+
+Dzieci węzła. \Hypertarget{class_a_a_b_b_node_a47d24ef49901eb595e3af4a57d4e81ae}\label{class_a_a_b_b_node_a47d24ef49901eb595e3af4a57d4e81ae} 
+\index{AABBNode@{AABBNode}!vertices@{vertices}}
+\index{vertices@{vertices}!AABBNode@{AABBNode}}
+\doxysubsubsection{\texorpdfstring{vertices}{vertices}}
+{\footnotesize\ttfamily std\+::vector$<$glm\+::vec3$>$ AABBNode\+::vertices}
+
+Wierzchołki zawarte w \doxylink{struct_a_a_b_b}{AABB}. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{main_8cpp}{main.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,175 @@
+\doxysection{Chest Class Reference}
+\hypertarget{class_chest}{}\label{class_chest}\index{Chest@{Chest}}
+
+
+Class representing a chest in the game, which can provide bonuses to the player.  
+
+
+
+
+{\ttfamily \#include $<$Chest.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_chest_ac130f20a2de436f148209745f90fdba6}{Chest}} (glm\+::vec3 position, float rotation)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_chest}{Chest} object. \end{DoxyCompactList}\item 
+glm\+::vec3 \mbox{\hyperlink{class_chest_a966bf8ad785b0be5b1ac358289bbe05f}{Get\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Gets the position of the chest. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_chest_a0b3291644132923da8e50fbb230931d9}{get\+Radians}} () const
+\begin{DoxyCompactList}\small\item\em Gets the rotation angle of the chest in radians. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5c}{Player\+Attribute}} \mbox{\hyperlink{class_chest_ab18738b67f6f570435982053c20e80f7}{get\+Attribute}} () const
+\begin{DoxyCompactList}\small\item\em Gets the attribute provided by the chest. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_chest_abbf3efb4d2069c48ff3f2d3a46042229}{Check\+Interaction}} (\mbox{\hyperlink{class_player}{Player}} \&\mbox{\hyperlink{main_8cpp_a113078dfda40cf61ffec3ec757ae6082}{player}})
+\begin{DoxyCompactList}\small\item\em Checks if the player is interacting with the chest and applies the attribute if so. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::vec3 \mbox{\hyperlink{class_chest_a6322f892e054ee65d7ed36e0695afec3}{Position}}
+\begin{DoxyCompactList}\small\item\em Position of the chest. \end{DoxyCompactList}\item 
+glm\+::quat \mbox{\hyperlink{class_chest_ac28338ae10cd9184d5cac5f5929b50c4}{Rotation}}
+\begin{DoxyCompactList}\small\item\em Rotation of the chest. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_chest_a6c49ad9a9084dfb5e8f30cf8039031c0}{rotation\+Radians}}
+\begin{DoxyCompactList}\small\item\em Rotation angle of the chest in radians. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5c}{Player\+Attribute}} \mbox{\hyperlink{class_chest_a274014e77939f8c8d401741d2dabad64}{attribute}}
+\begin{DoxyCompactList}\small\item\em Attribute that the chest provides. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_chest_aaa9abdfe7b030f22220ec4e2e74ffab0}{opened}} = false
+\begin{DoxyCompactList}\small\item\em Indicates if the chest has been opened. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing a chest in the game, which can provide bonuses to the player. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_chest_ac130f20a2de436f148209745f90fdba6}\label{class_chest_ac130f20a2de436f148209745f90fdba6} 
+\index{Chest@{Chest}!Chest@{Chest}}
+\index{Chest@{Chest}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{Chest()}{Chest()}}
+{\footnotesize\ttfamily Chest\+::\+Chest (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{position,  }\item[{float}]{rotation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{class_chest}{Chest} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Initial position of the chest. \\
+\hline
+{\em rotation} & Initial rotation of the chest in radians. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_chest_abbf3efb4d2069c48ff3f2d3a46042229}\label{class_chest_abbf3efb4d2069c48ff3f2d3a46042229} 
+\index{Chest@{Chest}!CheckInteraction@{CheckInteraction}}
+\index{CheckInteraction@{CheckInteraction}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{CheckInteraction()}{CheckInteraction()}}
+{\footnotesize\ttfamily void Chest\+::\+Check\+Interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the player is interacting with the chest and applies the attribute if so. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & The player interacting with the chest. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_chest_ab18738b67f6f570435982053c20e80f7}\label{class_chest_ab18738b67f6f570435982053c20e80f7} 
+\index{Chest@{Chest}!getAttribute@{getAttribute}}
+\index{getAttribute@{getAttribute}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{getAttribute()}{getAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5c}{Player\+Attribute}} Chest\+::get\+Attribute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the attribute provided by the chest. 
+
+\begin{DoxyReturn}{Returns}
+The attribute provided by the chest. 
+\end{DoxyReturn}
+\Hypertarget{class_chest_a966bf8ad785b0be5b1ac358289bbe05f}\label{class_chest_a966bf8ad785b0be5b1ac358289bbe05f} 
+\index{Chest@{Chest}!GetPosition@{GetPosition}}
+\index{GetPosition@{GetPosition}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{GetPosition()}{GetPosition()}}
+{\footnotesize\ttfamily glm\+::vec3 Chest\+::\+Get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the position of the chest. 
+
+\begin{DoxyReturn}{Returns}
+The current position of the chest. 
+\end{DoxyReturn}
+\Hypertarget{class_chest_a0b3291644132923da8e50fbb230931d9}\label{class_chest_a0b3291644132923da8e50fbb230931d9} 
+\index{Chest@{Chest}!getRadians@{getRadians}}
+\index{getRadians@{getRadians}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{getRadians()}{getRadians()}}
+{\footnotesize\ttfamily float Chest\+::get\+Radians (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the rotation angle of the chest in radians. 
+
+\begin{DoxyReturn}{Returns}
+The current rotation angle in radians. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_chest_a274014e77939f8c8d401741d2dabad64}\label{class_chest_a274014e77939f8c8d401741d2dabad64} 
+\index{Chest@{Chest}!attribute@{attribute}}
+\index{attribute@{attribute}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{attribute}{attribute}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5c}{Player\+Attribute}} Chest\+::attribute}
+
+
+
+Attribute that the chest provides. 
+
+\Hypertarget{class_chest_aaa9abdfe7b030f22220ec4e2e74ffab0}\label{class_chest_aaa9abdfe7b030f22220ec4e2e74ffab0} 
+\index{Chest@{Chest}!opened@{opened}}
+\index{opened@{opened}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{opened}{opened}}
+{\footnotesize\ttfamily bool Chest\+::opened = false}
+
+
+
+Indicates if the chest has been opened. 
+
+\Hypertarget{class_chest_a6322f892e054ee65d7ed36e0695afec3}\label{class_chest_a6322f892e054ee65d7ed36e0695afec3} 
+\index{Chest@{Chest}!Position@{Position}}
+\index{Position@{Position}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily glm\+::vec3 Chest\+::\+Position}
+
+
+
+Position of the chest. 
+
+\Hypertarget{class_chest_ac28338ae10cd9184d5cac5f5929b50c4}\label{class_chest_ac28338ae10cd9184d5cac5f5929b50c4} 
+\index{Chest@{Chest}!Rotation@{Rotation}}
+\index{Rotation@{Rotation}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{Rotation}{Rotation}}
+{\footnotesize\ttfamily glm\+::quat Chest\+::\+Rotation}
+
+
+
+Rotation of the chest. 
+
+\Hypertarget{class_chest_a6c49ad9a9084dfb5e8f30cf8039031c0}\label{class_chest_a6c49ad9a9084dfb5e8f30cf8039031c0} 
+\index{Chest@{Chest}!rotationRadians@{rotationRadians}}
+\index{rotationRadians@{rotationRadians}!Chest@{Chest}}
+\doxysubsubsection{\texorpdfstring{rotationRadians}{rotationRadians}}
+{\footnotesize\ttfamily float Chest\+::rotation\+Radians}
+
+
+
+Rotation angle of the chest in radians. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_chest_8h}{Chest.\+h}}\end{DoxyCompactItemize}

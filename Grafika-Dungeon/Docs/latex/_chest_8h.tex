@@ -1,0 +1,65 @@
+\doxysection{Chest.\+h File Reference}
+\hypertarget{_chest_8h}{}\label{_chest_8h}\index{Chest.h@{Chest.h}}
+{\ttfamily \#include "{}libs.\+h"{}}\newline
+{\ttfamily \#include "{}Camera.\+h"{}}\newline
+{\ttfamily \#include $<$glm/gtx/quaternion.\+hpp$>$}\newline
+{\ttfamily \#include $<$glm/gtx/vector\+\_\+angle.\+hpp$>$}\newline
+{\ttfamily \#include $<$glm/gtx/rotate\+\_\+vector.\+hpp$>$}\newline
+{\ttfamily \#include "{}Player.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_chest}{Chest}}
+\begin{DoxyCompactList}\small\item\em Class representing a chest in the game, which can provide bonuses to the player. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5c}{Player\+Attribute}} \{ \newline
+\mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca01dc2c0b0a5b72f35bfbe2a358b82c27}{Max\+Health}}
+, \mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca7f3cf2272c2f07c4e7632ed5a20ff8ad}{Current\+Health}}
+, \mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5cab9f24e83531326204197015b2f43a93f}{Damage}}
+, \mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5caa1039049ad899dd188ddd24169458b48}{Attack\+Speed}}
+, \newline
+\mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca93fb94ede88fe65704d75647dfc6595f}{Regeneration}}
+, \mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca87ba2ecc8b6915e8bd6f5089918229fd}{Range}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration for player attributes that can be modified by a chest. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5c}\label{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5c} 
+\index{Chest.h@{Chest.h}!PlayerAttribute@{PlayerAttribute}}
+\index{PlayerAttribute@{PlayerAttribute}!Chest.h@{Chest.h}}
+\doxysubsubsection{\texorpdfstring{PlayerAttribute}{PlayerAttribute}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5c}{Player\+Attribute}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enumeration for player attributes that can be modified by a chest. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MaxHealth@{MaxHealth}!Chest.h@{Chest.h}}\index{Chest.h@{Chest.h}!MaxHealth@{MaxHealth}}}\Hypertarget{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca01dc2c0b0a5b72f35bfbe2a358b82c27}\label{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca01dc2c0b0a5b72f35bfbe2a358b82c27} 
+Max\+Health&Maximum health of the player. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CurrentHealth@{CurrentHealth}!Chest.h@{Chest.h}}\index{Chest.h@{Chest.h}!CurrentHealth@{CurrentHealth}}}\Hypertarget{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca7f3cf2272c2f07c4e7632ed5a20ff8ad}\label{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca7f3cf2272c2f07c4e7632ed5a20ff8ad} 
+Current\+Health&Current health of the player. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Damage@{Damage}!Chest.h@{Chest.h}}\index{Chest.h@{Chest.h}!Damage@{Damage}}}\Hypertarget{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5cab9f24e83531326204197015b2f43a93f}\label{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5cab9f24e83531326204197015b2f43a93f} 
+Damage&Damage dealt by the player. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AttackSpeed@{AttackSpeed}!Chest.h@{Chest.h}}\index{Chest.h@{Chest.h}!AttackSpeed@{AttackSpeed}}}\Hypertarget{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5caa1039049ad899dd188ddd24169458b48}\label{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5caa1039049ad899dd188ddd24169458b48} 
+Attack\+Speed&Attack speed of the player. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Regeneration@{Regeneration}!Chest.h@{Chest.h}}\index{Chest.h@{Chest.h}!Regeneration@{Regeneration}}}\Hypertarget{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca93fb94ede88fe65704d75647dfc6595f}\label{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca93fb94ede88fe65704d75647dfc6595f} 
+Regeneration&Health regeneration rate of the player. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Range@{Range}!Chest.h@{Chest.h}}\index{Chest.h@{Chest.h}!Range@{Range}}}\Hypertarget{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca87ba2ecc8b6915e8bd6f5089918229fd}\label{_chest_8h_a70f581437f0c5ab4b9c6f8ca8d08ca5ca87ba2ecc8b6915e8bd6f5089918229fd} 
+Range&Attack range of the player. \\
+\hline
+
+\end{DoxyEnumFields}

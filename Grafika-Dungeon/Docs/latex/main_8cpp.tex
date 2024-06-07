@@ -1,0 +1,381 @@
+\doxysection{main.\+cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
+
+
+Plik główny implementujący funkcje do obsługi kolizji oraz renderowania gry.  
+
+
+{\ttfamily \#include "{}libs.\+h"{}}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include "{}Shaders.\+h"{}}\newline
+{\ttfamily \#include "{}Camera.\+h"{}}\newline
+{\ttfamily \#include "{}Enemy.\+h"{}}\newline
+{\ttfamily \#include "{}Model.\+h"{}}\newline
+{\ttfamily \#include "{}Input.\+h"{}}\newline
+{\ttfamily \#include "{}Player.\+h"{}}\newline
+{\ttfamily \#include "{}Chest.\+h"{}}\newline
+{\ttfamily \#include $<$random$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_a_a_b_b}{AABB}}
+\begin{DoxyCompactList}\small\item\em Struktura reprezentująca Axis-\/\+Aligned Bounding Box (\doxylink{struct_a_a_b_b}{AABB}). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}}
+\begin{DoxyCompactList}\small\item\em Klasa reprezentująca węzeł drzewa \doxylink{struct_a_a_b_b}{AABB}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{main_8cpp_a940992d1f5169e7f7236fc060023a26f}{check\+Sphere\+AABBCollision}} (const glm\+::vec3 \&center, float radius, const \mbox{\hyperlink{struct_a_a_b_b}{AABB}} \&aabb)
+\begin{DoxyCompactList}\small\item\em Sprawdza kolizję między sferą a \doxylink{struct_a_a_b_b}{AABB}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a073b46fb34705ff4e5fab41e616a6653}{check\+Collision}} (const glm\+::vec3 \&player\+Position, float \mbox{\hyperlink{main_8cpp_a5af125e5316db1b9b65d94c95a3c62bc}{player\+Radius}}, const \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*}root)
+\begin{DoxyCompactList}\small\item\em Sprawdza kolizję między sferą gracza a węzłem \doxylink{struct_a_a_b_b}{AABB}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_a1a8ad71d4c45a6bd454f6fc368b799f9}{build\+AABBTree}} (const std\+::vector$<$ \mbox{\hyperlink{struct_a_a_b_b}{AABB}} $>$ \&object\+AABBs, const std\+::vector$<$ std\+::vector$<$ glm\+::vec3 $>$ $>$ \&vertices)
+\begin{DoxyCompactList}\small\item\em Tworzy drzewo \doxylink{struct_a_a_b_b}{AABB} na podstawie wektorów opisujących obiekty na mapie. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a47658d80df1d32f97a10c50552c95aba}{load\+OBJ}} (const std\+::string \&filename, std\+::vector$<$ glm\+::vec3 $>$ \&vertices, std\+::vector$<$ glm\+::vec3 $>$ \&normals, std\+::vector$<$ unsigned int $>$ \&indices)
+\begin{DoxyCompactList}\small\item\em Wczytuje plik OBJ i zapisuje wierzchołki, normalne i indeksy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_a0cd7dc1322d2f47499325129462aacf5}{build\+Map\+AABBTree}} ()
+\begin{DoxyCompactList}\small\item\em Wczytuje mapę i tworzy drzewo \doxylink{struct_a_a_b_b}{AABB}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a4668e874115a3392e3db5383f0af079e}{check\+Player\+Map\+Collision\+And\+Move\+Back}} (glm\+::vec3 \&player\+Position, const \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*}map\+Root, glm\+::vec3 \&previous\+Player\+Position, float \mbox{\hyperlink{main_8cpp_a5af125e5316db1b9b65d94c95a3c62bc}{player\+Radius}})
+\item 
+void \mbox{\hyperlink{main_8cpp_a5180f7bf2b71421af837035824a8c8ac}{framebuffer\+\_\+size\+\_\+callback}} (GLFWwindow \texorpdfstring{$\ast$}{*}window, int width, int height)
+\item 
+void \mbox{\hyperlink{main_8cpp_af4ca2891044ac10a664b8d83ce590f1f}{mouse\+\_\+callback}} (GLFWwindow \texorpdfstring{$\ast$}{*}window, double xpos, double ypos)
+\item 
+void \mbox{\hyperlink{main_8cpp_a06ad2502008f16fbcf01dfaa7f7bc9ea}{scroll\+\_\+callback}} (GLFWwindow \texorpdfstring{$\ast$}{*}window, double xoffset, double yoffset)
+\item 
+glm\+::vec3 \mbox{\hyperlink{main_8cpp_abeae42b5390e64f1f8af33863a949036}{light\+Pos}} (1.\+2f, 1.\+0f, 2.\+0f)
+\item 
+glm\+::vec3 \mbox{\hyperlink{main_8cpp_a2363d4566ebdf3de55e61b1fdc0e2025}{target\+Point}} (-\/0.\+016375f, 0.\+0f, 10.\+050759f)
+\item 
+glm\+::vec3 \mbox{\hyperlink{main_8cpp_ab9a7fcf51bbec35e330d963ea537da89}{skeleton\+Hand\+Offset}} (0.\+088918f, 0.\+77669f, 0.\+014702f)
+\item 
+std\+::mt19937 \mbox{\hyperlink{main_8cpp_a374a9a7de3fd00dceacc5de8a654c087}{gen}} (\mbox{\hyperlink{main_8cpp_a7071b0092ad8c5b57d6cc40c5f803df5}{rd}}())
+\item 
+std\+::uniform\+\_\+real\+\_\+distribution \mbox{\hyperlink{main_8cpp_a74ce3b09f984b7b05652947728b86d4f}{dis}} (0.\+0, 1.\+0)
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{main_8cpp_a64881c5f5f42c13aa0deb1dc0d7a8b26}{menu}} = true
+\item 
+bool \mbox{\hyperlink{main_8cpp_ad8f6d257142678d59a37901ccaff0438}{game}} = false
+\item 
+bool \mbox{\hyperlink{main_8cpp_a49643181341d59a340e8f2247c6b4a96}{died}} = false
+\item 
+\mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_a9ff08b5834d9b6bd9c4e950edd24cc57}{map\+AABBRoot}} = nullptr
+\item 
+const unsigned int \mbox{\hyperlink{main_8cpp_a74ba59acbf346c2b19bc1ce5170f755d}{SCR\+\_\+\+WIDTH}} = 1920
+\item 
+const unsigned int \mbox{\hyperlink{main_8cpp_aca03a77ac5a7f2e26d08cd6de43f9a17}{SCR\+\_\+\+HEIGHT}} = 1080
+\item 
+\mbox{\hyperlink{class_camera}{Camera}} \mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}} (glm\+::vec3(-\/0.\+000978f, 0.\+9f, 15.\+233716f))
+\item 
+float \mbox{\hyperlink{main_8cpp_a4664c5d930c290e6f82141a070cbea46}{lastX}} = \mbox{\hyperlink{main_8cpp_a74ba59acbf346c2b19bc1ce5170f755d}{SCR\+\_\+\+WIDTH}} / 2.\+0f
+\item 
+float \mbox{\hyperlink{main_8cpp_a9d5b8dfd025caf1c0ed043132515f587}{lastY}} = \mbox{\hyperlink{main_8cpp_aca03a77ac5a7f2e26d08cd6de43f9a17}{SCR\+\_\+\+HEIGHT}} / 2.\+0f
+\item 
+bool \mbox{\hyperlink{main_8cpp_ac21731ba101e28334c34543121caa841}{first\+Mouse}} = true
+\item 
+\mbox{\hyperlink{class_player}{Player}} \mbox{\hyperlink{main_8cpp_a113078dfda40cf61ffec3ec757ae6082}{player}} (glm\+::vec3(-\/0.\+000978f, 0.\+9f, 15.\+233716f))
+\item 
+float \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{delta\+Time}} = 0.\+0f
+\item 
+float \mbox{\hyperlink{main_8cpp_a518a497d888d805d5f368bbb91b54a6c}{last\+Frame}} = 0.\+0f
+\item 
+int \mbox{\hyperlink{main_8cpp_aa707ffca431dabc9bd220b7a3f8f69b7}{grid\+Width}} = 10
+\item 
+int \mbox{\hyperlink{main_8cpp_ae2ffabdf4f3c5824969bb5a3f29e9211}{grid\+Height}} = 10
+\item 
+float \mbox{\hyperlink{main_8cpp_a5af125e5316db1b9b65d94c95a3c62bc}{player\+Radius}} = 0.\+1f
+\item 
+vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $>$ \mbox{\hyperlink{main_8cpp_ad3604be7ed778f90576433df66b61f8b}{enemies}}
+\item 
+vector$<$ \mbox{\hyperlink{class_chest}{Chest}} $>$ \mbox{\hyperlink{main_8cpp_aaaed10e0121b2a501e40d1b658a17c3e}{chests}}
+\item 
+std\+::random\+\_\+device \mbox{\hyperlink{main_8cpp_a7071b0092ad8c5b57d6cc40c5f803df5}{rd}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Plik główny implementujący funkcje do obsługi kolizji oraz renderowania gry. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a1a8ad71d4c45a6bd454f6fc368b799f9}\label{main_8cpp_a1a8ad71d4c45a6bd454f6fc368b799f9} 
+\index{main.cpp@{main.cpp}!buildAABBTree@{buildAABBTree}}
+\index{buildAABBTree@{buildAABBTree}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{buildAABBTree()}{buildAABBTree()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*} build\+AABBTree (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{struct_a_a_b_b}{AABB}} $>$ \&}]{object\+AABBs,  }\item[{const std\+::vector$<$ std\+::vector$<$ glm\+::vec3 $>$ $>$ \&}]{vertices }\end{DoxyParamCaption})}
+
+
+
+Tworzy drzewo \doxylink{struct_a_a_b_b}{AABB} na podstawie wektorów opisujących obiekty na mapie. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object\+AABBs} & Wektory \doxylink{struct_a_a_b_b}{AABB} obiektów. \\
+\hline
+{\em vertices} & Wektory wierzchołków obiektów. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Korzeń drzewa \doxylink{struct_a_a_b_b}{AABB}. 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a0cd7dc1322d2f47499325129462aacf5}\label{main_8cpp_a0cd7dc1322d2f47499325129462aacf5} 
+\index{main.cpp@{main.cpp}!buildMapAABBTree@{buildMapAABBTree}}
+\index{buildMapAABBTree@{buildMapAABBTree}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{buildMapAABBTree()}{buildMapAABBTree()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*} build\+Map\+AABBTree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Wczytuje mapę i tworzy drzewo \doxylink{struct_a_a_b_b}{AABB}. 
+
+\begin{DoxyReturn}{Returns}
+Korzeń drzewa \doxylink{struct_a_a_b_b}{AABB} mapy. 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a073b46fb34705ff4e5fab41e616a6653}\label{main_8cpp_a073b46fb34705ff4e5fab41e616a6653} 
+\index{main.cpp@{main.cpp}!checkCollision@{checkCollision}}
+\index{checkCollision@{checkCollision}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{checkCollision()}{checkCollision()}}
+{\footnotesize\ttfamily bool check\+Collision (\begin{DoxyParamCaption}\item[{const glm\+::vec3 \&}]{player\+Position,  }\item[{float}]{player\+Radius,  }\item[{const \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*}}]{root }\end{DoxyParamCaption})}
+
+
+
+Sprawdza kolizję między sferą gracza a węzłem \doxylink{struct_a_a_b_b}{AABB}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Position} & Pozycja gracza. \\
+\hline
+{\em player\+Radius} & Promień sfery gracza. \\
+\hline
+{\em root} & Korzeń drzewa \doxylink{struct_a_a_b_b}{AABB}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, jeśli gracz koliduje z węzłem \doxylink{struct_a_a_b_b}{AABB}, w przeciwnym razie false. 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a4668e874115a3392e3db5383f0af079e}\label{main_8cpp_a4668e874115a3392e3db5383f0af079e} 
+\index{main.cpp@{main.cpp}!checkPlayerMapCollisionAndMoveBack@{checkPlayerMapCollisionAndMoveBack}}
+\index{checkPlayerMapCollisionAndMoveBack@{checkPlayerMapCollisionAndMoveBack}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{checkPlayerMapCollisionAndMoveBack()}{checkPlayerMapCollisionAndMoveBack()}}
+{\footnotesize\ttfamily bool check\+Player\+Map\+Collision\+And\+Move\+Back (\begin{DoxyParamCaption}\item[{glm\+::vec3 \&}]{player\+Position,  }\item[{const \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}} \texorpdfstring{$\ast$}{*}}]{map\+Root,  }\item[{glm\+::vec3 \&}]{previous\+Player\+Position,  }\item[{float}]{player\+Radius }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a940992d1f5169e7f7236fc060023a26f}\label{main_8cpp_a940992d1f5169e7f7236fc060023a26f} 
+\index{main.cpp@{main.cpp}!checkSphereAABBCollision@{checkSphereAABBCollision}}
+\index{checkSphereAABBCollision@{checkSphereAABBCollision}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{checkSphereAABBCollision()}{checkSphereAABBCollision()}}
+{\footnotesize\ttfamily bool check\+Sphere\+AABBCollision (\begin{DoxyParamCaption}\item[{const glm\+::vec3 \&}]{center,  }\item[{float}]{radius,  }\item[{const \mbox{\hyperlink{struct_a_a_b_b}{AABB}} \&}]{aabb }\end{DoxyParamCaption})}
+
+
+
+Sprawdza kolizję między sferą a \doxylink{struct_a_a_b_b}{AABB}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & Środek sfery. \\
+\hline
+{\em radius} & Promień sfery. \\
+\hline
+{\em aabb} & \doxylink{struct_a_a_b_b}{AABB} do sprawdzenia kolizji. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, jeśli sfera koliduje z \doxylink{struct_a_a_b_b}{AABB}, w przeciwnym razie false. 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a74ce3b09f984b7b05652947728b86d4f}\label{main_8cpp_a74ce3b09f984b7b05652947728b86d4f} 
+\index{main.cpp@{main.cpp}!dis@{dis}}
+\index{dis@{dis}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{dis()}{dis()}}
+{\footnotesize\ttfamily std\+::uniform\+\_\+real\+\_\+distribution dis (\begin{DoxyParamCaption}\item[{0.}]{0,  }\item[{1.}]{0 }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a5180f7bf2b71421af837035824a8c8ac}\label{main_8cpp_a5180f7bf2b71421af837035824a8c8ac} 
+\index{main.cpp@{main.cpp}!framebuffer\_size\_callback@{framebuffer\_size\_callback}}
+\index{framebuffer\_size\_callback@{framebuffer\_size\_callback}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{framebuffer\_size\_callback()}{framebuffer\_size\_callback()}}
+{\footnotesize\ttfamily void framebuffer\+\_\+size\+\_\+callback (\begin{DoxyParamCaption}\item[{GLFWwindow \texorpdfstring{$\ast$}{*}}]{window,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a374a9a7de3fd00dceacc5de8a654c087}\label{main_8cpp_a374a9a7de3fd00dceacc5de8a654c087} 
+\index{main.cpp@{main.cpp}!gen@{gen}}
+\index{gen@{gen}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{gen()}{gen()}}
+{\footnotesize\ttfamily std\+::mt19937 gen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8cpp_a7071b0092ad8c5b57d6cc40c5f803df5}{rd}}()}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_abeae42b5390e64f1f8af33863a949036}\label{main_8cpp_abeae42b5390e64f1f8af33863a949036} 
+\index{main.cpp@{main.cpp}!lightPos@{lightPos}}
+\index{lightPos@{lightPos}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{lightPos()}{lightPos()}}
+{\footnotesize\ttfamily glm\+::vec3 light\+Pos (\begin{DoxyParamCaption}\item[{1.}]{2f,  }\item[{1.}]{0f,  }\item[{2.}]{0f }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a47658d80df1d32f97a10c50552c95aba}\label{main_8cpp_a47658d80df1d32f97a10c50552c95aba} 
+\index{main.cpp@{main.cpp}!loadOBJ@{loadOBJ}}
+\index{loadOBJ@{loadOBJ}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loadOBJ()}{loadOBJ()}}
+{\footnotesize\ttfamily void load\+OBJ (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename,  }\item[{std\+::vector$<$ glm\+::vec3 $>$ \&}]{vertices,  }\item[{std\+::vector$<$ glm\+::vec3 $>$ \&}]{normals,  }\item[{std\+::vector$<$ unsigned int $>$ \&}]{indices }\end{DoxyParamCaption})}
+
+
+
+Wczytuje plik OBJ i zapisuje wierzchołki, normalne i indeksy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Nazwa pliku OBJ. \\
+\hline
+{\em vertices} & Wektory wierzchołków. \\
+\hline
+{\em normals} & Wektory normalnych. \\
+\hline
+{\em indices} & Wektory indeksów. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_af4ca2891044ac10a664b8d83ce590f1f}\label{main_8cpp_af4ca2891044ac10a664b8d83ce590f1f} 
+\index{main.cpp@{main.cpp}!mouse\_callback@{mouse\_callback}}
+\index{mouse\_callback@{mouse\_callback}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{mouse\_callback()}{mouse\_callback()}}
+{\footnotesize\ttfamily void mouse\+\_\+callback (\begin{DoxyParamCaption}\item[{GLFWwindow \texorpdfstring{$\ast$}{*}}]{window,  }\item[{double}]{xpos,  }\item[{double}]{ypos }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a06ad2502008f16fbcf01dfaa7f7bc9ea}\label{main_8cpp_a06ad2502008f16fbcf01dfaa7f7bc9ea} 
+\index{main.cpp@{main.cpp}!scroll\_callback@{scroll\_callback}}
+\index{scroll\_callback@{scroll\_callback}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{scroll\_callback()}{scroll\_callback()}}
+{\footnotesize\ttfamily void scroll\+\_\+callback (\begin{DoxyParamCaption}\item[{GLFWwindow \texorpdfstring{$\ast$}{*}}]{window,  }\item[{double}]{xoffset,  }\item[{double}]{yoffset }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_ab9a7fcf51bbec35e330d963ea537da89}\label{main_8cpp_ab9a7fcf51bbec35e330d963ea537da89} 
+\index{main.cpp@{main.cpp}!skeletonHandOffset@{skeletonHandOffset}}
+\index{skeletonHandOffset@{skeletonHandOffset}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{skeletonHandOffset()}{skeletonHandOffset()}}
+{\footnotesize\ttfamily glm\+::vec3 skeleton\+Hand\+Offset (\begin{DoxyParamCaption}\item[{0.}]{088918f,  }\item[{0.}]{77669f,  }\item[{0.}]{014702f }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a2363d4566ebdf3de55e61b1fdc0e2025}\label{main_8cpp_a2363d4566ebdf3de55e61b1fdc0e2025} 
+\index{main.cpp@{main.cpp}!targetPoint@{targetPoint}}
+\index{targetPoint@{targetPoint}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{targetPoint()}{targetPoint()}}
+{\footnotesize\ttfamily glm\+::vec3 target\+Point (\begin{DoxyParamCaption}\item[{-\/0.}]{016375f,  }\item[{0.}]{0f,  }\item[{10.}]{050759f }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}\label{main_8cpp_ab14b785ad2aab016d1856339ff982e3e} 
+\index{main.cpp@{main.cpp}!camera@{camera}}
+\index{camera@{camera}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{camera}{camera}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_camera}{Camera}} camera(glm\+::vec3(-\/0.\+000978f, 0.\+9f, 15.\+233716f)) (\begin{DoxyParamCaption}\item[{glm\+::vec3(-\/0.\+000978f, 0.\+9f, 15.\+233716f)}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_aaaed10e0121b2a501e40d1b658a17c3e}\label{main_8cpp_aaaed10e0121b2a501e40d1b658a17c3e} 
+\index{main.cpp@{main.cpp}!chests@{chests}}
+\index{chests@{chests}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{chests}{chests}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{class_chest}{Chest}}$>$ chests}
+
+\Hypertarget{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}\label{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891} 
+\index{main.cpp@{main.cpp}!deltaTime@{deltaTime}}
+\index{deltaTime@{deltaTime}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{deltaTime}{deltaTime}}
+{\footnotesize\ttfamily float delta\+Time = 0.\+0f}
+
+\Hypertarget{main_8cpp_a49643181341d59a340e8f2247c6b4a96}\label{main_8cpp_a49643181341d59a340e8f2247c6b4a96} 
+\index{main.cpp@{main.cpp}!died@{died}}
+\index{died@{died}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{died}{died}}
+{\footnotesize\ttfamily bool died = false}
+
+\Hypertarget{main_8cpp_ad3604be7ed778f90576433df66b61f8b}\label{main_8cpp_ad3604be7ed778f90576433df66b61f8b} 
+\index{main.cpp@{main.cpp}!enemies@{enemies}}
+\index{enemies@{enemies}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{enemies}{enemies}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{class_enemy}{Enemy}}$>$ enemies}
+
+\Hypertarget{main_8cpp_ac21731ba101e28334c34543121caa841}\label{main_8cpp_ac21731ba101e28334c34543121caa841} 
+\index{main.cpp@{main.cpp}!firstMouse@{firstMouse}}
+\index{firstMouse@{firstMouse}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{firstMouse}{firstMouse}}
+{\footnotesize\ttfamily bool first\+Mouse = true}
+
+\Hypertarget{main_8cpp_ad8f6d257142678d59a37901ccaff0438}\label{main_8cpp_ad8f6d257142678d59a37901ccaff0438} 
+\index{main.cpp@{main.cpp}!game@{game}}
+\index{game@{game}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{game}{game}}
+{\footnotesize\ttfamily bool game = false}
+
+\Hypertarget{main_8cpp_ae2ffabdf4f3c5824969bb5a3f29e9211}\label{main_8cpp_ae2ffabdf4f3c5824969bb5a3f29e9211} 
+\index{main.cpp@{main.cpp}!gridHeight@{gridHeight}}
+\index{gridHeight@{gridHeight}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{gridHeight}{gridHeight}}
+{\footnotesize\ttfamily int grid\+Height = 10}
+
+\Hypertarget{main_8cpp_aa707ffca431dabc9bd220b7a3f8f69b7}\label{main_8cpp_aa707ffca431dabc9bd220b7a3f8f69b7} 
+\index{main.cpp@{main.cpp}!gridWidth@{gridWidth}}
+\index{gridWidth@{gridWidth}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{gridWidth}{gridWidth}}
+{\footnotesize\ttfamily int grid\+Width = 10}
+
+\Hypertarget{main_8cpp_a518a497d888d805d5f368bbb91b54a6c}\label{main_8cpp_a518a497d888d805d5f368bbb91b54a6c} 
+\index{main.cpp@{main.cpp}!lastFrame@{lastFrame}}
+\index{lastFrame@{lastFrame}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{lastFrame}{lastFrame}}
+{\footnotesize\ttfamily float last\+Frame = 0.\+0f}
+
+\Hypertarget{main_8cpp_a4664c5d930c290e6f82141a070cbea46}\label{main_8cpp_a4664c5d930c290e6f82141a070cbea46} 
+\index{main.cpp@{main.cpp}!lastX@{lastX}}
+\index{lastX@{lastX}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{lastX}{lastX}}
+{\footnotesize\ttfamily float lastX = \mbox{\hyperlink{main_8cpp_a74ba59acbf346c2b19bc1ce5170f755d}{SCR\+\_\+\+WIDTH}} / 2.\+0f}
+
+\Hypertarget{main_8cpp_a9d5b8dfd025caf1c0ed043132515f587}\label{main_8cpp_a9d5b8dfd025caf1c0ed043132515f587} 
+\index{main.cpp@{main.cpp}!lastY@{lastY}}
+\index{lastY@{lastY}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{lastY}{lastY}}
+{\footnotesize\ttfamily float lastY = \mbox{\hyperlink{main_8cpp_aca03a77ac5a7f2e26d08cd6de43f9a17}{SCR\+\_\+\+HEIGHT}} / 2.\+0f}
+
+\Hypertarget{main_8cpp_a9ff08b5834d9b6bd9c4e950edd24cc57}\label{main_8cpp_a9ff08b5834d9b6bd9c4e950edd24cc57} 
+\index{main.cpp@{main.cpp}!mapAABBRoot@{mapAABBRoot}}
+\index{mapAABBRoot@{mapAABBRoot}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{mapAABBRoot}{mapAABBRoot}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_a_b_b_node}{AABBNode}}\texorpdfstring{$\ast$}{*} map\+AABBRoot = nullptr}
+
+\Hypertarget{main_8cpp_a64881c5f5f42c13aa0deb1dc0d7a8b26}\label{main_8cpp_a64881c5f5f42c13aa0deb1dc0d7a8b26} 
+\index{main.cpp@{main.cpp}!menu@{menu}}
+\index{menu@{menu}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{menu}{menu}}
+{\footnotesize\ttfamily bool menu = true}
+
+\Hypertarget{main_8cpp_a113078dfda40cf61ffec3ec757ae6082}\label{main_8cpp_a113078dfda40cf61ffec3ec757ae6082} 
+\index{main.cpp@{main.cpp}!player@{player}}
+\index{player@{player}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_player}{Player}} player(glm\+::vec3(-\/0.\+000978f, 0.\+9f, 15.\+233716f)) (\begin{DoxyParamCaption}\item[{glm\+::vec3(-\/0.\+000978f, 0.\+9f, 15.\+233716f)}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a5af125e5316db1b9b65d94c95a3c62bc}\label{main_8cpp_a5af125e5316db1b9b65d94c95a3c62bc} 
+\index{main.cpp@{main.cpp}!playerRadius@{playerRadius}}
+\index{playerRadius@{playerRadius}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{playerRadius}{playerRadius}}
+{\footnotesize\ttfamily float player\+Radius = 0.\+1f}
+
+\Hypertarget{main_8cpp_a7071b0092ad8c5b57d6cc40c5f803df5}\label{main_8cpp_a7071b0092ad8c5b57d6cc40c5f803df5} 
+\index{main.cpp@{main.cpp}!rd@{rd}}
+\index{rd@{rd}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{rd}{rd}}
+{\footnotesize\ttfamily std\+::random\+\_\+device rd}
+
+\Hypertarget{main_8cpp_aca03a77ac5a7f2e26d08cd6de43f9a17}\label{main_8cpp_aca03a77ac5a7f2e26d08cd6de43f9a17} 
+\index{main.cpp@{main.cpp}!SCR\_HEIGHT@{SCR\_HEIGHT}}
+\index{SCR\_HEIGHT@{SCR\_HEIGHT}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{SCR\_HEIGHT}{SCR\_HEIGHT}}
+{\footnotesize\ttfamily const unsigned int SCR\+\_\+\+HEIGHT = 1080}
+
+\Hypertarget{main_8cpp_a74ba59acbf346c2b19bc1ce5170f755d}\label{main_8cpp_a74ba59acbf346c2b19bc1ce5170f755d} 
+\index{main.cpp@{main.cpp}!SCR\_WIDTH@{SCR\_WIDTH}}
+\index{SCR\_WIDTH@{SCR\_WIDTH}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{SCR\_WIDTH}{SCR\_WIDTH}}
+{\footnotesize\ttfamily const unsigned int SCR\+\_\+\+WIDTH = 1920}
+

@@ -21,39 +21,39 @@
     <ClCompile Include="glad.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Inputs.cpp">
+    <ClCompile Include="Input.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Draw.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="Libraries\include\IMGUI\imgui.cpp">
+      <Filter>Pliki zasobów</Filter>
     </ClCompile>
-    <ClCompile Include="Update.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_demo.cpp">
+      <Filter>Pliki zasobów</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_draw.cpp">
+      <Filter>Pliki zasobów</Filter>
     </ClCompile>
-    <ClCompile Include="Options.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_glfw.cpp">
+      <Filter>Pliki zasobów</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_opengl2.cpp">
+      <Filter>Pliki zasobów</Filter>
     </ClCompile>
-    <ClCompile Include="Models.cpp">
+    <ClCompile Include="Libraries\include\IMGUI\imgui_impl_opengl3.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_tables.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\include\IMGUI\imgui_widgets.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Sounds.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Inputs.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Draw.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Update.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Shaders.h">
@@ -62,22 +62,61 @@
     <ClInclude Include="resource.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Options.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Models.h">
+    <ClInclude Include="Mesh.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Material.h">
+    <ClInclude Include="Model.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imconfig.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_glfw.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl2.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl3.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_impl_opengl3_loader.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imgui_internal.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imstb_rectpack.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imstb_textedit.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\IMGUI\imstb_truetype.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Chest.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Sounds.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,6 +125,12 @@
       <Filter>Pliki zasobów</Filter>
     </None>
     <None Include="vertex_core.glsl">
+      <Filter>Pliki zasobów</Filter>
+    </None>
+    <None Include="fragment.glsl">
+      <Filter>Pliki zasobów</Filter>
+    </None>
+    <None Include="vertex.glsl">
       <Filter>Pliki zasobów</Filter>
     </None>
   </ItemGroup>

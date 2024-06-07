@@ -1,0 +1,55 @@
+\doxysection{Text\+\_\+\+Renderer.\+h}
+\hypertarget{_text___renderer_8h_source}{}\label{_text___renderer_8h_source}\mbox{\hyperlink{_text___renderer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*******************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ This\ code\ is\ part\ of\ Breakout.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ Breakout\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ it\ under\ the\ terms\ of\ the\ CC\ BY\ 4.0\ license\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{**\ Creative\ Commons,\ either\ version\ 4\ of\ the\ License,\ or\ (at\ your}}
+\DoxyCodeLine{00007\ \textcolor{comment}{**\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{******************************************************************/}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ TEXT\_RENDERER\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ TEXT\_RENDERER\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <glad/glad.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <glm/glm.hpp>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}texture.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}shader.h"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_character}{Character}}\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_character_a411760a6a33f2cb54dd6a0138e038a46}{TextureID}};\ \textcolor{comment}{//\ ID\ handle\ of\ the\ glyph\ texture}}
+\DoxyCodeLine{00024\ \ \ \ \ glm::ivec2\ \ \ \mbox{\hyperlink{struct_character_aaaa598050e0ef590fe6903fd2bab40b8}{Size}};\ \ \ \ \ \ \textcolor{comment}{//\ size\ of\ glyph}}
+\DoxyCodeLine{00025\ \ \ \ \ glm::ivec2\ \ \ \mbox{\hyperlink{struct_character_afef98bf9c7f5313d96476f6f3f85f872}{Bearing}};\ \ \ \textcolor{comment}{//\ offset\ from\ baseline\ to\ left/top\ of\ glyph}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_character_a5338c0800545802a63f8e4945573cbe7}{Advance}};\ \ \ \textcolor{comment}{//\ horizontal\ offset\ to\ advance\ to\ next\ glyph}}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ A\ renderer\ class\ for\ rendering\ text\ displayed\ by\ a\ font\ loaded\ using\ the\ }}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ FreeType\ library.\ A\ single\ font\ is\ loaded,\ processed\ into\ a\ list\ of\ Character}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ items\ for\ later\ rendering.}}
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_text_renderer}{TextRenderer}}}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ holds\ a\ list\ of\ pre-\/compiled\ Characters}}
+\DoxyCodeLine{00037\ \ \ \ \ std::map<char,\ Character>\ \mbox{\hyperlink{class_text_renderer_af7bc364007cd449284e88024c59722ba}{Characters}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//\ shader\ used\ for\ text\ rendering}}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_shader}{Shader}}\ \mbox{\hyperlink{class_text_renderer_a2a8b02491134189be1ae0cbe65cca892}{TextShader}};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ constructor}}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_text_renderer_ac87978b0da75711662f6627190d5332a}{TextRenderer}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ pre-\/compiles\ a\ list\ of\ characters\ from\ the\ given\ font}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_text_renderer_addf75e2c1eede12f9fcc465e83cec2d9}{Load}}(std::string\ font,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ fontSize);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ renders\ a\ string\ of\ text\ using\ the\ precompiled\ list\ of\ characters}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_text_renderer_a6b9531e45975c862f266ef6002179125}{RenderText}}(std::string\ text,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ scale,\ glm::vec3\ color\ =\ glm::vec3(1.0f));}
+\DoxyCodeLine{00046\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ render\ state}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ VAO,\ VBO;}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }}
+
+\end{DoxyCode}

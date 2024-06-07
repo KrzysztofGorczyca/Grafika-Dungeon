@@ -1,0 +1,205 @@
+\doxysection{Model.\+h}
+\hypertarget{_model_8h_source}{}\label{_model_8h_source}\mbox{\hyperlink{_model_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{libs_8h}{libs.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_mesh_8h}{Mesh.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}stb\_image.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_model}{Model}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ vector<Texture>\ \mbox{\hyperlink{class_model_aa0d87cb976812a96da160a85d7a610e8}{textures\_loaded}};\ }
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_model_a1e47b338ca8b4f60a5460e4658dd3443}{Model}}(\textcolor{keywordtype}{string}\ path)}
+\DoxyCodeLine{00022\ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ loadModel(path);}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model_a9c66de8af7e48fefaccbb8a056ec3c1d}{Draw}}(\mbox{\hyperlink{class_shader}{Shader}}\&\ shader)}
+\DoxyCodeLine{00032\ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ meshes.size();\ i++)}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ meshes[i].\mbox{\hyperlink{class_model_a9c66de8af7e48fefaccbb8a056ec3c1d}{Draw}}(shader);}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ vector<Mesh>\ meshes;\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{string}\ directory;\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ loadModel(\textcolor{keywordtype}{string}\ path)}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ Assimp::Importer\ \textcolor{keyword}{import};}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ aiScene\ *\ scene\ =\ \textcolor{keyword}{import}.ReadFile(path,\ aiProcess\_Triangulate\ |\ aiProcess\_FlipUVs);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!scene\ ||\ scene-\/>mFlags\ \&\ AI\_SCENE\_FLAGS\_INCOMPLETE\ ||\ !scene-\/>mRootNode)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}ERROR::ASSIMP::"{}}\ <<\ \textcolor{keyword}{import}.GetErrorString()\ <<\ endl;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ directory\ =\ path.substr(0,\ path.find\_last\_of(\textcolor{charliteral}{'/'}));}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ processNode(scene-\/>mRootNode,\ scene);}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ processNode(aiNode*\ node,\ \textcolor{keyword}{const}\ aiScene*\ scene)}
+\DoxyCodeLine{00068\ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ all\ the\ node's\ meshes\ (if\ any)}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ node-\/>mNumMeshes;\ i++)}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ aiMesh*\ mesh\ =\ scene-\/>mMeshes[node-\/>mMeshes[i]];}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ meshes.push\_back(processMesh(mesh,\ scene));}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Then\ do\ the\ same\ for\ each\ of\ its\ children}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ node-\/>mNumChildren;\ i++)}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ processNode(node-\/>mChildren[i],\ scene);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{class_mesh}{Mesh}}\ processMesh(aiMesh*\ mesh,\ \textcolor{keyword}{const}\ aiScene*\ scene)}
+\DoxyCodeLine{00090\ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ vector<Vertex>\ vertices;\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ vector<unsigned\ int>\ indices;\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ vector<Texture>\ textures;\ }
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Walk\ through\ each\ of\ the\ mesh's\ vertices}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ mesh-\/>mNumVertices;\ i++)}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_vertex}{Vertex}}\ vertex;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ glm::vec3\ vector;}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ vector.x\ =\ mesh-\/>mVertices[i].x;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ vector.y\ =\ mesh-\/>mVertices[i].y;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ vector.z\ =\ mesh-\/>mVertices[i].z;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ vertex.\mbox{\hyperlink{struct_vertex_abb3cfacd96b5955b0cec9359840ee49f}{Position}}\ =\ vector;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Normals}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mesh-\/>HasNormals())}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vector.x\ =\ mesh-\/>mNormals[i].x;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vector.y\ =\ mesh-\/>mNormals[i].y;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vector.z\ =\ mesh-\/>mNormals[i].z;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertex.\mbox{\hyperlink{struct_vertex_a9ab4dc431b41509f0b1bb1a4bf09d4e2}{Normal}}\ =\ vector;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Texture\ coordinates}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mesh-\/>mTextureCoords[0])}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glm::vec2\ vec;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vec.x\ =\ mesh-\/>mTextureCoords[0][i].x;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vec.y\ =\ mesh-\/>mTextureCoords[0][i].y;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertex.\mbox{\hyperlink{struct_vertex_a921a513c1e6d1e63e99d477fa837a317}{TexCoords}}\ =\ vec;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertex.\mbox{\hyperlink{struct_vertex_a921a513c1e6d1e63e99d477fa837a317}{TexCoords}}\ =\ glm::vec2(0.0f,\ 0.0f);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ vertices.push\_back(vertex);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ each\ of\ the\ mesh's\ faces}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ mesh-\/>mNumFaces;\ i++)}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ aiFace\ face\ =\ mesh-\/>mFaces[i];}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ face.mNumIndices;\ j++)}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indices.push\_back(face.mIndices[j]);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ materials}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ aiMaterial*\ material\ =\ scene-\/>mMaterials[mesh-\/>mMaterialIndex];}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ Diffuse\ maps}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ vector<Texture>\ diffuseMaps\ =\ loadMaterialTextures(material,\ aiTextureType\_DIFFUSE,\ \textcolor{stringliteral}{"{}texture\_diffuse"{}});}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ textures.insert(textures.end(),\ diffuseMaps.begin(),\ diffuseMaps.end());}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ Specular\ maps}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ vector<Texture>\ specularMaps\ =\ loadMaterialTextures(material,\ aiTextureType\_SPECULAR,\ \textcolor{stringliteral}{"{}texture\_specular"{}});}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ textures.insert(textures.end(),\ specularMaps.begin(),\ specularMaps.end());}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 3.\ Normal\ maps}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ vector<Texture>\ normalMaps\ =\ loadMaterialTextures(material,\ aiTextureType\_HEIGHT,\ \textcolor{stringliteral}{"{}texture\_normal"{}});}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ textures.insert(textures.end(),\ normalMaps.begin(),\ normalMaps.end());}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 4.\ Height\ maps}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ vector<Texture>\ heightMaps\ =\ loadMaterialTextures(material,\ aiTextureType\_AMBIENT,\ \textcolor{stringliteral}{"{}texture\_height"{}});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ textures.insert(textures.end(),\ heightMaps.begin(),\ heightMaps.end());}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ a\ mesh\ object\ created\ from\ the\ extracted\ mesh\ data}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_mesh}{Mesh}}(vertices,\ indices,\ textures);}
+\DoxyCodeLine{00158\ \ \ \ \ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00168\ \ \ \ \ vector<Texture>\ loadMaterialTextures(aiMaterial*\ mat,\ aiTextureType\ type,\ \textcolor{keywordtype}{string}\ typeName)}
+\DoxyCodeLine{00169\ \ \ \ \ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ vector<Texture>\ textures;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ mat-\/>GetTextureCount(type);\ i++)}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ aiString\ str;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ mat-\/>GetTexture(type,\ i,\ \&str);}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ skip\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{class_model_aa0d87cb976812a96da160a85d7a610e8}{textures\_loaded}}.size();\ j++)}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::strcmp(\mbox{\hyperlink{class_model_aa0d87cb976812a96da160a85d7a610e8}{textures\_loaded}}[j].path.data(),\ str.C\_Str())\ ==\ 0)}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textures.push\_back(\mbox{\hyperlink{class_model_aa0d87cb976812a96da160a85d7a610e8}{textures\_loaded}}[j]);}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ skip\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!skip)}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ texture\ hasn't\ been\ loaded\ already,\ load\ it}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_texture}{Texture}}\ texture;}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ texture.\mbox{\hyperlink{struct_texture_aed42161a5c00b6020c85833401da6da6}{id}}\ =\ TextureFromFile(str.C\_Str(),\ directory);}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ texture.\mbox{\hyperlink{struct_texture_adacb495ed5140ec76a09cd130e7d5c32}{type}}\ =\ typeName;}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ texture.\mbox{\hyperlink{struct_texture_a2bb543fb01b98cc7406ee7466030e7d2}{path}}\ =\ str.C\_Str();}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textures.push\_back(texture);}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model_aa0d87cb976812a96da160a85d7a610e8}{textures\_loaded}}.push\_back(texture);\ \textcolor{comment}{//\ Add\ to\ loaded\ textures}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ textures;}
+\DoxyCodeLine{00197\ \ \ \ \ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ TextureFromFile(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ directory)}
+\DoxyCodeLine{00207\ \ \ \ \ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ filename\ =\ string(path);}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ filename\ =\ directory\ +\ \textcolor{charliteral}{'/'}\ +\ filename;}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ textureID;}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ glGenTextures(1,\ \&textureID);}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ width,\ height,\ nrComponents;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ data\ =\ stbi\_load(filename.c\_str(),\ \&width,\ \&height,\ \&nrComponents,\ 0);}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data)}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ GLenum\ format;}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nrComponents\ ==\ 1)}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ format\ =\ GL\_RED;}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (nrComponents\ ==\ 3)}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ format\ =\ GL\_RGB;}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (nrComponents\ ==\ 4)}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ format\ =\ GL\_RGBA;}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ glBindTexture(GL\_TEXTURE\_2D,\ textureID);}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ glTexImage2D(GL\_TEXTURE\_2D,\ 0,\ format,\ width,\ height,\ 0,\ format,\ GL\_UNSIGNED\_BYTE,\ data);}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ glGenerateMipmap(GL\_TEXTURE\_2D);}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ glTexParameteri(GL\_TEXTURE\_2D,\ GL\_TEXTURE\_WRAP\_S,\ GL\_REPEAT);}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ glTexParameteri(GL\_TEXTURE\_2D,\ GL\_TEXTURE\_WRAP\_T,\ GL\_REPEAT);}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ glTexParameteri(GL\_TEXTURE\_2D,\ GL\_TEXTURE\_MIN\_FILTER,\ GL\_LINEAR\_MIPMAP\_LINEAR);}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ glTexParameteri(GL\_TEXTURE\_2D,\ GL\_TEXTURE\_MAG\_FILTER,\ GL\_LINEAR);}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ stbi\_image\_free(data);}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Texture\ failed\ to\ load\ at\ path:\ "{}}\ <<\ path\ <<\ std::endl;}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ stbi\_image\_free(data);}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ textureID;}
+\DoxyCodeLine{00244\ \ \ \ \ \}}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \};}
+
+\end{DoxyCode}

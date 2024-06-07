@@ -1,0 +1,398 @@
+\doxysection{Enemy Class Reference}
+\hypertarget{class_enemy}{}\label{class_enemy}\index{Enemy@{Enemy}}
+
+
+Class representing an enemy in the game, with properties and methods for controlling the enemy\textquotesingle{}s behavior and state.  
+
+
+
+
+{\ttfamily \#include $<$Enemy.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_enemy_a22af0a2768ce70b3d08f3b5e12d593f1}{Enemy}} (glm\+::vec3 position)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{class_enemy}{Enemy} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_ac0eec4755e28c02688065f9657150ac3}{\texorpdfstring{$\sim$}{\string~}\+Enemy}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_enemy}{Enemy} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_afc70f614df367561bf67c4095bf33b74}{play\+Hand\+Animation}} (float \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{delta\+Time}})
+\begin{DoxyCompactList}\small\item\em Plays the hand animation for the enemy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_a903904b1d894956ab359cfba94efdc80}{Update}} (float \mbox{\hyperlink{main_8cpp_a1a61318ed6aa02b4ff346e7eb8f68891}{delta\+Time}}, const \mbox{\hyperlink{class_camera}{Camera}} \&\mbox{\hyperlink{main_8cpp_ab14b785ad2aab016d1856339ff982e3e}{camera}})
+\begin{DoxyCompactList}\small\item\em Updates the enemy\textquotesingle{}s state, including movement and other logic. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_aadb48094d070ffe1bd8a3f83a35b1c76}{modify\+Health}} (float amount)
+\begin{DoxyCompactList}\small\item\em Modifies the enemy\textquotesingle{}s health. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_enemy_a038e636d16b708f92627348a36750702}{is\+Dead}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the enemy is dead. \end{DoxyCompactList}\item 
+glm\+::vec3 \mbox{\hyperlink{class_enemy_a8ba4fc9b6ddc379bb2fe31d6a563e27b}{Get\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Gets the position of the enemy. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_enemy_a965c6de593a46bdeb9a21cd92248bb17}{Get\+Health}} () const
+\begin{DoxyCompactList}\small\item\em Gets the health of the enemy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_a888e5066c6720ceee95dab533e99e5f7}{Update\+Position}} (glm\+::vec3 position)
+\begin{DoxyCompactList}\small\item\em Updates the position of the enemy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_enemy_a12cedead90bb43208f7e84a7108598aa}{is\+Animating}} = false
+\begin{DoxyCompactList}\small\item\em Indicates if the enemy is currently animating. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}{animation\+Time}} = 0.\+0f
+\begin{DoxyCompactList}\small\item\em The current time of the animation. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_enemy_ad4d20cb56869aab203b6b295cfae2cf7}{attack\+Duration}} = 1.\+5f
+\begin{DoxyCompactList}\small\item\em Duration of the attack animation. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_enemy_a6b63a0873b8001ddb7b478d0eb964913}{return\+Duration}} = 1.\+5f
+\begin{DoxyCompactList}\small\item\em Duration of the return animation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_enemy_afe01bd4e6b09d747d4af95a269b59cf2}{is\+Returning}} = false
+\begin{DoxyCompactList}\small\item\em Indicates if the enemy is in the return phase of the animation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_enemy_a32f3c699f3fb23423a5d6e04c15bb403}{once\+Done}} = false
+\item 
+bool \mbox{\hyperlink{class_enemy_a4dae78d11d711cd276c3ffab779c8e2f}{damage\+Player}} = false
+\begin{DoxyCompactList}\small\item\em Indicates if the enemy can damage the player. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_enemy_a3fd2ad12e1e9a553408def3d68f5a914}{animation\+Finished}} = false
+\begin{DoxyCompactList}\small\item\em Indicates if the animation has finished. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a}{in\+Attack\+Mode}} = false
+\begin{DoxyCompactList}\small\item\em Indicates if the enemy is in attack mode. \end{DoxyCompactList}\item 
+glm\+::vec3 \mbox{\hyperlink{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}{Position}}
+\begin{DoxyCompactList}\small\item\em The position of the enemy. \end{DoxyCompactList}\item 
+glm\+::quat \mbox{\hyperlink{class_enemy_a83ba249e99fa49b4c17b53d8db165f06}{Rotation}}
+\begin{DoxyCompactList}\small\item\em The rotation of the enemy. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_enemy_a77fda4977da2209e2e49fba767f45b4c}{Speed}}
+\begin{DoxyCompactList}\small\item\em The movement speed of the enemy. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}{Health}} = 100.f
+\begin{DoxyCompactList}\small\item\em The current health of the enemy. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_enemy_a8f4cb3fa5b1d3188baf2f4c898e2a87a}{Damage}} = 10
+\begin{DoxyCompactList}\small\item\em The damage the enemy can inflict. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_enemy_a720dbfd35828a881caef2e5eadb30131}{Max\+Health}} = 100.\+0f
+\begin{DoxyCompactList}\small\item\em The maximum health of the enemy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classenemy_hand}{enemy\+Hand}} \mbox{\hyperlink{class_enemy_a4018e72a1eca51719593637dd2ca3c18}{hand}}
+\begin{DoxyCompactList}\small\item\em The hand of the enemy. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_enemy_ab80ead7883d5b9fff3b5f7f3f471506a}{attacked}} = false
+\item 
+bool \mbox{\hyperlink{class_enemy_a61c279a69811ee5a011f2d0e8fe70a4d}{can\+Damage}} = true
+\item 
+bool \mbox{\hyperlink{class_enemy_a617d2a12657c3792f41f2767484d7709}{in\+Range}} = false
+\item 
+bool \mbox{\hyperlink{class_enemy_a29fc25f7935052538d8bed4e0fee125e}{deal\+Damage}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing an enemy in the game, with properties and methods for controlling the enemy\textquotesingle{}s behavior and state. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_enemy_a22af0a2768ce70b3d08f3b5e12d593f1}\label{class_enemy_a22af0a2768ce70b3d08f3b5e12d593f1} 
+\index{Enemy@{Enemy}!Enemy@{Enemy}}
+\index{Enemy@{Enemy}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{Enemy()}{Enemy()}}
+{\footnotesize\ttfamily Enemy\+::\+Enemy (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an \doxylink{class_enemy}{Enemy} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Initial position of the enemy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_enemy_ac0eec4755e28c02688065f9657150ac3}\label{class_enemy_ac0eec4755e28c02688065f9657150ac3} 
+\index{Enemy@{Enemy}!````~Enemy@{\texorpdfstring{$\sim$}{\string~}Enemy}}
+\index{````~Enemy@{\texorpdfstring{$\sim$}{\string~}Enemy}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Enemy()}{\string~Enemy()}}
+{\footnotesize\ttfamily Enemy\+::\texorpdfstring{$\sim$}{\string~}\+Enemy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor for the \doxylink{class_enemy}{Enemy} class. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_enemy_a965c6de593a46bdeb9a21cd92248bb17}\label{class_enemy_a965c6de593a46bdeb9a21cd92248bb17} 
+\index{Enemy@{Enemy}!GetHealth@{GetHealth}}
+\index{GetHealth@{GetHealth}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{GetHealth()}{GetHealth()}}
+{\footnotesize\ttfamily float Enemy\+::\+Get\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the health of the enemy. 
+
+\begin{DoxyReturn}{Returns}
+The current health of the enemy. 
+\end{DoxyReturn}
+\Hypertarget{class_enemy_a8ba4fc9b6ddc379bb2fe31d6a563e27b}\label{class_enemy_a8ba4fc9b6ddc379bb2fe31d6a563e27b} 
+\index{Enemy@{Enemy}!GetPosition@{GetPosition}}
+\index{GetPosition@{GetPosition}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{GetPosition()}{GetPosition()}}
+{\footnotesize\ttfamily glm\+::vec3 Enemy\+::\+Get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the position of the enemy. 
+
+\begin{DoxyReturn}{Returns}
+The current position of the enemy. 
+\end{DoxyReturn}
+\Hypertarget{class_enemy_a038e636d16b708f92627348a36750702}\label{class_enemy_a038e636d16b708f92627348a36750702} 
+\index{Enemy@{Enemy}!isDead@{isDead}}
+\index{isDead@{isDead}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{isDead()}{isDead()}}
+{\footnotesize\ttfamily bool Enemy\+::is\+Dead (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the enemy is dead. 
+
+\begin{DoxyReturn}{Returns}
+True if the enemy\textquotesingle{}s health is 0 or less, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_enemy_aadb48094d070ffe1bd8a3f83a35b1c76}\label{class_enemy_aadb48094d070ffe1bd8a3f83a35b1c76} 
+\index{Enemy@{Enemy}!modifyHealth@{modifyHealth}}
+\index{modifyHealth@{modifyHealth}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{modifyHealth()}{modifyHealth()}}
+{\footnotesize\ttfamily void Enemy\+::modify\+Health (\begin{DoxyParamCaption}\item[{float}]{amount }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Modifies the enemy\textquotesingle{}s health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & The amount to modify the health by. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_enemy_afc70f614df367561bf67c4095bf33b74}\label{class_enemy_afc70f614df367561bf67c4095bf33b74} 
+\index{Enemy@{Enemy}!playHandAnimation@{playHandAnimation}}
+\index{playHandAnimation@{playHandAnimation}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{playHandAnimation()}{playHandAnimation()}}
+{\footnotesize\ttfamily void Enemy\+::play\+Hand\+Animation (\begin{DoxyParamCaption}\item[{float}]{delta\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Plays the hand animation for the enemy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+Time} & The time elapsed between the current and previous frame. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_enemy_a903904b1d894956ab359cfba94efdc80}\label{class_enemy_a903904b1d894956ab359cfba94efdc80} 
+\index{Enemy@{Enemy}!Update@{Update}}
+\index{Update@{Update}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Enemy\+::\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+Time,  }\item[{const \mbox{\hyperlink{class_camera}{Camera}} \&}]{camera }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Updates the enemy\textquotesingle{}s state, including movement and other logic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+Time} & The time elapsed between the current and previous frame. \\
+\hline
+{\em camera} & The camera object, used for determining the player\textquotesingle{}s position. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_enemy_a888e5066c6720ceee95dab533e99e5f7}\label{class_enemy_a888e5066c6720ceee95dab533e99e5f7} 
+\index{Enemy@{Enemy}!UpdatePosition@{UpdatePosition}}
+\index{UpdatePosition@{UpdatePosition}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{UpdatePosition()}{UpdatePosition()}}
+{\footnotesize\ttfamily void Enemy\+::\+Update\+Position (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Updates the position of the enemy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The new position to set. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_enemy_a3fd2ad12e1e9a553408def3d68f5a914}\label{class_enemy_a3fd2ad12e1e9a553408def3d68f5a914} 
+\index{Enemy@{Enemy}!animationFinished@{animationFinished}}
+\index{animationFinished@{animationFinished}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{animationFinished}{animationFinished}}
+{\footnotesize\ttfamily bool Enemy\+::animation\+Finished = false}
+
+
+
+Indicates if the animation has finished. 
+
+\Hypertarget{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe}\label{class_enemy_a3ce891400ed88cbd8228a1d2ad3575fe} 
+\index{Enemy@{Enemy}!animationTime@{animationTime}}
+\index{animationTime@{animationTime}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{animationTime}{animationTime}}
+{\footnotesize\ttfamily float Enemy\+::animation\+Time = 0.\+0f}
+
+
+
+The current time of the animation. 
+
+\Hypertarget{class_enemy_ad4d20cb56869aab203b6b295cfae2cf7}\label{class_enemy_ad4d20cb56869aab203b6b295cfae2cf7} 
+\index{Enemy@{Enemy}!attackDuration@{attackDuration}}
+\index{attackDuration@{attackDuration}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{attackDuration}{attackDuration}}
+{\footnotesize\ttfamily float Enemy\+::attack\+Duration = 1.\+5f}
+
+
+
+Duration of the attack animation. 
+
+\Hypertarget{class_enemy_ab80ead7883d5b9fff3b5f7f3f471506a}\label{class_enemy_ab80ead7883d5b9fff3b5f7f3f471506a} 
+\index{Enemy@{Enemy}!attacked@{attacked}}
+\index{attacked@{attacked}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{attacked}{attacked}}
+{\footnotesize\ttfamily bool Enemy\+::attacked = false}
+
+\Hypertarget{class_enemy_a61c279a69811ee5a011f2d0e8fe70a4d}\label{class_enemy_a61c279a69811ee5a011f2d0e8fe70a4d} 
+\index{Enemy@{Enemy}!canDamage@{canDamage}}
+\index{canDamage@{canDamage}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{canDamage}{canDamage}}
+{\footnotesize\ttfamily bool Enemy\+::can\+Damage = true}
+
+\Hypertarget{class_enemy_a8f4cb3fa5b1d3188baf2f4c898e2a87a}\label{class_enemy_a8f4cb3fa5b1d3188baf2f4c898e2a87a} 
+\index{Enemy@{Enemy}!Damage@{Damage}}
+\index{Damage@{Damage}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{Damage}{Damage}}
+{\footnotesize\ttfamily float Enemy\+::\+Damage = 10}
+
+
+
+The damage the enemy can inflict. 
+
+\Hypertarget{class_enemy_a4dae78d11d711cd276c3ffab779c8e2f}\label{class_enemy_a4dae78d11d711cd276c3ffab779c8e2f} 
+\index{Enemy@{Enemy}!damagePlayer@{damagePlayer}}
+\index{damagePlayer@{damagePlayer}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{damagePlayer}{damagePlayer}}
+{\footnotesize\ttfamily bool Enemy\+::damage\+Player = false}
+
+
+
+Indicates if the enemy can damage the player. 
+
+\Hypertarget{class_enemy_a29fc25f7935052538d8bed4e0fee125e}\label{class_enemy_a29fc25f7935052538d8bed4e0fee125e} 
+\index{Enemy@{Enemy}!dealDamage@{dealDamage}}
+\index{dealDamage@{dealDamage}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{dealDamage}{dealDamage}}
+{\footnotesize\ttfamily bool Enemy\+::deal\+Damage = false}
+
+\Hypertarget{class_enemy_a4018e72a1eca51719593637dd2ca3c18}\label{class_enemy_a4018e72a1eca51719593637dd2ca3c18} 
+\index{Enemy@{Enemy}!hand@{hand}}
+\index{hand@{hand}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{hand}{hand}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classenemy_hand}{enemy\+Hand}} Enemy\+::hand}
+
+
+
+The hand of the enemy. 
+
+\Hypertarget{class_enemy_af481148dde9fdeb9130b5fdb4a76c113}\label{class_enemy_af481148dde9fdeb9130b5fdb4a76c113} 
+\index{Enemy@{Enemy}!Health@{Health}}
+\index{Health@{Health}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{Health}{Health}}
+{\footnotesize\ttfamily float Enemy\+::\+Health = 100.f}
+
+
+
+The current health of the enemy. 
+
+\Hypertarget{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a}\label{class_enemy_aa90b9789c767dc8e9fe7eb002d36079a} 
+\index{Enemy@{Enemy}!inAttackMode@{inAttackMode}}
+\index{inAttackMode@{inAttackMode}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{inAttackMode}{inAttackMode}}
+{\footnotesize\ttfamily bool Enemy\+::in\+Attack\+Mode = false}
+
+
+
+Indicates if the enemy is in attack mode. 
+
+\Hypertarget{class_enemy_a617d2a12657c3792f41f2767484d7709}\label{class_enemy_a617d2a12657c3792f41f2767484d7709} 
+\index{Enemy@{Enemy}!inRange@{inRange}}
+\index{inRange@{inRange}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{inRange}{inRange}}
+{\footnotesize\ttfamily bool Enemy\+::in\+Range = false}
+
+\Hypertarget{class_enemy_a12cedead90bb43208f7e84a7108598aa}\label{class_enemy_a12cedead90bb43208f7e84a7108598aa} 
+\index{Enemy@{Enemy}!isAnimating@{isAnimating}}
+\index{isAnimating@{isAnimating}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{isAnimating}{isAnimating}}
+{\footnotesize\ttfamily bool Enemy\+::is\+Animating = false}
+
+
+
+Indicates if the enemy is currently animating. 
+
+\Hypertarget{class_enemy_afe01bd4e6b09d747d4af95a269b59cf2}\label{class_enemy_afe01bd4e6b09d747d4af95a269b59cf2} 
+\index{Enemy@{Enemy}!isReturning@{isReturning}}
+\index{isReturning@{isReturning}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{isReturning}{isReturning}}
+{\footnotesize\ttfamily bool Enemy\+::is\+Returning = false}
+
+
+
+Indicates if the enemy is in the return phase of the animation. 
+
+\Hypertarget{class_enemy_a720dbfd35828a881caef2e5eadb30131}\label{class_enemy_a720dbfd35828a881caef2e5eadb30131} 
+\index{Enemy@{Enemy}!MaxHealth@{MaxHealth}}
+\index{MaxHealth@{MaxHealth}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{MaxHealth}{MaxHealth}}
+{\footnotesize\ttfamily float Enemy\+::\+Max\+Health = 100.\+0f}
+
+
+
+The maximum health of the enemy. 
+
+\Hypertarget{class_enemy_a32f3c699f3fb23423a5d6e04c15bb403}\label{class_enemy_a32f3c699f3fb23423a5d6e04c15bb403} 
+\index{Enemy@{Enemy}!onceDone@{onceDone}}
+\index{onceDone@{onceDone}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{onceDone}{onceDone}}
+{\footnotesize\ttfamily bool Enemy\+::once\+Done = false}
+
+\Hypertarget{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0}\label{class_enemy_a3d57a7f5471dfe2a2d2d97dfe45000b0} 
+\index{Enemy@{Enemy}!Position@{Position}}
+\index{Position@{Position}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily glm\+::vec3 Enemy\+::\+Position}
+
+
+
+The position of the enemy. 
+
+\Hypertarget{class_enemy_a6b63a0873b8001ddb7b478d0eb964913}\label{class_enemy_a6b63a0873b8001ddb7b478d0eb964913} 
+\index{Enemy@{Enemy}!returnDuration@{returnDuration}}
+\index{returnDuration@{returnDuration}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{returnDuration}{returnDuration}}
+{\footnotesize\ttfamily float Enemy\+::return\+Duration = 1.\+5f}
+
+
+
+Duration of the return animation. 
+
+\Hypertarget{class_enemy_a83ba249e99fa49b4c17b53d8db165f06}\label{class_enemy_a83ba249e99fa49b4c17b53d8db165f06} 
+\index{Enemy@{Enemy}!Rotation@{Rotation}}
+\index{Rotation@{Rotation}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{Rotation}{Rotation}}
+{\footnotesize\ttfamily glm\+::quat Enemy\+::\+Rotation}
+
+
+
+The rotation of the enemy. 
+
+\Hypertarget{class_enemy_a77fda4977da2209e2e49fba767f45b4c}\label{class_enemy_a77fda4977da2209e2e49fba767f45b4c} 
+\index{Enemy@{Enemy}!Speed@{Speed}}
+\index{Speed@{Speed}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{Speed}{Speed}}
+{\footnotesize\ttfamily float Enemy\+::\+Speed}
+
+
+
+The movement speed of the enemy. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_enemy_8h}{Enemy.\+h}}\end{DoxyCompactItemize}
