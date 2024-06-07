@@ -456,6 +456,12 @@ int main()
         player.printPlayerPosition();
         player.CheckDistanceAndModifyHealth(targetPoint, 2.0f, 20);
 
+        for(Enemy& enemy : enemies)
+        {
+        	player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.35f, 10);
+		}
+
+
         // render
         // ------
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
@@ -654,13 +660,27 @@ int main()
 					died = true;
 				}
 
-                ImGui::Begin("Health");
-                ImGui::Text("Player Health: %.1f", player.Health);
-                ImGui::End();
-                ImGui::Begin("Damage");
-                ImGui::Text("Player Damage: %.1f", player.Damage);
-                ImGui::End();
+                //Render UI
+	            {
+                    ImGui::SetNextWindowSize(ImVec2(400, 100));
+		            ImGui::Begin("Hud");
 
+                	ImGui::Text("Player Health: %.1f", player.GetHealth());
+
+                	ImGui::Text("Player Damage: %.1f", player.GetDamage());
+
+                    ImGui::Text("Player Attack Speed: %.1f", player.GetAttackSpeed());
+
+                	ImGui::End();
+	            }
+
+                if(GLFW_PRESS == glfwGetKey(window, GLFW_KEY_I))
+                {
+                    glfwSetInputMode(window, GLFW_LOCK_KEY_MODS, GLFW_TRUE);
+                        player.addDamage(10.0f);
+                        player.modifyCurrentHealth(10.0f);
+					
+				}
 
                 ImGui::Render();
                 ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

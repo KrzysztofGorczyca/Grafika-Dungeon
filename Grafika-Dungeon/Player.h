@@ -12,7 +12,8 @@ class Player
 public:
     glm::vec3 Position;     // Pozycja gracza na mapie
     float Health = 100.0;       // Zdrowie gracza
-    int Damage = 25;        // Obra¿enia zadawane przez gracza
+    float MaxHealth = 200.0;    // Maksymalne zdrowie gracza
+    float Damage = 25;        // Obra¿enia zadawane przez gracza
     glm::vec3 swordOffset;
     glm::quat swordRotation; // Domyœlna rotacja miecza
     // Dodaj zmienne do œledzenia stanu animacji w klasie Player lub Sword
@@ -21,32 +22,13 @@ public:
     float attackDuration = 0.3f; // Czas trwania animacji ataku
     float returnDuration = 0.5f; // Czas trwania animacji powrotu
     bool isReturning = false;  // Nowa zmienna do œledzenia fazy powrotu
+    bool holdingE = false;  // Czy gracz trzyma klawisz E
 
     // Konstruktor
     Player(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f))
         : Position(position), lastHealthUpdateTime(std::chrono::high_resolution_clock::now()),
     	swordOffset(glm::vec3(0.23f, -0.33f, 0.5f)),
         swordRotation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f)) {}
-
-
-    void takeDamage(Enemy enemy, float deltaTime)
-    {
-        float atackSpeed = 1.0f;
-        std::cout << Health << std::endl;
-        float time = 0.0f;
-        time += deltaTime;
-        if (time >= atackSpeed) {
-            glm::vec2 playerPosition(Position.x, Position.z);
-            glm::vec2 enemyPos2D(enemy.Position.x, enemy.Position.z);
-            float distance = glm::distance(playerPosition, enemyPos2D);
-            if (distance < 1.0f) {
-                Health -= enemy.Damage;
-                if (Health < 0) Health = 0;
-                if (isDead())
-                    std::cout << Health << std::endl;
-            }
-        }
-    }
 
     // Metody do ustawiania i pobierania pozycji
     void SetPosition(float x, float y, float z) {
@@ -57,25 +39,59 @@ public:
         return Position;
     }
 
+    float GetDamage()
+    {
+    	return Damage;
+	}
+
+    void addDamage(float amount)
+    {
+    	Damage += amount;
+    }
+
+    void addAtackSpeed(float amount)
+    {
+    	attackDuration -= amount;
+        returnDuration -= amount/2;
+    }
+
+    float GetAttackSpeed()
+    {
+    	return attackDuration;
+    }
+
+    // Metody do modyfikacji zdrowia
+    void setCurrentHealth(int health) {
+        Health = health;
+    }
+
+    float GetHealth() const {
+        return Health;
+    }
+
+    void modifyCurrentHealth(int amount) {
+        Health += amount;
+        if (Health < 0) Health = 0;
+        if (Health > MaxHealth) Health = MaxHealth;
+        setCurrentHealth(Health);
+    }
+
+    void addMaxHealth(float amount)
+    {
+        MaxHealth += amount;
+    }
+
+    float GetMaxHealth()
+    {
+        return MaxHealth;
+    }
+
     void printPlayerPosition() {
        //printf("Health: %d\n", Health);
        //printf("Position: (%f, %f)\n", Position.x, Position.z);
     }
 
-    // Metody do modyfikacji zdrowia
-    void SetHealth(int health) {
-        Health = health;
-    }
-
-    int GetHealth() const {
-        return Health;
-    }
-
-    void ModifyHealth(int amount) {
-        Health += amount;
-        if (Health < 0) Health = 0;
-        if (Health > 100) Health = 100;
-    }
+   
 
     // Metoda do obliczania odleg³oœci od zadanego punktu
     float CalculateDistance(glm::vec3 point) const {
@@ -89,7 +105,7 @@ public:
 
         float distance = CalculateDistance(point);
         if (distance < threshold && elapsedTime.count() >= 1.0f) {
-            ModifyHealth(-healthReduction);
+            modifyCurrentHealth(-healthReduction);
             lastHealthUpdateTime = now; // reset the timer
         }
     }
