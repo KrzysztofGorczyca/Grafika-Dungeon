@@ -589,6 +589,10 @@ int main()
                     player.CheckDistanceAndModifyHealth(enemy.GetPosition(), 1.35f, 10, enemy.canDamage);
                 }
 
+                for (Chest& chest : chests) {
+                    chest.CheckInteraction(player);
+                }
+
                 //Update Sword Animation
                 player.UpdateSwordAnimation(deltaTime, enemies);
 
@@ -679,39 +683,6 @@ int main()
 
                 	ImGui::End();
 	            }
-
-                //Cheats
-                bool isCheating = false;
-                if(GLFW_PRESS == glfwGetKey(window, GLFW_KEY_P))
-                {
-                    isCheating = true;
-                    std::cout<<"Cheating"<<std::endl;
-				}
-
-                if(GLFW_PRESS == glfwGetKey(window, GLFW_KEY_O))
-                {
-                    std::cout << "No more Cheating" << std::endl;
-                	isCheating = false;
-                }
-
-                if(isCheating)
-                {
-                    if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_1))
-                    {
-                        player.addDamage(10.0f);
-                        std::cout << "DamageAdded" << std::endl;
-                    }
-                    if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_2))
-                    {
-                        player.modifyCurrentHealth(10.0f);
-                        std::cout << "HealthAdded" << std::endl;
-                    }
-                    if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_3))
-                    {
-                        player.addAtackSpeed(0.1f);
-                        std::cout << "AttackSpeedAdded" << std::endl;
-                    }
-                }
 
                 //Render UI
                 ImGui::Render();
