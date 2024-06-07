@@ -25,6 +25,7 @@ public:
     float attackDuration = 0.3f; // Czas trwania animacji ataku
     float returnDuration = 0.6f; // Czas trwania animacji powrotu
     bool isReturning = false;  // Nowa zmienna do œledzenia fazy powrotu
+
     bool holdingE = false;  // Czy gracz trzyma klawisz E
 
     // Konstruktor
@@ -134,7 +135,7 @@ public:
     }
 
     // Metoda do sprawdzania odleg³oœci i modyfikacji zdrowia co sekundê
-    void CheckDistanceAndModifyHealth(glm::vec3 point, float threshold, int healthReduction, bool canDamage) {
+    void CheckDistanceAndModifyHealth(glm::vec3 point, float threshold, int healthReduction, bool canDamage, Enemy& enemy) {
         if(canDamage)
     	{
 		    auto now = std::chrono::high_resolution_clock::now();
@@ -143,8 +144,12 @@ public:
 	    	float distance = CalculateDistance(point);
 	    	if (distance < threshold && elapsedTime.count() >= 1.0f) {
 	    		modifyCurrentHealth(-healthReduction);
+                enemy.inRange = true;
 	    		lastHealthUpdateTime = now; // reset the timer
-	    	}
+            }else if(distance > threshold)
+            {
+				enemy.inRange = false;
+			}
 	    }
     }
 
